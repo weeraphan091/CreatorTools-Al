@@ -7,6 +7,12 @@ type GenerateRequestBody = {
   tool?: string;
 };
 
+type EnvStatus = {
+  geminiConfigured: boolean;
+  openaiConfigured: boolean;
+  deploymentSha: string | null;
+};
+
 function sanitizeLine(line: string) {
   return line
     .replace(/^[-*\d.)\s]+/, "")
@@ -147,6 +153,11 @@ export async function POST(request: Request) {
 
     const openAiKey = process.env.OPENAI_API_KEY;
     const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+    const envStatus: EnvStatus = {
+      geminiConfigured: Boolean(geminiKey),
+      openaiConfigured: Boolean(openAiKey),
+      deploymentSha: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) || null,
+    };
 
     const cacheKey = `${tool.toLowerCase()}::${topic.toLowerCase()}`;
     const cached = aiResultCache.get(cacheKey);
@@ -155,7 +166,12 @@ export async function POST(request: Request) {
       if (cached.source === "fallback" && (geminiKey || openAiKey)) {
         aiResultCache.delete(cacheKey);
       } else {
-      return NextResponse.json({ results: cached.results, source: cached.source });
+        return NextResponse.json({
+          results: cached.results,
+          source: cached.source,
+          cacheHit: true,
+          envStatus,
+        });
       }
     }
 
@@ -170,7 +186,7 @@ export async function POST(request: Request) {
         source,
         expiresAt: Date.now() + CACHE_TTL_MS,
       });
-      return NextResponse.json({ results, source });
+      return NextResponse.json({ results, source, cacheHit: false, envStatus });
     }
 
     const prompt = `You are an expert social media marketer. Generate 5 high converting results based on this topic: ${topic}`;
@@ -196,6 +212,7 @@ export async function POST(request: Request) {
               error:
                 "Gemini API call failed. Please verify GEMINI_API_KEY/GOOGLE_API_KEY, quota, and API restrictions.",
               detail,
+              envStatus,
             },
             { status: 502 },
           );
@@ -222,8 +239,11 @@ export async function POST(request: Request) {
     return NextResponse.json({
       results: [results[0], results[1], results[2], results[3], results[4]],
       source,
+      cacheHit: false,
+      envStatus,
     });
-  } catch {
-    return NextResponse.json({ error: "Unable to generate results." }, { status: 500 });
+  } catch (error) {
+    const detail = error instanceof Error ? error.message.slice(0, 220) : "Unknown server error";
+    return NextResponse.json({ error: "Unable to generate results.", detail }, { status: 500 });
   }
 }

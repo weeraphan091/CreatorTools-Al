@@ -13,7 +13,9 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
   const [results, setResults] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [detail, setDetail] = useState<string | null>(null);
   const [source, setSource] = useState<string | null>(null);
+  const [envStatusText, setEnvStatusText] = useState<string | null>(null);
 
   const handleGenerate = async () => {
     if (!topic.trim()) {
@@ -22,6 +24,7 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
     }
 
     setError(null);
+    setDetail(null);
     setIsLoading(true);
 
     try {
@@ -37,14 +40,34 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
       });
 
       if (!response.ok) {
-        const errorData = (await response.json()) as { error?: string };
+        const errorData = (await response.json()) as {
+          error?: string;
+          detail?: string;
+          envStatus?: { geminiConfigured?: boolean; openaiConfigured?: boolean; deploymentSha?: string | null };
+        };
+        if (errorData.envStatus) {
+          const status = `Deployment ${errorData.envStatus.deploymentSha || "unknown"} | geminiConfigured=${Boolean(errorData.envStatus.geminiConfigured)} | openaiConfigured=${Boolean(errorData.envStatus.openaiConfigured)}`;
+          setEnvStatusText(status);
+        }
+        setDetail(errorData.detail || null);
         throw new Error(errorData.error || "Generation failed.");
       }
 
-      const data = (await response.json()) as { results?: string[]; source?: string };
+      const data = (await response.json()) as {
+        results?: string[];
+        source?: string;
+        cacheHit?: boolean;
+        envStatus?: { geminiConfigured?: boolean; openaiConfigured?: boolean; deploymentSha?: string | null };
+      };
       const generatedResults = Array.isArray(data.results) ? data.results.slice(0, 5) : [];
       setResults(generatedResults);
       setSource(data.source || null);
+      if (data.envStatus) {
+        const status = `Deployment ${data.envStatus.deploymentSha || "unknown"} | geminiConfigured=${Boolean(data.envStatus.geminiConfigured)} | openaiConfigured=${Boolean(data.envStatus.openaiConfigured)} | cacheHit=${Boolean(data.cacheHit)}`;
+        setEnvStatusText(status);
+      } else {
+        setEnvStatusText(null);
+      }
       trackEvent("generate_click", {
         tool_name: toolTitle,
       });
@@ -99,9 +122,11 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
         </button>
 
         {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
+        {error && detail ? <p className="mt-1 text-xs text-red-500">{detail}</p> : null}
         {!error && source ? (
           <p className="mt-3 text-xs text-slate-500">Source: {source.toUpperCase()}</p>
         ) : null}
+        {envStatusText ? <p className="mt-1 text-xs text-slate-500">{envStatusText}</p> : null}
       </div>
 
       <ResultList results={results} toolTitle={toolTitle} />
