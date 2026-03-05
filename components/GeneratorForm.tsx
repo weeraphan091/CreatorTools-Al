@@ -13,6 +13,7 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
   const [results, setResults] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [source, setSource] = useState<string | null>(null);
 
   const handleGenerate = async () => {
     if (!topic.trim()) {
@@ -36,12 +37,14 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
       });
 
       if (!response.ok) {
-        throw new Error("Generation failed.");
+        const errorData = (await response.json()) as { error?: string };
+        throw new Error(errorData.error || "Generation failed.");
       }
 
-      const data = (await response.json()) as { results?: string[] };
+      const data = (await response.json()) as { results?: string[]; source?: string };
       const generatedResults = Array.isArray(data.results) ? data.results.slice(0, 5) : [];
       setResults(generatedResults);
+      setSource(data.source || null);
       trackEvent("generate_click", {
         tool_name: toolTitle,
       });
@@ -55,6 +58,7 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
       const message = err instanceof Error ? err.message : "Unexpected error";
       setError(message);
       setResults([]);
+      setSource(null);
       trackEvent("generation_error", {
         tool_name: toolTitle,
       });
@@ -95,6 +99,9 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
         </button>
 
         {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
+        {!error && source ? (
+          <p className="mt-3 text-xs text-slate-500">Source: {source.toUpperCase()}</p>
+        ) : null}
       </div>
 
       <ResultList results={results} toolTitle={toolTitle} />

@@ -27,6 +27,7 @@ function fallbackResults(topic: string) {
 type CachedResult = {
   expiresAt: number;
   results: string[];
+  source: "gemini" | "openai" | "fallback";
 };
 
 type RateLimitEntry = {
@@ -133,20 +134,23 @@ export async function POST(request: Request) {
     const cacheKey = `${tool.toLowerCase()}::${topic.toLowerCase()}`;
     const cached = aiResultCache.get(cacheKey);
     if (cached && cached.expiresAt > Date.now()) {
-      return NextResponse.json({ results: cached.results });
+      return NextResponse.json({ results: cached.results, source: cached.source });
     }
 
     let results: string[] = [];
+    let source: "gemini" | "openai" | "fallback" = "fallback";
     const openAiKey = process.env.OPENAI_API_KEY;
     const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
     if (!geminiKey && !openAiKey) {
       results = fallbackResults(topic);
+      source = "fallback";
       aiResultCache.set(cacheKey, {
         results,
+        source,
         expiresAt: Date.now() + CACHE_TTL_MS,
       });
-      return NextResponse.json({ results });
+      return NextResponse.json({ results, source });
     }
 
     const prompt = `You are an expert social media marketer. Generate 5 high converting results based on this topic: ${topic}`;
@@ -157,28 +161,42 @@ export async function POST(request: Request) {
     if (geminiKey) {
       try {
         output = await generateWithGemini(input, geminiKey);
+        source = "gemini";
       } catch {
         if (openAiKey) {
           output = await generateWithOpenAI(input, openAiKey);
+          source = "openai";
+        } else {
+          return NextResponse.json(
+            {
+              error:
+                "Gemini API call failed. Please verify GEMINI_API_KEY/GOOGLE_API_KEY, quota, and API restrictions.",
+            },
+            { status: 502 },
+          );
         }
       }
     } else if (openAiKey) {
       output = await generateWithOpenAI(input, openAiKey);
+      source = "openai";
     }
 
     if (!output) {
       results = fallbackResults(topic);
+      source = "fallback";
     } else {
       results = parseToFiveResults(output, topic);
     }
 
     aiResultCache.set(cacheKey, {
       results,
+      source,
       expiresAt: Date.now() + CACHE_TTL_MS,
     });
 
     return NextResponse.json({
       results: [results[0], results[1], results[2], results[3], results[4]],
+      source,
     });
   } catch {
     return NextResponse.json({ error: "Unable to generate results." }, { status: 500 });
