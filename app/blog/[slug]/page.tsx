@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import AffiliateBlock from "@/components/AffiliateBlock";
 import AdBanner from "@/components/AdBanner";
+import BlogJsonLd from "@/components/BlogJsonLd";
 import { blogPosts, getBlogPostBySlug } from "@/lib/blog";
+import { tools } from "@/lib/tools";
 
 type BlogPostPageProps = {
   params: {
@@ -27,10 +30,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   return {
     title: post.title,
     description: post.description,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
+      url: `/blog/${post.slug}`,
     },
   };
 }
@@ -44,6 +51,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article className="space-y-6">
+      <BlogJsonLd title={post.title} description={post.description} slug={post.slug} />
       <header className="card p-8">
         <h1 className="text-3xl font-bold text-slate-900">{post.title}</h1>
         <p className="mt-3 text-slate-600">{post.description}</p>
@@ -59,6 +67,21 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <AdBanner slot={`Blog Post Banner - ${post.title}`} />
         <AffiliateBlock title="Creator Monetization Toolkit" />
       </div>
+
+      <section className="card p-6">
+        <h2 className="text-xl font-semibold text-slate-900">Try the Tools Mentioned in This Guide</h2>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {tools.slice(0, 6).map((tool) => (
+            <Link
+              key={tool.slug}
+              href={`/tools/${tool.slug}`}
+              className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:border-brand-500 hover:text-brand-700"
+            >
+              {tool.title}
+            </Link>
+          ))}
+        </div>
+      </section>
     </article>
   );
 }

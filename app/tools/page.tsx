@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ToolCard from "@/components/ToolCard";
 import AdBanner from "@/components/AdBanner";
 import { tools } from "@/lib/tools";
@@ -6,9 +7,13 @@ import { tools } from "@/lib/tools";
 export const metadata: Metadata = {
   title: "AI Tools",
   description: "Browse all 10 AI generators for creators, marketers, and businesses.",
+  alternates: {
+    canonical: "/tools",
+  },
   openGraph: {
     title: "CreatorTools AI Tools",
     description: "Generate titles, hooks, bios, ads, CTAs, and more with free AI tools.",
+    url: "/tools",
   },
 };
 
@@ -28,6 +33,19 @@ export default function ToolsPage() {
         {tools.map((tool) => (
           <ToolCard key={tool.slug} tool={tool} />
         ))}
+      </section>
+
+      <section className="card p-6">
+        <h2 className="text-xl font-semibold text-slate-900">Need long-tail SEO angles?</h2>
+        <p className="mt-2 text-sm text-slate-600">
+          Use our template hub with niche pages like creator, ecommerce, and ad campaign use cases.
+        </p>
+        <Link
+          href="/templates"
+          className="mt-4 inline-flex rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+        >
+          Open Templates
+        </Link>
       </section>
     </div>
   );

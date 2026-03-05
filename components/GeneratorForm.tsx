@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ResultList from "@/components/ResultList";
+import { trackEvent } from "@/lib/analytics";
 
 type GeneratorFormProps = {
   toolTitle: string;
@@ -39,11 +40,24 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
       }
 
       const data = (await response.json()) as { results?: string[] };
-      setResults(Array.isArray(data.results) ? data.results.slice(0, 5) : []);
+      const generatedResults = Array.isArray(data.results) ? data.results.slice(0, 5) : [];
+      setResults(generatedResults);
+      trackEvent("generate_click", {
+        tool_name: toolTitle,
+      });
+      if (generatedResults.length > 0) {
+        trackEvent("generation_success", {
+          tool_name: toolTitle,
+          result_count: generatedResults.length,
+        });
+      }
     } catch (err) {
       const message = err instanceof Error ? err.message : "Unexpected error";
       setError(message);
       setResults([]);
+      trackEvent("generation_error", {
+        tool_name: toolTitle,
+      });
     } finally {
       setIsLoading(false);
     }
@@ -83,7 +97,7 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
         {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
       </div>
 
-      <ResultList results={results} />
+      <ResultList results={results} toolTitle={toolTitle} />
     </section>
   );
 }

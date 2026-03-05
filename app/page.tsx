@@ -4,17 +4,23 @@ import ToolCard from "@/components/ToolCard";
 import AdBanner from "@/components/AdBanner";
 import AffiliateBlock from "@/components/AffiliateBlock";
 import NewsletterForm from "@/components/NewsletterForm";
+import FAQSection from "@/components/FAQSection";
 import { joinNewsletterAction } from "@/app/actions";
 import { tools } from "@/lib/tools";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Content Generators for Creators",
   description:
     "Use CreatorTools AI to generate viral titles, hooks, captions, bios, and marketing copy with 10 powerful AI tools.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "CreatorTools AI - Free AI Generators for Creators",
     description:
       "Generate high-converting content for YouTube, TikTok, Instagram, blogs, and ads.",
+    url: siteConfig.url,
   },
 };
 
@@ -33,6 +39,9 @@ export default function HomePage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href="/tools" className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
             Explore 10 AI Tools
+          </Link>
+          <Link href="/templates" className="rounded-lg border border-brand-600 bg-white px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50">
+            Explore SEO Templates
           </Link>
           <Link href="/blog" className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100">
             Read Blog
@@ -64,6 +73,26 @@ export default function HomePage() {
         </div>
         <AffiliateBlock title="Creator Stack: Editing, SEO, and Growth Tools" />
       </section>
+
+      <FAQSection
+        items={[
+          {
+            question: "Is CreatorTools AI free to use?",
+            answer:
+              "Yes. You can generate content ideas for free. You can later add premium plans if you want higher usage limits or advanced features.",
+          },
+          {
+            question: "How does this site make money?",
+            answer:
+              "Revenue can come from display ads, affiliate offers, and premium upgrades. This project already includes ad and affiliate placeholders ready for activation.",
+          },
+          {
+            question: "Which tools get the most SEO traffic?",
+            answer:
+              "Typically high-intent generators like YouTube title generator, TikTok caption generator, and AI hook generator drive strong organic traffic when supported by template pages and blog posts.",
+          },
+        ]}
+      />
     </div>
   );
 }

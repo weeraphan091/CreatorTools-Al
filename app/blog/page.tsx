@@ -7,9 +7,13 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Read practical growth guides, marketing hooks, and copywriting ideas for creators.",
+  alternates: {
+    canonical: "/blog",
+  },
   openGraph: {
     title: "CreatorTools AI Blog",
     description: "Creator-focused growth and marketing playbooks.",
+    url: "/blog",
   },
 };
 
@@ -36,6 +40,19 @@ export default function BlogPage() {
             </Link>
           </article>
         ))}
+      </section>
+
+      <section className="card p-6">
+        <h2 className="text-xl font-semibold text-slate-900">More SEO Landing Pages</h2>
+        <p className="mt-2 text-sm text-slate-600">
+          Looking for long-tail search pages? Explore template pages built around high-intent keyword variations.
+        </p>
+        <Link
+          href="/templates"
+          className="mt-4 inline-flex rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+        >
+          Browse Templates
+        </Link>
       </section>
     </div>
   );

@@ -5,9 +5,13 @@ export const metadata: Metadata = {
   title: "About CreatorTools AI",
   description:
     "Learn about CreatorTools AI and our mission to help creators produce high-converting content with AI.",
+  alternates: {
+    canonical: "/about",
+  },
   openGraph: {
     title: "About CreatorTools AI",
     description: "Built for creators and marketers who want faster, better content generation.",
+    url: "/about",
   },
 };
 

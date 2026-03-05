@@ -1,0 +1,45 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import AdBanner from "@/components/AdBanner";
+import { templatePages } from "@/lib/templates";
+
+export const metadata: Metadata = {
+  title: "AI Content Templates",
+  description:
+    "Browse SEO-focused AI template pages for YouTube titles, TikTok captions, hooks, bios, ad headlines, and more.",
+  openGraph: {
+    title: "AI Content Templates | CreatorTools AI",
+    description: "Long-tail AI generator templates designed to rank and convert.",
+  },
+};
+
+export default function TemplatesPage() {
+  return (
+    <div className="space-y-6">
+      <section className="card p-8">
+        <h1 className="text-3xl font-bold text-slate-900">AI Templates for Creators and Marketers</h1>
+        <p className="mt-3 max-w-3xl text-slate-600">
+          Use these long-tail template pages to quickly generate platform-specific marketing copy and content ideas.
+        </p>
+      </section>
+
+      <AdBanner slot="Templates Top Banner" />
+
+      <section className="grid gap-4 md:grid-cols-2">
+        {templatePages.map((page) => (
+          <article key={page.slug} className="card p-6">
+            <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">{page.keyword}</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-900">{page.title}</h2>
+            <p className="mt-2 text-sm text-slate-600">{page.description}</p>
+            <Link
+              href={`/templates/${page.slug}`}
+              className="mt-4 inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+            >
+              Open Template
+            </Link>
+          </article>
+        ))}
+      </section>
+    </div>
+  );
+}
