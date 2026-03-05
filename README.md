@@ -8,9 +8,13 @@ A full AI tools website built with **Next.js 14 App Router**, **TypeScript**, **
 - `/api/generate` endpoint using `gpt-4o-mini`
 - API rate limiting and in-memory result caching to control OpenAI cost
 - Blog system with SEO metadata per post
+- 30+ blog posts across creator marketing keyword clusters
 - Template landing pages for long-tail SEO keyword targeting
 - Programmatic use-case pages for audience + tool keyword combinations
 - Technical SEO: `robots.txt`, `sitemap.xml`, JSON-LD schema, canonicals
+- Breadcrumb schema + intent-based internal linking
+- Trust pages: contact, privacy, terms, editorial policy
+- SEO keyword map page at `/seo-keyword-map`
 - RSS feed at `/feed.xml`
 - Analytics + AdSense script support via environment variables
 - Homepage, tools listing, tool details, blog, and about pages

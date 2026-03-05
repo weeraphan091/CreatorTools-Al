@@ -4,8 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AdBanner from "@/components/AdBanner";
 import AffiliateBlock from "@/components/AffiliateBlock";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
+import IntentLinkSection from "@/components/IntentLinkSection";
 import ToolJsonLd from "@/components/ToolJsonLd";
+import { getIntentMatchedLinks } from "@/lib/intentLinks";
 import { getRelatedTools, getToolBySlug, tools } from "@/lib/tools";
 import { getUseCasesByTool } from "@/lib/useCases";
 
@@ -59,10 +62,22 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
   }
 
   const toolUseCases = getUseCasesByTool(tool.slug, 8);
+  const intentLinks = getIntentMatchedLinks({
+    query: `${tool.title} ${tool.description} ${tool.keywords.join(" ")}`,
+    excludeHrefs: [`/tools/${tool.slug}`],
+    limit: 8,
+  });
 
   return (
     <div className="space-y-6">
       <ToolJsonLd tool={tool} />
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Tools", href: "/tools" },
+          { label: tool.title, href: `/tools/${tool.slug}` },
+        ]}
+      />
       <section className="card p-8">
         <h1 className="text-3xl font-bold text-slate-900">{tool.title}</h1>
         <p className="mt-3 text-slate-600">{tool.description}</p>
@@ -127,6 +142,8 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
           ))}
         </div>
       </section>
+
+      <IntentLinkSection title="Intent-Matched Resources" links={intentLinks} />
     </div>
   );
 }

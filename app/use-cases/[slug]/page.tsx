@@ -3,7 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AdBanner from "@/components/AdBanner";
 import AffiliateBlock from "@/components/AffiliateBlock";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
+import IntentLinkSection from "@/components/IntentLinkSection";
+import { getIntentMatchedLinks } from "@/lib/intentLinks";
 import { getAllUseCasePages, getUseCaseBySlug, getUseCasesByTool } from "@/lib/useCases";
 
 type UseCaseDetailPageProps = {
@@ -49,9 +52,21 @@ export default function UseCaseDetailPage({ params }: UseCaseDetailPageProps) {
   }
 
   const relatedForTool = getUseCasesByTool(page.toolSlug, 8).filter((item) => item.slug !== page.slug);
+  const intentLinks = getIntentMatchedLinks({
+    query: `${page.title} ${page.searchTerm} ${page.description}`,
+    excludeHrefs: [`/use-cases/${page.slug}`],
+    limit: 8,
+  });
 
   return (
     <article className="space-y-6">
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Use Cases", href: "/use-cases" },
+          { label: page.title, href: `/use-cases/${page.slug}` },
+        ]}
+      />
       <header className="card p-8">
         <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">{page.searchTerm}</p>
         <h1 className="mt-2 text-3xl font-bold text-slate-900">{page.title}</h1>
@@ -96,6 +111,8 @@ export default function UseCaseDetailPage({ params }: UseCaseDetailPageProps) {
           ))}
         </div>
       </section>
+
+      <IntentLinkSection title="More Resources for This Intent" links={intentLinks} />
     </article>
   );
 }

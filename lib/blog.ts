@@ -176,6 +176,156 @@ export const blogPosts: BlogPost[] = [
       "Prioritize quality and uniqueness so indexed pages earn stable rankings over time.",
     ],
   },
+  {
+    slug: "youtube-shorts-title-formulas",
+    title: "YouTube Shorts Title Formulas That Boost CTR",
+    description: "Practical title formulas to improve YouTube Shorts click-through rate and discovery.",
+    content: [
+      "Shorts titles should be clear, emotional, and specific in under 60 characters.",
+      "Use one power word plus one outcome, then add a topical keyword for relevance.",
+      "Track CTR by theme and double down on title angles that sustain retention.",
+    ],
+  },
+  {
+    slug: "tiktok-caption-ideas-for-business",
+    title: "TikTok Caption Ideas for Business Accounts",
+    description: "Caption frameworks for brands that need engagement and conversion from short-form content.",
+    content: [
+      "Business captions perform better when they combine a relatable hook with one practical takeaway.",
+      "Use comments as research: turn recurring audience questions into new caption angles.",
+      "Rotate CTAs between saves, comments, and profile visits to avoid fatigue.",
+    ],
+  },
+  {
+    slug: "hooks-for-sales-reels",
+    title: "30 Hooks for Sales Reels and Shorts",
+    description: "Use these hook patterns to improve watch time and lead generation on sales-driven videos.",
+    content: [
+      "Strong sales hooks highlight a painful gap before introducing your solution.",
+      "Use specific numbers and outcomes instead of broad claims.",
+      "Pair each hook with proof to build trust before your CTA appears.",
+    ],
+  },
+  {
+    slug: "instagram-bio-ideas-for-personal-brand",
+    title: "Instagram Bio Ideas for Personal Brands",
+    description: "Positioning-focused bio examples that help personal brands earn trust quickly.",
+    content: [
+      "A personal brand bio should communicate identity, expertise, and one clear next step.",
+      "Use social proof lightly, then direct users to one action like DM or newsletter.",
+      "Refresh bios quarterly to align with your current offer and audience.",
+    ],
+  },
+  {
+    slug: "google-ads-headline-testing-framework",
+    title: "Google Ads Headline Testing Framework",
+    description: "A practical headline testing system to improve CTR and conversion on search campaigns.",
+    content: [
+      "Build three headline buckets: benefit-first, urgency-first, and proof-first.",
+      "Test one variable at a time so performance changes are easier to interpret.",
+      "Promote winning headlines into landing page hero copy to keep message match high.",
+    ],
+  },
+  {
+    slug: "blog-title-ideas-for-saas",
+    title: "Blog Title Ideas for SaaS Content Marketing",
+    description: "High-intent SaaS blog title templates for awareness, comparison, and conversion-stage content.",
+    content: [
+      "SaaS titles should clearly reflect user journey stage and problem maturity.",
+      "Use 'how to', 'vs', and 'alternatives' formats to capture commercial intent.",
+      "Map titles to product pages so traffic can move naturally into signup funnels.",
+    ],
+  },
+  {
+    slug: "product-description-examples-for-fashion",
+    title: "Product Description Examples for Fashion Stores",
+    description: "Conversion-focused product copy examples for apparel and lifestyle ecommerce brands.",
+    content: [
+      "Fashion descriptions convert better when they combine emotional style language with practical fit info.",
+      "Use sensory wording sparingly and prioritize clarity around size, material, and use case.",
+      "Include one confidence CTA near delivery and return details to reduce hesitation.",
+    ],
+  },
+  {
+    slug: "brand-name-checklist-before-launch",
+    title: "Brand Name Checklist Before You Launch",
+    description: "A final quality checklist to validate your brand name before buying domains and launching.",
+    content: [
+      "Check pronunciation, spelling friction, and recall speed with target users.",
+      "Review legal and naming conflicts before investing in assets.",
+      "Run lightweight message tests to confirm the name aligns with your positioning.",
+    ],
+  },
+  {
+    slug: "slogan-examples-for-ecommerce-brands",
+    title: "Slogan Examples for Ecommerce Brands",
+    description: "Tagline examples that communicate value fast across product pages and ads.",
+    content: [
+      "Ecommerce slogans should be short enough to support ad creative and homepage headers.",
+      "Focus each slogan on one promise: speed, quality, affordability, or identity.",
+      "Validate slogans in paid tests before rolling out across brand assets.",
+    ],
+  },
+  {
+    slug: "cta-examples-for-checkout-pages",
+    title: "CTA Examples for Checkout and Offer Pages",
+    description: "High-converting CTA patterns designed for checkout flows and sales pages.",
+    content: [
+      "Checkout CTA copy should reduce uncertainty and reinforce immediate value.",
+      "Use low-friction wording and pair it with trust indicators near the button.",
+      "Test CTA variants at each step of the checkout journey, not just the first page.",
+    ],
+  },
+  {
+    slug: "keyword-clustering-for-ai-tool-sites",
+    title: "Keyword Clustering for AI Tool Sites",
+    description: "How to build topical clusters that help AI tools rank across many long-tail queries.",
+    content: [
+      "Group keywords by intent first, then map each cluster to one primary page type.",
+      "Use tools, templates, and use cases as interlinked cluster layers.",
+      "Review cannibalization monthly and consolidate pages that target overlapping intent.",
+    ],
+  },
+  {
+    slug: "how-to-increase-organic-ctr",
+    title: "How to Increase Organic CTR on Tool Pages",
+    description: "Actionable tactics to lift organic click-through rate without changing rankings.",
+    content: [
+      "Rewrite titles for specificity and outcomes rather than generic keyword stuffing.",
+      "Match meta descriptions to user urgency and expected result.",
+      "Use Search Console weekly to identify high-impression, low-CTR pages for optimization.",
+    ],
+  },
+  {
+    slug: "seo-content-calendar-for-creators",
+    title: "SEO Content Calendar for Creators",
+    description: "A 4-week publishing framework to scale content output without sacrificing quality.",
+    content: [
+      "Assign each week to one funnel stage and one content format for consistency.",
+      "Repurpose top posts into platform-specific variants to multiply distribution.",
+      "Track post-level conversions, not just traffic, to prioritize winning topics.",
+    ],
+  },
+  {
+    slug: "internal-linking-strategy-for-saas-blogs",
+    title: "Internal Linking Strategy for SaaS and Tool Blogs",
+    description: "Build internal links that improve topical authority and crawl efficiency.",
+    content: [
+      "Link from educational blog posts to transactional tool pages using intent-matched anchors.",
+      "Use hub pages to consolidate context and distribute authority to deeper pages.",
+      "Audit orphan pages monthly and add contextual links from high-traffic URLs.",
+    ],
+  },
+  {
+    slug: "seo-metrics-that-actually-matter",
+    title: "SEO Metrics That Actually Matter for Growth",
+    description: "A practical KPI framework for SEO teams focused on revenue, not vanity traffic.",
+    content: [
+      "Track impressions, CTR, qualified sessions, and conversion rate by landing page type.",
+      "Separate exploratory traffic from buyer-intent traffic to avoid false signals.",
+      "Use leading indicators weekly and revenue-linked metrics monthly for better decisions.",
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string) {

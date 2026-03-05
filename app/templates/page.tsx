@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AdBanner from "@/components/AdBanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { templatePages } from "@/lib/templates";
 
 export const metadata: Metadata = {
@@ -20,6 +21,12 @@ export const metadata: Metadata = {
 export default function TemplatesPage() {
   return (
     <div className="space-y-6">
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Templates", href: "/templates" },
+        ]}
+      />
       <section className="card p-8">
         <h1 className="text-3xl font-bold text-slate-900">AI Templates for Creators and Marketers</h1>
         <p className="mt-3 max-w-3xl text-slate-600">

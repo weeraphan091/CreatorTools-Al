@@ -3,8 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AffiliateBlock from "@/components/AffiliateBlock";
 import AdBanner from "@/components/AdBanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import BlogJsonLd from "@/components/BlogJsonLd";
+import IntentLinkSection from "@/components/IntentLinkSection";
 import { blogPosts, getBlogPostBySlug } from "@/lib/blog";
+import { getIntentMatchedLinks } from "@/lib/intentLinks";
 import { tools } from "@/lib/tools";
 import { getFeaturedUseCases } from "@/lib/useCases";
 
@@ -51,9 +54,22 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const intentLinks = getIntentMatchedLinks({
+    query: `${post.title} ${post.description} ${post.content.join(" ")}`,
+    excludeHrefs: [`/blog/${post.slug}`],
+    limit: 8,
+  });
+
   return (
     <article className="space-y-6">
       <BlogJsonLd title={post.title} description={post.description} slug={post.slug} />
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Blog", href: "/blog" },
+          { label: post.title, href: `/blog/${post.slug}` },
+        ]}
+      />
       <header className="card p-8">
         <h1 className="text-3xl font-bold text-slate-900">{post.title}</h1>
         <p className="mt-3 text-slate-600">{post.description}</p>
@@ -99,6 +115,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           ))}
         </div>
       </section>
+
+      <IntentLinkSection title="Related Resources by Search Intent" links={intentLinks} />
     </article>
   );
 }

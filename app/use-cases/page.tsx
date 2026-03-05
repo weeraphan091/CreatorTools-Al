@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AdBanner from "@/components/AdBanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { getAllUseCasePages } from "@/lib/useCases";
 
 const allUseCasePages = getAllUseCasePages();
@@ -23,6 +24,12 @@ export const metadata: Metadata = {
 export default function UseCasesPage() {
   return (
     <div className="space-y-6">
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Use Cases", href: "/use-cases" },
+        ]}
+      />
       <section className="card p-8">
         <h1 className="text-3xl font-bold text-slate-900">Programmatic SEO Use Cases</h1>
         <p className="mt-3 max-w-3xl text-slate-600">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AdBanner from "@/components/AdBanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { blogPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -20,6 +21,12 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <div className="space-y-6">
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Blog", href: "/blog" },
+        ]}
+      />
       <section className="card p-8">
         <h1 className="text-3xl font-bold text-slate-900">CreatorTools AI Blog</h1>
         <p className="mt-3 text-slate-600">Actionable guides to help you grow faster with better content.</p>

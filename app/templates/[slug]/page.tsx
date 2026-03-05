@@ -3,7 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AdBanner from "@/components/AdBanner";
 import AffiliateBlock from "@/components/AffiliateBlock";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
+import IntentLinkSection from "@/components/IntentLinkSection";
+import { getIntentMatchedLinks } from "@/lib/intentLinks";
 import { siteConfig } from "@/lib/site";
 import { getTemplateBySlug, templatePages } from "@/lib/templates";
 import { getToolBySlug } from "@/lib/tools";
@@ -52,9 +55,21 @@ export default function TemplateDetailPage({ params }: TemplatePageProps) {
 
   const tool = getToolBySlug(page.toolSlug);
   const relatedUseCases = tool ? getUseCasesByTool(tool.slug, 4) : [];
+  const intentLinks = getIntentMatchedLinks({
+    query: `${page.title} ${page.description} ${page.keyword}`,
+    excludeHrefs: [`/templates/${page.slug}`],
+    limit: 8,
+  });
 
   return (
     <div className="space-y-6">
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Templates", href: "/templates" },
+          { label: page.title, href: `/templates/${page.slug}` },
+        ]}
+      />
       <section className="card p-8">
         <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">{page.keyword}</p>
         <h1 className="mt-2 text-3xl font-bold text-slate-900">{page.title}</h1>
@@ -108,6 +123,8 @@ export default function TemplateDetailPage({ params }: TemplatePageProps) {
           </div>
         </section>
       ) : null}
+
+      <IntentLinkSection title="Intent-Matched Content Cluster" links={intentLinks} />
     </div>
   );
 }

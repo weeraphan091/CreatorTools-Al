@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ToolCard from "@/components/ToolCard";
 import AdBanner from "@/components/AdBanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { tools } from "@/lib/tools";
 import { getFeaturedUseCases } from "@/lib/useCases";
 
@@ -23,6 +24,12 @@ export default function ToolsPage() {
 
   return (
     <div className="space-y-6">
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Tools", href: "/tools" },
+        ]}
+      />
       <section className="card p-8">
         <h1 className="text-3xl font-bold text-slate-900">All AI Tools</h1>
         <p className="mt-3 max-w-2xl text-slate-600">
