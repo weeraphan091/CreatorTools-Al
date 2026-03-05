@@ -98,9 +98,23 @@ function isRateLimited(ip: string) {
 
 async function generateWithGemini(prompt: string, apiKey: string) {
   const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-  const response = await model.generateContent(prompt);
-  return response.response.text();
+  const modelCandidates = ["gemini-2.0-flash", "gemini-1.5-flash"];
+  let lastError: unknown;
+
+  for (const modelName of modelCandidates) {
+    try {
+      const model = genAI.getGenerativeModel({ model: modelName });
+      const response = await model.generateContent(prompt);
+      return response.response.text();
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  if (lastError instanceof Error) {
+    throw lastError;
+  }
+  throw new Error("Gemini request failed for all model candidates.");
 }
 
 async function generateWithOpenAI(prompt: string, apiKey: string) {
@@ -131,16 +145,22 @@ export async function POST(request: Request) {
       );
     }
 
+    const openAiKey = process.env.OPENAI_API_KEY;
+    const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+
     const cacheKey = `${tool.toLowerCase()}::${topic.toLowerCase()}`;
     const cached = aiResultCache.get(cacheKey);
     if (cached && cached.expiresAt > Date.now()) {
+      // If keys are now configured, skip stale fallback cache and regenerate real AI output.
+      if (cached.source === "fallback" && (geminiKey || openAiKey)) {
+        aiResultCache.delete(cacheKey);
+      } else {
       return NextResponse.json({ results: cached.results, source: cached.source });
+      }
     }
 
     let results: string[] = [];
     let source: "gemini" | "openai" | "fallback" = "fallback";
-    const openAiKey = process.env.OPENAI_API_KEY;
-    const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
     if (!geminiKey && !openAiKey) {
       results = fallbackResults(topic);
@@ -162,15 +182,20 @@ export async function POST(request: Request) {
       try {
         output = await generateWithGemini(input, geminiKey);
         source = "gemini";
-      } catch {
+      } catch (geminiError) {
         if (openAiKey) {
           output = await generateWithOpenAI(input, openAiKey);
           source = "openai";
         } else {
+          const detail =
+            geminiError instanceof Error
+              ? geminiError.message.slice(0, 220)
+              : "Unknown Gemini SDK error";
           return NextResponse.json(
             {
               error:
                 "Gemini API call failed. Please verify GEMINI_API_KEY/GOOGLE_API_KEY, quota, and API restrictions.",
+              detail,
             },
             { status: 502 },
           );
