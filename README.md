@@ -46,13 +46,19 @@ Open http://localhost:3000
 Create `.env.local`:
 
 ```bash
+GEMINI_API_KEY=your_google_ai_studio_key
+# or use GOOGLE_API_KEY=your_google_ai_studio_key
 OPENAI_API_KEY=your_openai_api_key
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-xxxxxxxxxxxxxxxx
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=google-site-verification-code
 ```
 
-If no API key is present, the API route returns fallback sample results.
+Generation provider priority:
+
+1. `GEMINI_API_KEY` (or `GOOGLE_API_KEY`)
+2. `OPENAI_API_KEY`
+3. Fallback sample results (if no key is set)
 
 ## Traffic + Monetization Setup
 

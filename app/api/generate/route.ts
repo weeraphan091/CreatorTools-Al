@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
 
 type GenerateRequestBody = {
@@ -94,6 +95,23 @@ function isRateLimited(ip: string) {
   return false;
 }
 
+async function generateWithGemini(prompt: string, apiKey: string) {
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const response = await model.generateContent(prompt);
+  return response.response.text();
+}
+
+async function generateWithOpenAI(prompt: string, apiKey: string) {
+  const openai = new OpenAI({ apiKey });
+  const completion = await openai.responses.create({
+    model: "gpt-4o-mini",
+    input: prompt,
+    temperature: 0.9,
+  });
+  return completion.output_text || "";
+}
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as GenerateRequestBody;
@@ -119,7 +137,10 @@ export async function POST(request: Request) {
     }
 
     let results: string[] = [];
-    if (!process.env.OPENAI_API_KEY) {
+    const openAiKey = process.env.OPENAI_API_KEY;
+    const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+
+    if (!geminiKey && !openAiKey) {
       results = fallbackResults(topic);
       aiResultCache.set(cacheKey, {
         results,
@@ -128,18 +149,29 @@ export async function POST(request: Request) {
       return NextResponse.json({ results });
     }
 
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const prompt = `You are an expert social media marketer. Generate 5 high converting results based on this topic: ${topic}`;
     const input = `${prompt}\nTool context: ${tool}\nReturn exactly 5 concise lines.`;
 
-    const completion = await openai.responses.create({
-      model: "gpt-4o-mini",
-      input,
-      temperature: 0.9,
-    });
+    let output = "";
 
-    const output = completion.output_text || "";
-    results = parseToFiveResults(output, topic);
+    if (geminiKey) {
+      try {
+        output = await generateWithGemini(input, geminiKey);
+      } catch {
+        if (openAiKey) {
+          output = await generateWithOpenAI(input, openAiKey);
+        }
+      }
+    } else if (openAiKey) {
+      output = await generateWithOpenAI(input, openAiKey);
+    }
+
+    if (!output) {
+      results = fallbackResults(topic);
+    } else {
+      results = parseToFiveResults(output, topic);
+    }
+
     aiResultCache.set(cacheKey, {
       results,
       expiresAt: Date.now() + CACHE_TTL_MS,
