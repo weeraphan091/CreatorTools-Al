@@ -6,8 +6,17 @@ export default function Footer() {
       <div className="container-shell flex flex-col gap-3 py-8 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
         <p>© {new Date().getFullYear()} CreatorTools AI. All rights reserved.</p>
         <div className="flex items-center gap-4">
+          <Link href="/use-cases" className="hover:text-brand-600">
+            Use Cases
+          </Link>
+          <Link href="/templates" className="hover:text-brand-600">
+            Templates
+          </Link>
           <Link href="/sitemap.xml" className="hover:text-brand-600">
             Sitemap
+          </Link>
+          <Link href="/feed.xml" className="hover:text-brand-600">
+            Feed
           </Link>
           <Link href="/robots.txt" className="hover:text-brand-600">
             Robots

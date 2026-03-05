@@ -47,12 +47,20 @@ export default function BlogPage() {
         <p className="mt-2 text-sm text-slate-600">
           Looking for long-tail search pages? Explore template pages built around high-intent keyword variations.
         </p>
-        <Link
-          href="/templates"
-          className="mt-4 inline-flex rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
-        >
-          Browse Templates
-        </Link>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link
+            href="/templates"
+            className="inline-flex rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+          >
+            Browse Templates
+          </Link>
+          <Link
+            href="/use-cases"
+            className="inline-flex rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
+          >
+            Browse Use Cases
+          </Link>
+        </div>
       </section>
     </div>
   );

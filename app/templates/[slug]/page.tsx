@@ -7,6 +7,7 @@ import FAQSection from "@/components/FAQSection";
 import { siteConfig } from "@/lib/site";
 import { getTemplateBySlug, templatePages } from "@/lib/templates";
 import { getToolBySlug } from "@/lib/tools";
+import { getUseCasesByTool } from "@/lib/useCases";
 
 type TemplatePageProps = {
   params: {
@@ -50,6 +51,7 @@ export default function TemplateDetailPage({ params }: TemplatePageProps) {
   }
 
   const tool = getToolBySlug(page.toolSlug);
+  const relatedUseCases = tool ? getUseCasesByTool(tool.slug, 4) : [];
 
   return (
     <div className="space-y-6">
@@ -88,6 +90,23 @@ export default function TemplateDetailPage({ params }: TemplatePageProps) {
           title={`${tool.title} FAQ`}
           items={tool.faqs}
         />
+      ) : null}
+
+      {relatedUseCases.length > 0 ? (
+        <section className="card p-6">
+          <h2 className="text-xl font-semibold text-slate-900">Related Industry Use Cases</h2>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {relatedUseCases.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/use-cases/${item.slug}`}
+                className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:border-brand-500 hover:text-brand-700"
+              >
+                {item.title}
+              </Link>
+            ))}
+          </div>
+        </section>
       ) : null}
     </div>
   );

@@ -20,6 +20,12 @@ export default function NotFound() {
         >
           SEO Templates
         </Link>
+        <Link
+          href="/use-cases"
+          className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
+        >
+          Use Cases
+        </Link>
       </div>
     </section>
   );

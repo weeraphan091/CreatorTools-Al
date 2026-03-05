@@ -6,6 +6,7 @@ import AdBanner from "@/components/AdBanner";
 import BlogJsonLd from "@/components/BlogJsonLd";
 import { blogPosts, getBlogPostBySlug } from "@/lib/blog";
 import { tools } from "@/lib/tools";
+import { getFeaturedUseCases } from "@/lib/useCases";
 
 type BlogPostPageProps = {
   params: {
@@ -44,6 +45,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = getBlogPostBySlug(params.slug);
+  const featuredUseCases = getFeaturedUseCases(6);
 
   if (!post) {
     notFound();
@@ -78,6 +80,21 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:border-brand-500 hover:text-brand-700"
             >
               {tool.title}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="card p-6">
+        <h2 className="text-xl font-semibold text-slate-900">More Long-Tail Use Cases</h2>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredUseCases.map((useCase) => (
+            <Link
+              key={useCase.slug}
+              href={`/use-cases/${useCase.slug}`}
+              className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:border-brand-500 hover:text-brand-700"
+            >
+              {useCase.searchTerm}
             </Link>
           ))}
         </div>

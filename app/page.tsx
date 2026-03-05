@@ -8,6 +8,7 @@ import FAQSection from "@/components/FAQSection";
 import { joinNewsletterAction } from "@/app/actions";
 import { tools } from "@/lib/tools";
 import { siteConfig } from "@/lib/site";
+import { getFeaturedUseCases } from "@/lib/useCases";
 
 export const metadata: Metadata = {
   title: "AI Content Generators for Creators",
@@ -25,6 +26,8 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  const featuredUseCases = getFeaturedUseCases(12);
+
   return (
     <div className="space-y-10">
       <section className="card p-8">
@@ -72,6 +75,31 @@ export default function HomePage() {
           <NewsletterForm action={joinNewsletterAction} />
         </div>
         <AffiliateBlock title="Creator Stack: Editing, SEO, and Growth Tools" />
+      </section>
+
+      <section className="card p-6">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-2xl font-semibold text-slate-900">High-Intent Use Case Pages</h2>
+            <p className="mt-1 text-sm text-slate-600">
+              Targeted landing pages for long-tail Google searches across niches.
+            </p>
+          </div>
+          <Link href="/use-cases" className="text-sm font-medium text-brand-700 hover:text-brand-600">
+            View all use cases
+          </Link>
+        </div>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredUseCases.map((page) => (
+            <Link
+              key={page.slug}
+              href={`/use-cases/${page.slug}`}
+              className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:border-brand-500 hover:text-brand-700"
+            >
+              {page.title}
+            </Link>
+          ))}
+        </div>
       </section>
 
       <FAQSection

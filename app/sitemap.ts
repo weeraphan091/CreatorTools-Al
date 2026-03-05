@@ -3,6 +3,7 @@ import { blogPosts } from "@/lib/blog";
 import { siteConfig } from "@/lib/site";
 import { templatePages } from "@/lib/templates";
 import { tools } from "@/lib/tools";
+import { getAllUseCasePages } from "@/lib/useCases";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -13,11 +14,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools",
     "/blog",
     "/templates",
+    "/use-cases",
+    "/feed.xml",
   ].map((path) => ({
     url: `${siteConfig.url}${path}`,
     lastModified: now,
     changeFrequency: "weekly",
-    priority: path === "" ? 1 : 0.8,
+    priority: path === "" ? 1 : path === "/feed.xml" ? 0.3 : 0.8,
   }));
 
   const toolRoutes: MetadataRoute.Sitemap = tools.map((tool) => ({
@@ -41,5 +44,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  return [...staticRoutes, ...toolRoutes, ...blogRoutes, ...templateRoutes];
+  const useCaseRoutes: MetadataRoute.Sitemap = getAllUseCasePages().map((page) => ({
+    url: `${siteConfig.url}/use-cases/${page.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.72,
+  }));
+
+  return [...staticRoutes, ...toolRoutes, ...blogRoutes, ...templateRoutes, ...useCaseRoutes];
 }

@@ -7,9 +7,13 @@ export const metadata: Metadata = {
   title: "AI Content Templates",
   description:
     "Browse SEO-focused AI template pages for YouTube titles, TikTok captions, hooks, bios, ad headlines, and more.",
+  alternates: {
+    canonical: "/templates",
+  },
   openGraph: {
     title: "AI Content Templates | CreatorTools AI",
     description: "Long-tail AI generator templates designed to rank and convert.",
+    url: "/templates",
   },
 };
 
@@ -39,6 +43,19 @@ export default function TemplatesPage() {
             </Link>
           </article>
         ))}
+      </section>
+
+      <section className="card p-6">
+        <h2 className="text-xl font-semibold text-slate-900">Need more keyword coverage?</h2>
+        <p className="mt-2 text-sm text-slate-600">
+          Explore additional long-tail use cases by industry and audience segment.
+        </p>
+        <Link
+          href="/use-cases"
+          className="mt-4 inline-flex rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+        >
+          Browse Use Cases
+        </Link>
       </section>
     </div>
   );

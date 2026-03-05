@@ -7,6 +7,7 @@ import AffiliateBlock from "@/components/AffiliateBlock";
 import FAQSection from "@/components/FAQSection";
 import ToolJsonLd from "@/components/ToolJsonLd";
 import { getRelatedTools, getToolBySlug, tools } from "@/lib/tools";
+import { getUseCasesByTool } from "@/lib/useCases";
 
 const GeneratorForm = dynamic(() => import("@/components/GeneratorForm"), {
   ssr: false,
@@ -57,6 +58,8 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
     notFound();
   }
 
+  const toolUseCases = getUseCasesByTool(tool.slug, 8);
+
   return (
     <div className="space-y-6">
       <ToolJsonLd tool={tool} />
@@ -102,6 +105,24 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
               className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:border-brand-500 hover:text-brand-700"
             >
               {related.title}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="card p-6">
+        <h2 className="text-xl font-semibold text-slate-900">Long-Tail Use Cases</h2>
+        <p className="mt-2 text-sm text-slate-600">
+          These pages target specific search intents and industries for this tool.
+        </p>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          {toolUseCases.map((page) => (
+            <Link
+              key={page.slug}
+              href={`/use-cases/${page.slug}`}
+              className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:border-brand-500 hover:text-brand-700"
+            >
+              {page.audienceName}
             </Link>
           ))}
         </div>

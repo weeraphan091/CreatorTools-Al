@@ -27,12 +27,24 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     locale: siteConfig.locale,
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "CreatorTools AI",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} | AI Content Generators`,
     description: siteConfig.description,
     creator: siteConfig.twitterHandle,
+    images: ["/twitter-image"],
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   metadataBase: new URL(siteConfig.url),
 };
