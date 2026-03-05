@@ -54,7 +54,7 @@ export default function TemplateDetailPage({ params }: TemplatePageProps) {
   }
 
   const tool = getToolBySlug(page.toolSlug);
-  const relatedUseCases = tool ? getUseCasesByTool(tool.slug, 4) : [];
+  const relatedUseCases = tool ? getUseCasesByTool(tool.slug, 6) : [];
   const intentLinks = getIntentMatchedLinks({
     query: `${page.title} ${page.description} ${page.keyword}`,
     excludeHrefs: [`/templates/${page.slug}`],

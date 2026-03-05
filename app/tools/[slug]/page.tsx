@@ -61,7 +61,7 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
     notFound();
   }
 
-  const toolUseCases = getUseCasesByTool(tool.slug, 8);
+  const toolUseCases = getUseCasesByTool(tool.slug, 12);
   const intentLinks = getIntentMatchedLinks({
     query: `${tool.title} ${tool.description} ${tool.keywords.join(" ")}`,
     excludeHrefs: [`/tools/${tool.slug}`],

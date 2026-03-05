@@ -33,6 +33,10 @@ export async function generateMetadata({ params }: UseCaseDetailPageProps): Prom
     title: page.title,
     description: page.description,
     keywords: [page.searchTerm, `${page.toolTitle} for ${page.audienceName}`],
+    robots: {
+      index: page.indexable,
+      follow: true,
+    },
     alternates: {
       canonical: `/use-cases/${page.slug}`,
     },
@@ -90,6 +94,13 @@ export default function UseCaseDetailPage({ params }: UseCaseDetailPageProps) {
         </ul>
       </section>
 
+      <section className="card p-6">
+        <h2 className="text-xl font-semibold text-slate-900">Prompt Template for This Use Case</h2>
+        <p className="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3 font-mono text-xs text-slate-700">
+          {page.promptTemplate}
+        </p>
+      </section>
+
       <div className="grid gap-4 lg:grid-cols-2">
         <AdBanner slot={`${page.title} Banner`} />
         <AffiliateBlock title={`${page.audienceName} Growth Stack`} />
@@ -110,6 +121,18 @@ export default function UseCaseDetailPage({ params }: UseCaseDetailPageProps) {
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="card p-6">
+        <h2 className="text-xl font-semibold text-slate-900">Quality Signals</h2>
+        <p className="mt-2 text-sm text-slate-600">
+          Quality score: <span className="font-semibold text-slate-900">{page.qualityScore}</span> ·
+          {page.indexable ? (
+            <span className="font-semibold text-emerald-700"> indexable</span>
+          ) : (
+            <span className="font-semibold text-amber-700"> noindex (quality filter)</span>
+          )}
+        </p>
       </section>
 
       <IntentLinkSection title="More Resources for This Intent" links={intentLinks} />

@@ -3,7 +3,7 @@ import { blogPosts } from "@/lib/blog";
 import { siteConfig } from "@/lib/site";
 import { templatePages } from "@/lib/templates";
 import { tools } from "@/lib/tools";
-import { getAllUseCasePages } from "@/lib/useCases";
+import { getIndexableUseCasePages } from "@/lib/useCases";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -49,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  const useCaseRoutes: MetadataRoute.Sitemap = getAllUseCasePages().map((page) => ({
+  const useCaseRoutes: MetadataRoute.Sitemap = getIndexableUseCasePages().map((page) => ({
     url: `${siteConfig.url}/use-cases/${page.slug}`,
     lastModified: now,
     changeFrequency: "weekly",

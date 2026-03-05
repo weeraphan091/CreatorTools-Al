@@ -11,6 +11,8 @@ A full AI tools website built with **Next.js 14 App Router**, **TypeScript**, **
 - 30+ blog posts across creator marketing keyword clusters
 - Template landing pages for long-tail SEO keyword targeting
 - Programmatic use-case pages for audience + tool keyword combinations
+- 600+ programmatic use-case pages generated (with auto quality scoring)
+- Automatic `noindex` filter for low-quality long-tail pages
 - Technical SEO: `robots.txt`, `sitemap.xml`, JSON-LD schema, canonicals
 - Breadcrumb schema + intent-based internal linking
 - Trust pages: contact, privacy, terms, editorial policy

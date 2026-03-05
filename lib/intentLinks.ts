@@ -1,7 +1,7 @@
 import { blogPosts } from "@/lib/blog";
 import { templatePages } from "@/lib/templates";
 import { tools } from "@/lib/tools";
-import { getAllUseCasePages } from "@/lib/useCases";
+import { getIndexableUseCasePages } from "@/lib/useCases";
 
 export type IntentLink = {
   href: string;
@@ -52,7 +52,7 @@ function getCandidates(): Candidate[] {
     tokens: normalizeTokens(`${template.title} ${template.description} ${template.keyword}`),
   }));
 
-  const useCaseCandidates: Candidate[] = getAllUseCasePages().map((useCase) => ({
+  const useCaseCandidates: Candidate[] = getIndexableUseCasePages().map((useCase) => ({
     href: `/use-cases/${useCase.slug}`,
     label: useCase.title,
     type: "use-case",
