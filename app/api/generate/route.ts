@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
 
 type GenerateRequestBody = {
@@ -11,6 +10,11 @@ type EnvStatus = {
   geminiConfigured: boolean;
   openaiConfigured: boolean;
   deploymentSha: string | null;
+};
+
+type GeminiModelCache = {
+  expiresAt: number;
+  modelName: string;
 };
 
 function sanitizeLine(line: string) {
@@ -48,6 +52,7 @@ const CACHE_TTL_MS = 12 * 60 * 60 * 1000;
 const globalForApiStore = globalThis as unknown as {
   aiResultCache?: Map<string, CachedResult>;
   aiRateLimit?: Map<string, RateLimitEntry>;
+  geminiModelCache?: GeminiModelCache;
 };
 
 const aiResultCache = globalForApiStore.aiResultCache ?? new Map<string, CachedResult>();
@@ -102,25 +107,113 @@ function isRateLimited(ip: string) {
   return false;
 }
 
+async function getGeminiModelName(apiKey: string) {
+  const now = Date.now();
+  const cached = globalForApiStore.geminiModelCache;
+
+  if (cached && cached.expiresAt > now) {
+    return cached.modelName;
+  }
+
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`Gemini list models failed (${response.status}): ${text.slice(0, 200)}`);
+  }
+
+  const data = (await response.json()) as {
+    models?: Array<{
+      name?: string;
+      supportedGenerationMethods?: string[];
+    }>;
+  };
+
+  const available = (data.models || []).filter((model) =>
+    model.supportedGenerationMethods?.includes("generateContent"),
+  );
+
+  const preferred = [
+    "models/gemini-2.5-flash",
+    "models/gemini-2.5-flash-lite",
+    "models/gemini-2.0-flash",
+    "models/gemini-1.5-flash-latest",
+    "models/gemini-1.5-flash-8b-latest",
+    "models/gemini-1.5-pro-latest",
+  ];
+
+  const selected =
+    preferred.find((name) => available.some((model) => model.name === name)) ||
+    available[0]?.name;
+
+  if (!selected) {
+    throw new Error("No Gemini generateContent model available for this API key.");
+  }
+
+  globalForApiStore.geminiModelCache = {
+    modelName: selected,
+    expiresAt: now + 60 * 60 * 1000,
+  };
+
+  return selected;
+}
+
 async function generateWithGemini(prompt: string, apiKey: string) {
-  const genAI = new GoogleGenerativeAI(apiKey);
-  const modelCandidates = ["gemini-2.0-flash", "gemini-1.5-flash"];
-  let lastError: unknown;
+  const modelName = await getGeminiModelName(apiKey);
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/${modelName}:generateContent?key=${apiKey}`;
 
-  for (const modelName of modelCandidates) {
-    try {
-      const model = genAI.getGenerativeModel({ model: modelName });
-      const response = await model.generateContent(prompt);
-      return response.response.text();
-    } catch (error) {
-      lastError = error;
-    }
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      contents: [
+        {
+          parts: [{ text: prompt }],
+        },
+      ],
+      generationConfig: {
+        temperature: 0.9,
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`Gemini generate failed (${response.status}) with ${modelName}: ${text.slice(0, 200)}`);
   }
 
-  if (lastError instanceof Error) {
-    throw lastError;
+  const data = (await response.json()) as {
+    candidates?: Array<{
+      content?: {
+        parts?: Array<{
+          text?: string;
+        }>;
+      };
+    }>;
+  };
+
+  const output = (data.candidates || [])
+    .flatMap((candidate) => candidate.content?.parts || [])
+    .map((part) => part.text || "")
+    .join("\n")
+    .trim();
+
+  if (!output) {
+    throw new Error(`Gemini returned empty output from ${modelName}.`);
   }
-  throw new Error("Gemini request failed for all model candidates.");
+
+  return output;
 }
 
 async function generateWithOpenAI(prompt: string, apiKey: string) {
