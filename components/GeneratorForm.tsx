@@ -21,6 +21,7 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [detail, setDetail] = useState<string | null>(null);
+  const [needsSignIn, setNeedsSignIn] = useState(false);
   const [source, setSource] = useState<string | null>(null);
   const [shareMessage, setShareMessage] = useState<string | null>(null);
 
@@ -104,14 +105,14 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
 
     setError(null);
     setDetail(null);
+    setNeedsSignIn(false);
     setIsLoading(true);
 
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({
           topic: normalizedTopic,
           tool: toolTitle,
@@ -121,12 +122,16 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
       });
 
       if (!response.ok) {
-        const errorData = (await response.json()) as { error?: string; detail?: string };
+        const errorData = (await response.json().catch(() => ({}))) as { error?: string; detail?: string };
         setDetail(errorData.detail || null);
+        if (response.status === 401) {
+          setNeedsSignIn(true);
+          throw new Error("Please sign in to generate results.");
+        }
         if (response.status === 403 && typeof window !== "undefined") {
           window.dispatchEvent(new CustomEvent("viralhooklab:out_of_credits"));
         }
-        throw new Error(errorData.error || "Generation failed.");
+        throw new Error(errorData.error || "Generation failed. Please try again.");
       }
 
       const data = (await response.json()) as {
@@ -220,7 +225,19 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
           )}
         </button>
 
-        {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
+        {error ? (
+          <div className="mt-3">
+            <p className="text-sm text-red-600">{error}</p>
+            {needsSignIn && (
+              <a
+                href={`/sign-in?redirect_url=${encodeURIComponent(typeof window !== "undefined" ? window.location.pathname : "/tools")}`}
+                className="mt-2 inline-flex rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+              >
+                Sign in to generate
+              </a>
+            )}
+          </div>
+        ) : null}
         {showDebugPanel && error && detail ? <p className="mt-1 text-xs text-red-500">{detail}</p> : null}
         {showDebugPanel && !error && source ? (
           <p className="mt-3 text-xs text-slate-500">Source: {source.toUpperCase()}</p>

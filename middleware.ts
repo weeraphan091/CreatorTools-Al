@@ -36,7 +36,7 @@ export default clerkMiddleware((_, request) => {
   }
 
   const method = request.method.toUpperCase();
-  if (!["POST", "OPTIONS"].includes(method)) {
+  if (!["GET", "POST", "OPTIONS"].includes(method)) {
     return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
   }
 
