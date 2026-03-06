@@ -21,7 +21,23 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing plan." }, { status: 400 });
   }
 
-  const mapping = getStripePriceMapping();
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return NextResponse.json(
+      { error: "Billing is not configured yet. Please try again later." },
+      { status: 503 },
+    );
+  }
+
+  let mapping;
+  try {
+    mapping = getStripePriceMapping();
+  } catch {
+    return NextResponse.json(
+      { error: "Billing plans are not configured yet. Please try again later." },
+      { status: 503 },
+    );
+  }
+
   const priceId =
     plan === "starter" ? mapping.starterMonthly : plan === "agency" ? mapping.agencyMonthly : mapping.topup100;
   const isTopup = plan === "topup100";
