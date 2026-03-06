@@ -22,13 +22,13 @@ export default function PrivacyPolicyPage() {
       <p>
         This Privacy Policy describes how ViralHookLab.com (“ViralHookLab”, “we”, “us”) collects, uses, and shares
         information when you use our website and tools. ViralHookLab.com is operated by{" "}
-        <span className="font-medium text-slate-900">Seventy Eight Co., Ltd.</span> (บริษัท เซเว่นตี้ เอท จำกัด).
+        <span className="font-medium text-slate-900">Seventy Eight Co., Ltd.</span>.
       </p>
 
       <h2 className="text-xl font-semibold text-slate-900">Who we are</h2>
       <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
         <p className="font-semibold text-slate-900">Operator</p>
-        <p className="mt-1">Seventy Eight Co., Ltd. (บริษัท เซเว่นตี้ เอท จำกัด)</p>
+        <p className="mt-1">Seventy Eight Co., Ltd.</p>
         <p className="mt-1">Tax ID: 0205565023848</p>
         <p className="mt-1">
           Support email:{" "}

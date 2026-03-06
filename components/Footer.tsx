@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="container-shell space-y-4 py-8 text-sm text-slate-600">
         <div className="space-y-1">
           <p>© 2026 ViralHookLab. All rights reserved.</p>
-          <p>Operated by Seventy Eight Co., Ltd. (บริษัท เซเว่นตี้ เอท จำกัด)</p>
+          <p>Operated by Seventy Eight Co., Ltd.</p>
           <p>Tax ID: 0205565023848</p>
           <p>
             Contact:{" "}
