@@ -10,7 +10,7 @@ import { getFeaturedUseCases } from "@/lib/useCases";
 
 export const metadata: Metadata = {
   title: "AI Tools",
-  description: "Browse all 40 AI generators for creators, marketers, and businesses.",
+  description: "Browse all 50 AI generators for creators, marketers, and businesses.",
   alternates: {
     canonical: "/tools",
   },

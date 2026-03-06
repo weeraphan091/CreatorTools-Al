@@ -41,7 +41,7 @@ export default function HomePage() {
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href="/tools" className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
-            Explore 40 AI Tools
+            Explore 50 AI Tools
           </Link>
           <Link href="/templates" className="rounded-lg border border-brand-600 bg-white px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50">
             Explore SEO Templates
