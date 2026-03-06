@@ -852,6 +852,900 @@ export const tools: ToolConfig[] = [
       },
     ],
   },
+  // ---- 20 new unique tools (no overlap with existing) ----
+  {
+    slug: "ai-scriptwriter-faceless-channels",
+    categoryId: "youtube",
+    title: "AI Scriptwriter for Faceless Channels",
+    description: "Generate full scripts for faceless YouTube videos with hooks, structure, and CTAs.",
+    seoTitle: "AI Scriptwriter for Faceless Channels (Free) - YouTube Automation Scripts",
+    seoDescription:
+      "Generate faceless YouTube scripts with hooks, retention beats, and CTAs. Free AI tool for YouTube automation and cash-cow channels.",
+    keywords: ["faceless youtube script", "youtube automation script", "ai scriptwriter youtube", "faceless channel script"],
+    useCases: ["List videos", "Explainer content", "Reddit story narration", "Comparison videos"],
+    examples: [
+      "Hook: You're doing [X] wrong. Here's what actually works.",
+      "Retention beat every 30s: number, tip, or twist",
+      "CTA: Like and subscribe for more [topic] breakdowns",
+      "Pattern: Problem → 3 steps → Proof → CTA",
+    ],
+    whoFor: ["YouTube automation creators", "Faceless channel operators", "Teams scaling scripted content"],
+    commonMistakes: ["No clear hook in first 5 seconds", "Scripts that sound robotic", "Missing mid-roll retention beats"],
+    faqs: [
+      {
+        question: "What makes a good faceless YouTube script?",
+        answer:
+          "A strong hook in the first 3–5 seconds, clear structure (problem, steps, proof), retention beats every 20–40 seconds, and a clear CTA. Keep sentences short for voiceover.",
+      },
+      {
+        question: "How long should a faceless script be?",
+        answer:
+          "Aim for 8–12 minutes for standard videos (1,200–1,800 words). Shorts: 30–60 seconds. Match length to topic depth and audience expectations.",
+      },
+      {
+        question: "Can I use this for different niches?",
+        answer:
+          "Yes. Enter your topic or niche and the tool generates structure and phrasing you can adapt. Swap in your own facts and examples for authenticity.",
+      },
+      {
+        question: "How do I improve retention with script structure?",
+        answer:
+          "Add a mini-hook or twist every 30–45 seconds (number, “but here’s the catch,” or “step two changes everything”). Tease the next point before transitions.",
+      },
+      {
+        question: "Should I use the same script format for every video?",
+        answer:
+          "Use a consistent format (e.g., hook → 3 tips → CTA) so viewers know what to expect. Vary the angle and examples, not the structure.",
+      },
+    ],
+  },
+  {
+    slug: "pinterest-idea-pin-planner",
+    categoryId: "business-writing",
+    title: "Pinterest Idea Pin Planner",
+    description: "Plan Idea Pin titles, page copy, and CTAs for multi-page Pinterest content.",
+    seoTitle: "Pinterest Idea Pin Planner (Free) - Multi-Page Pin Copy & CTAs",
+    seoDescription:
+      "Plan Idea Pin titles, page-by-page copy, and CTAs. Free AI tool for visual content creators and Pinterest marketers.",
+    keywords: ["pinterest idea pin", "idea pin planner", "pinterest multi-page", "pinterest content planner"],
+    useCases: ["How-to Idea Pins", "List-style pins", "Story-style sequences", "Product showcases"],
+    examples: [
+      "Title: [Number] [Outcome] in [Timeframe] (Swipe for Steps)",
+      "Page 1: Hook + promise | Page 2–N: One tip per page | Last: CTA",
+      "CTA options: Save this pin, Follow for more, Tap link in bio",
+    ],
+    whoFor: ["Pinterest creators", "Lifestyle and DIY bloggers", "Brands building Idea Pin series"],
+    commonMistakes: ["Weak first page hook", "Too much text per page", "No clear CTA on final page"],
+    faqs: [
+      {
+        question: "What is a Pinterest Idea Pin?",
+        answer:
+          "Idea Pins are multi-page, native Pinterest formats (like Stories). They support up to 20 pages and are ideal for how-tos, lists, and step-by-step content.",
+      },
+      {
+        question: "How many pages should an Idea Pin have?",
+        answer:
+          "Often 5–10 pages work best. Use the first page as a strong hook and title, then one clear idea per page. End with a CTA page.",
+      },
+      {
+        question: "What should each page say?",
+        answer:
+          "Keep copy short and scannable. One headline or tip per page. Use the first page to promise an outcome; use the last to drive saves, follows, or link clicks.",
+      },
+      {
+        question: "How do I get more saves on Idea Pins?",
+        answer:
+          "Use save-worthy titles (e.g., “Save for later”), include checklists or steps, and make the outcome clear in the first page so people know what they’re saving.",
+      },
+      {
+        question: "Can I reuse the same structure for different topics?",
+        answer:
+          "Yes. Use a template (e.g., “X tips for Y”) and swap the topic and details. Consistency helps your audience recognize your style and improves performance over time.",
+      },
+    ],
+  },
+  {
+    slug: "x-viral-thread-starter",
+    categoryId: "business-writing",
+    title: "X (Twitter) Viral Thread Starter",
+    description: "Generate thread openers and structure for thought leaders and educators on X.",
+    seoTitle: "X Viral Thread Starter (Free) - Thread Hooks & Structure for Thought Leaders",
+    seoDescription:
+      "Generate viral X (Twitter) thread openers and structure. Free AI tool for thought leaders, educators, and creators.",
+    keywords: ["twitter thread starter", "x thread viral", "thread hook generator", "twitter thread structure"],
+    useCases: ["Educational threads", "Story threads", "Framework breakdowns", "Hot takes with proof"],
+    examples: [
+      "I spent [X] hours on [topic]. Here are [number] things nobody talks about:",
+      "The [framework] that changed how I [outcome]. Thread:",
+      "Most people get [topic] wrong. Here's the truth (with receipts):",
+    ],
+    whoFor: ["Thought leaders on X", "Educators and coaches", "Creators building authority with threads"],
+    commonMistakes: ["Vague opener with no payoff", "No clear structure (numbered vs story)", "Thread too long without sub-hooks"],
+    faqs: [
+      {
+        question: "What makes a thread go viral on X?",
+        answer:
+          "A strong first tweet that promises a clear payoff, a consistent structure (numbered list or story), and each tweet earning the next. Add proof or examples when possible.",
+      },
+      {
+        question: "How long should my thread be?",
+        answer:
+          "Often 5–12 tweets. Short enough to finish, long enough to deliver value. Use the first tweet as a hook and table of contents when helpful.",
+      },
+      {
+        question: "Should I use a hook or a question to start?",
+        answer:
+          "Both work. Use a bold claim or “I did X, here’s what I learned” for authority. Use a question when you want replies and discussion. Test both.",
+      },
+      {
+        question: "How do I keep people reading to the end?",
+        answer:
+          "Tease the next tweet at the end of each one (“This is where it gets interesting”) and deliver one clear idea per tweet. Avoid long blocks of text.",
+      },
+      {
+        question: "Can I reuse thread structures for different topics?",
+        answer:
+          "Yes. Use a repeatable format (e.g., “X lessons from Y”) so your audience knows what to expect. Swap the topic and examples for each new thread.",
+      },
+    ],
+  },
+  {
+    slug: "linkedin-thought-leadership-post-ai",
+    categoryId: "business-writing",
+    title: "LinkedIn Thought Leadership Post AI",
+    description: "Write LinkedIn posts that build authority and spark discussion for B2B professionals.",
+    seoTitle: "LinkedIn Thought Leadership Post AI (Free) - B2B Authority-Building Posts",
+    seoDescription:
+      "Generate LinkedIn thought leadership posts designed for engagement and authority. Free AI tool for B2B professionals and executives.",
+    keywords: ["linkedin thought leadership", "linkedin authority posts", "b2b linkedin content", "linkedin post generator"],
+    useCases: ["Industry insights", "Lessons learned", "Hot takes with nuance", "Framework sharing"],
+    examples: [
+      "I used to believe [X]. Then [experience] changed my view. Here's what I learned:",
+      "The [framework] I use to [outcome]. No fluff:",
+      "Unpopular opinion: [claim]. Here's why:",
+    ],
+    whoFor: ["B2B executives and founders", "Consultants and coaches", "Professionals building personal brand on LinkedIn"],
+    commonMistakes: ["Generic advice without personal angle", "No discussion prompt", "Too long without subheads or breaks"],
+    faqs: [
+      {
+        question: "What is a thought leadership post on LinkedIn?",
+        answer:
+          "A post that shares a clear point of view, backed by experience or evidence. It invites discussion and positions you as a trusted voice on a topic.",
+      },
+      {
+        question: "How long should a LinkedIn thought leadership post be?",
+        answer:
+          "Often 150–300 words. Use short paragraphs and line breaks. Lead with the insight, then support it with a story or framework. End with a question or CTA.",
+      },
+      {
+        question: "How do I get more comments on LinkedIn posts?",
+        answer:
+          "End with a specific question tied to the post. Ask for opinions, examples, or “agree or disagree.” Avoid generic “Thoughts?” and make it easy to answer.",
+      },
+      {
+        question: "Should I share personal stories?",
+        answer:
+          "Yes, when they support your point. A short anecdote or lesson learned makes the post memorable and builds connection. Keep it relevant to your audience.",
+      },
+      {
+        question: "How often should I post thought leadership content?",
+        answer:
+          "Consistency matters more than volume. Aim for 2–4 posts per week. Mix thought leadership with lighter updates and engagement on others’ posts.",
+      },
+    ],
+  },
+  {
+    slug: "podcast-episode-show-notes-generator",
+    categoryId: "business-writing",
+    title: "Podcast Episode Show Notes Generator",
+    description: "Generate show notes, timestamps, and key takeaways for podcast episodes.",
+    seoTitle: "Podcast Episode Show Notes Generator (Free) - Show Notes & Timestamps",
+    seoDescription:
+      "Generate podcast show notes, timestamps, and key takeaways. Free AI tool for podcasters and audio creators.",
+    keywords: ["podcast show notes", "show notes generator", "podcast timestamps", "episode summary"],
+    useCases: ["Interview episodes", "Solo episodes", "Educational series", "Repurposing for SEO"],
+    examples: [
+      "[Timestamp] – Topic intro and hook",
+      "Key takeaway: [One sentence]",
+      "In this episode we cover: [3–5 bullets]",
+      "Resources mentioned: [Links or names]",
+    ],
+    whoFor: ["Podcasters publishing weekly", "Teams repurposing episodes for blogs", "Creators improving discoverability"],
+    commonMistakes: ["Show notes that are too vague", "No timestamps for key moments", "Missing keywords for search"],
+    faqs: [
+      {
+        question: "What should podcast show notes include?",
+        answer:
+          "A short summary (2–4 sentences), 3–5 key takeaways, timestamps for major sections, guest or topic details, and links to resources mentioned.",
+      },
+      {
+        question: "Why are timestamps important?",
+        answer:
+          "They help listeners jump to sections they care about and improve engagement. They also help platforms and SEO when included in descriptions.",
+      },
+      {
+        question: "How long should show notes be?",
+        answer:
+          "Enough to convey value and keywords: often 150–400 words. Keep the first paragraph strong for previews and search snippets.",
+      },
+      {
+        question: "Can show notes help with podcast SEO?",
+        answer:
+          "Yes. Use relevant keywords in the title and first paragraph. Include topic phrases and guest names. Publish show notes on your site for indexation.",
+      },
+      {
+        question: "Should I write show notes before or after recording?",
+        answer:
+          "After recording you have exact timestamps and quotes. Draft a structure before if it helps; finalize with accurate timestamps and takeaways after.",
+      },
+    ],
+  },
+  {
+    slug: "email-newsletter-subject-line-ab-tester",
+    categoryId: "business-writing",
+    title: "Email Newsletter Subject Line A/B Tester",
+    description: "Generate A/B subject line variants for newsletters to improve open rates.",
+    seoTitle: "Email Newsletter Subject Line A/B Tester (Free) - Open Rate Optimization",
+    seoDescription:
+      "Generate A/B newsletter subject lines with different angles. Free AI tool for email marketers and newsletter creators.",
+    keywords: ["newsletter subject line", "email subject line ab test", "newsletter open rate", "subject line tester"],
+    useCases: ["Weekly newsletters", "Launch announcements", "Digest emails", "Re-engagement campaigns"],
+    examples: [
+      "A: [Curiosity] | B: [Benefit]",
+      "A: [Number] things you missed this week | B: [Personalization]",
+      "A: Quick question... | B: [Outcome] in [timeframe]",
+    ],
+    whoFor: ["Newsletter creators", "Email marketers", "Founders sending regular updates"],
+    commonMistakes: ["Testing two similar angles", "Overusing urgency or clickbait", "No clear winner criteria"],
+    faqs: [
+      {
+        question: "What should I test in newsletter subject lines?",
+        answer:
+          "Test one variable at a time: angle (curiosity vs benefit), length, personalization, or format (question vs statement). Keep the rest of the email the same.",
+      },
+      {
+        question: "How many subscribers do I need to A/B test?",
+        answer:
+          "Roughly 1,000+ for meaningful results. With smaller lists, run sequential tests or use best practices (clear benefit, concise length) until you have enough volume.",
+      },
+      {
+        question: "What length works best for newsletter subjects?",
+        answer:
+          "It depends on your audience. Mobile users often see 40–50 characters. Test short (under 50) vs longer (50–70) and check your own open data.",
+      },
+      {
+        question: "Should I use emojis in subject lines?",
+        answer:
+          "Test it. Some audiences open more with a relevant emoji; others prefer plain text. Use one emoji at most and keep it consistent with your brand.",
+      },
+      {
+        question: "How do I avoid spam filters with subject lines?",
+        answer:
+          "Avoid all caps, excessive punctuation, and spam triggers (“FREE,” “Act now”). Keep copy clear and value-focused. Maintain a healthy sender reputation.",
+      },
+    ],
+  },
+  {
+    slug: "amazon-aplus-content-headline-optimizer",
+    categoryId: "ecommerce",
+    title: "Amazon A+ Content Headline Optimizer",
+    description: "Optimize headlines and module copy for Amazon A+ Content to boost conversion.",
+    seoTitle: "Amazon A+ Content Headline Optimizer (Free) - E-commerce Sellers",
+    seoDescription:
+      "Generate and optimize A+ Content headlines and module copy for Amazon listings. Free AI tool for e-commerce sellers.",
+    keywords: ["amazon a+ content", "a+ content headline", "amazon brand story", "amazon listing optimizer"],
+    useCases: ["Brand story modules", "Comparison charts", "Feature callouts", "Trust and warranty sections"],
+    examples: [
+      "Why [Product]? [Benefit] in [Timeframe]",
+      "[Number] Reasons [Audience] Choose [Brand]",
+      "From [Problem] to [Outcome] – How It Works",
+    ],
+    whoFor: ["Amazon sellers with Brand Registry", "E-commerce brands optimizing listings", "Agencies managing multiple ASINs"],
+    commonMistakes: ["Generic headlines that don’t differentiate", "Too much text per module", "Ignoring mobile layout"],
+    faqs: [
+      {
+        question: "What is Amazon A+ Content?",
+        answer:
+          "A+ Content (Brand Story) is enhanced product detail for Brand Registry sellers. It includes headlines, images, and modules below the fold to explain benefits and build trust.",
+      },
+      {
+        question: "What makes a strong A+ headline?",
+        answer:
+          "Clear benefit, audience or use case, and outcome. Keep it short and scannable. Match the headline to the module content (e.g., comparison vs feature).",
+      },
+      {
+        question: "How many modules should I use?",
+        answer:
+          "Use the space Amazon allows (typically 5–7 modules). Lead with brand story or key benefits, then comparison, features, and trust (warranty, materials).",
+      },
+      {
+        question: "Can A+ Content improve conversion rate?",
+        answer:
+          "Yes. Clear benefits, comparison charts, and trust elements can reduce returns and improve conversion. Test different headlines and module order.",
+      },
+      {
+        question: "Should I use keywords in A+ Content?",
+        answer:
+          "Use them naturally in headlines and body. Don’t stuff. Focus on readability and benefit-led copy; use backend search terms for heavy keyword coverage.",
+      },
+    ],
+  },
+  {
+    slug: "etsy-seo-product-title-generator",
+    categoryId: "ecommerce",
+    title: "Etsy SEO Product Title Generator",
+    description: "Generate Etsy-optimized product titles with keywords for handmade and vintage sellers.",
+    seoTitle: "Etsy SEO Product Title Generator (Free) - Handmade Sellers",
+    seoDescription:
+      "Generate Etsy product titles with relevant keywords for search. Free AI tool for handmade, vintage, and craft sellers.",
+    keywords: ["etsy product title", "etsy seo", "etsy title generator", "handmade seo"],
+    useCases: ["Handmade jewelry", "Vintage items", "Digital downloads", "Custom gifts"],
+    examples: [
+      "[Material] [Product Type] for [Occasion] – [Style] – [Audience] Gift",
+      "[Number] [Item] – [Descriptor] – [Color] – Personalization Available",
+      "[Seasonal] [Product] – [Key Feature] – [Material]",
+    ],
+    whoFor: ["Etsy sellers", "Handmade and vintage shop owners", "Sellers improving search rank"],
+    commonMistakes: ["Keyword stuffing", "Missing niche keywords", "Titles that don’t read naturally"],
+    faqs: [
+      {
+        question: "How long can an Etsy title be?",
+        answer:
+          "Up to 140 characters. Use the full space with relevant, readable keywords. Front-load the most important terms for search and clarity.",
+      },
+      {
+        question: "What keywords should I include in Etsy titles?",
+        answer:
+          "Include product type, material, style, occasion, color, and audience (e.g., “gift for her”). Use Etsy search and listings to find what buyers search for.",
+      },
+      {
+        question: "Should I repeat keywords from tags in the title?",
+        answer:
+          "Use your most important tags in the title. Repeating exact phrases can help for that term, but prioritize a natural, readable title first.",
+      },
+      {
+        question: "How do I balance SEO and readability?",
+        answer:
+          "Write for humans first: a clear, descriptive title. Then weave in search terms (material, style, occasion) without stuffing. Read it aloud to check flow.",
+      },
+      {
+        question: "Can I use this for digital products on Etsy?",
+        answer:
+          "Yes. Use the same principles: product type, format (e.g., printable, SVG), use case, and audience. Include “instant download” or “digital” if relevant.",
+      },
+    ],
+  },
+  {
+    slug: "google-business-profile-description-ai",
+    categoryId: "seo-marketing",
+    title: "Google Business Profile Description AI",
+    description: "Write Google Business Profile descriptions for local SEO and discovery.",
+    seoTitle: "Google Business Profile Description AI (Free) - Local SEO",
+    seoDescription:
+      "Generate Google Business Profile (Google My Business) descriptions for local SEO. Free AI tool for local businesses and agencies.",
+    keywords: ["google business profile", "google my business description", "local seo", "gbp description"],
+    useCases: ["Local services", "Restaurants and retail", "Multi-location brands", "Service area businesses"],
+    examples: [
+      "[Business] serving [Area] since [Year]. We [primary service]. [Key differentiator]. Call or visit today.",
+      "[Type] in [Location]. [Offer]. [Proof]. Open [hours]. [CTA].",
+    ],
+    whoFor: ["Local business owners", "Multi-location marketers", "SEO agencies managing GBP"],
+    commonMistakes: ["Generic descriptions", "Missing location and service keywords", "Over 750 characters (limit)"],
+    faqs: [
+      {
+        question: "How long can my Google Business Profile description be?",
+        answer:
+          "Up to 750 characters. Use the space to cover what you do, where you serve, key services, and a clear CTA. Avoid keyword stuffing.",
+      },
+      {
+        question: "What should a GBP description include?",
+        answer:
+          "Business name and category, primary services or products, location or service area, what makes you different, and a call to action (call, book, visit).",
+      },
+      {
+        question: "Do keywords in the description help local SEO?",
+        answer:
+          "Relevant terms help Google understand your business. Use natural language and include location, service type, and niche terms. Don’t stuff.",
+      },
+      {
+        question: "Can I use the same description for multiple locations?",
+        answer:
+          "Use a template and customize per location (city, neighborhood, services). Duplicate content across many profiles can be less effective; localize where possible.",
+      },
+      {
+        question: "How often should I update my GBP description?",
+        answer:
+          "Update when offerings, hours, or messaging change. There’s no need to change it constantly; keep it accurate and relevant.",
+      },
+    ],
+  },
+  {
+    slug: "press-release-draft-generator",
+    categoryId: "business-writing",
+    title: "Press Release Draft Generator",
+    description: "Draft press release structure and copy for PR and startup announcements.",
+    seoTitle: "Press Release Draft Generator (Free) - PR & Startups",
+    seoDescription:
+      "Generate press release drafts with headline, subhead, boilerplate, and quotes. Free AI tool for PR teams and startups.",
+    keywords: ["press release generator", "press release template", "pr draft", "news release"],
+    useCases: ["Product launches", "Funding announcements", "Partnerships", "Awards and milestones"],
+    examples: [
+      "[Company] Launches [Product] to [Outcome] for [Audience]",
+      "[Company] Secures [Amount] to [Mission] – [Quote]",
+      "FOR IMMEDIATE RELEASE – [Headline] – [City, Date]",
+    ],
+    whoFor: ["PR professionals", "Startup founders", "Communications teams"],
+    commonMistakes: ["Buried lead", "No quote or spokesperson", "Too long or jargon-heavy"],
+    faqs: [
+      {
+        question: "What should a press release include?",
+        answer:
+          "A clear headline, dateline, lead paragraph (who, what, when, where, why), supporting paragraphs, quote from spokesperson, boilerplate about the company, and contact info.",
+      },
+      {
+        question: "How long should a press release be?",
+        answer:
+          "Often 400–600 words. Keep the lead to 1–2 sentences. Journalists scan quickly; put the most newsworthy information first.",
+      },
+      {
+        question: "What makes a strong press release headline?",
+        answer:
+          "Specific and newsworthy: include the key news (launch, funding, partnership). Avoid hype words. Use active voice and clarity.",
+      },
+      {
+        question: "Should I include quotes in a press release?",
+        answer:
+          "Yes. Include at least one quote from a named spokesperson (CEO, VP). It adds credibility and gives journalists a ready-made sound bite.",
+      },
+      {
+        question: "How do I distribute a press release?",
+        answer:
+          "Use wire services (e.g., PR Newswire, Business Wire) for reach, and also send directly to relevant journalists. Post on your newsroom and social channels.",
+      },
+    ],
+  },
+  {
+    slug: "webinar-registration-page-copy-ai",
+    categoryId: "business-writing",
+    title: "Webinar Registration Page Copy AI",
+    description: "Write webinar registration page headlines, bullets, and CTAs for online educators.",
+    seoTitle: "Webinar Registration Page Copy AI (Free) - Online Educators",
+    seoDescription:
+      "Generate webinar registration page copy: headlines, benefits, and CTAs. Free AI tool for course creators and educators.",
+    keywords: ["webinar registration page", "webinar copy", "registration page headline", "webinar signup copy"],
+    useCases: ["Lead gen webinars", "Product demos", "Training launches", "Evergreen webinar funnels"],
+    examples: [
+      "Join [Expert] for [Topic]: [Outcome] in [Timeframe]",
+      "What you'll learn: [3–5 bullets]",
+      "Reserve your spot – [Date] at [Time] – Free",
+    ],
+    whoFor: ["Online educators", "Course creators", "B2B marketers running webinars"],
+    commonMistakes: ["Vague headline", "Too many bullets", "Weak or missing CTA"],
+    faqs: [
+      {
+        question: "What should a webinar registration page include?",
+        answer:
+          "A clear headline (topic + outcome), 3–5 benefit bullets, date/time/timezone, speaker credibility, and a strong CTA (e.g., Reserve my spot, Register free).",
+      },
+      {
+        question: "How long should the headline be?",
+        answer:
+          "Short enough to scan: often 10–15 words. Include the topic and the main outcome or promise. Avoid jargon.",
+      },
+      {
+        question: "What makes people register for webinars?",
+        answer:
+          "Clear value (what they’ll learn), credibility (who’s presenting), low friction (free, one click), and sometimes urgency (limited spots, deadline).",
+      },
+      {
+        question: "Should I use countdown timers or urgency?",
+        answer:
+          "Use sparingly and honestly. “Limited spots” or “Register by X” can help if true. Avoid fake scarcity; it can hurt trust and compliance.",
+      },
+      {
+        question: "Can I reuse the same page for multiple webinars?",
+        answer:
+          "Use a template and swap headline, date, and bullets. Keep the structure and CTA consistent so you can optimize over time.",
+      },
+    ],
+  },
+  {
+    slug: "app-store-aso-description-optimizer",
+    categoryId: "ecommerce",
+    title: "App Store (ASO) Description Optimizer",
+    description: "Optimize App Store and Play Store descriptions for ASO and conversion.",
+    seoTitle: "App Store ASO Description Optimizer (Free) - Mobile App Devs",
+    seoDescription:
+      "Generate and optimize App Store and Google Play descriptions for ASO. Free AI tool for mobile app developers and publishers.",
+    keywords: ["app store description", "aso optimizer", "play store description", "app store optimization"],
+    useCases: ["New app launches", "Update descriptions", "Keyword testing", "Localization prep"],
+    examples: [
+      "[App] – [One-line benefit]. [Key feature]. [Key feature]. [Social proof]. Download free.",
+      "Subtitle: [Benefit] in [Timeframe]",
+      "First 3 lines: keyword-rich, benefit-led (visible before “more”)",
+    ],
+    whoFor: ["Mobile app developers", "ASO specialists", "Publishers with multiple apps"],
+    commonMistakes: ["Ignoring character limits", "Keyword stuffing", "Weak first line (visible in store)"],
+    faqs: [
+      {
+        question: "What is ASO?",
+        answer:
+          "App Store Optimization: improving visibility and conversion in app stores through keywords, title, subtitle, description, and screenshots. Similar to SEO for apps.",
+      },
+      {
+        question: "What are App Store character limits?",
+        answer:
+          "Apple: subtitle 30 characters, promo text 170. Description length varies by store. Google Play: short description 80 characters, full description 4,000. Prioritize what’s visible first.",
+      },
+      {
+        question: "What should the first line of my description say?",
+        answer:
+          "Lead with the main benefit or value proposition. Many users only see the first few lines; make them keyword-aware but readable.",
+      },
+      {
+        question: "How do I choose ASO keywords?",
+        answer:
+          "Use store search suggestions, competitor apps, and keyword tools. Include core terms in title/subtitle and natural phrases in the description.",
+      },
+      {
+        question: "Should I A/B test my store listing?",
+        answer:
+          "Yes. Test icons, screenshots, and first lines where possible. Small changes can improve conversion; measure installs and conversion rate.",
+      },
+    ],
+  },
+  {
+    slug: "real-estate-property-listing-storyteller",
+    categoryId: "business-writing",
+    title: "Real Estate Property Listing Storyteller",
+    description: "Turn property details into compelling listing copy for realtors.",
+    seoTitle: "Real Estate Property Listing Storyteller (Free) - Realtors",
+    seoDescription:
+      "Generate compelling real estate listing copy from property details. Free AI tool for realtors and property marketers.",
+    keywords: ["real estate listing copy", "property description", "realtor copy", "listing storyteller"],
+    useCases: ["Residential listings", "Luxury properties", "Open house blurbs", "Zillow/MLS descriptions"],
+    examples: [
+      "Welcome to [Address] – [Key feature]. [Lifestyle angle]. [Room highlights]. [Outdoor/area]. Schedule your tour.",
+      "[Neighborhood] gem: [Bed/bath]. [Standout feature]. [Perfect for]. [CTA].",
+    ],
+    whoFor: ["Realtors", "Property managers", "Real estate marketers"],
+    commonMistakes: ["Only listing features", "No lifestyle or emotion", "Missing CTA or contact"],
+    faqs: [
+      {
+        question: "What makes real estate listing copy sell?",
+        answer:
+          "Lead with the most desirable feature or lifestyle (views, location, layout). Use vivid but accurate language. Include key specs and a clear CTA.",
+      },
+      {
+        question: "How long should a listing description be?",
+        answer:
+          "Varies by platform. Zillow and MLS allow longer copy; use 100–200 words for the main description and a short headline. Lead with the hook.",
+      },
+      {
+        question: "Should I use superlatives?",
+        answer:
+          "Use them sparingly and only when true (“stunning,” “spacious”). Avoid overused or vague terms. Be specific (e.g., “floor-to-ceiling windows”) instead.",
+      },
+      {
+        question: "How do I write for different price points?",
+        answer:
+          "Luxury: emphasize lifestyle, quality, exclusivity. Mid-range: balance features and value. Entry-level: highlight practicality and opportunity. Match tone to buyer.",
+      },
+      {
+        question: "Can I use this for open house or social posts?",
+        answer:
+          "Yes. Shorten the main description for social or open house blurbs. Keep the hook and one or two key selling points plus CTA.",
+      },
+    ],
+  },
+  {
+    slug: "quora-answer-assistant-lead-gen",
+    categoryId: "seo-marketing",
+    title: "Quora Answer Assistant for Lead Gen",
+    description: "Draft Quora answers that provide value and support lead generation.",
+    seoTitle: "Quora Answer Assistant for Lead Gen (Free) - Growth Hackers",
+    seoDescription:
+      "Generate Quora answers that educate and support lead generation. Free AI tool for growth marketers and content teams.",
+    keywords: ["quora answer", "quora lead gen", "quora marketing", "quora growth"],
+    useCases: ["Expert positioning", "Product-aware answers", "Newsletter signups", "Consulting leads"],
+    examples: [
+      "Short direct answer first. Then: [Context]. [Step-by-step]. [Resource or CTA if relevant].",
+      "Avoid hard sell. Add value first; mention tool/resource only when it fits.",
+    ],
+    whoFor: ["Growth marketers", "Content marketers", "Founders building authority"],
+    commonMistakes: ["Overtly promotional", "Generic answers", "No clear value before any CTA"],
+    faqs: [
+      {
+        question: "How do I use Quora for lead generation?",
+        answer:
+          "Answer questions in your niche with genuine value. When relevant, mention a free resource, tool, or newsletter. Keep the answer helpful; the CTA subtle.",
+      },
+      {
+        question: "What makes a good Quora answer?",
+        answer:
+          "Direct answer first, then context or steps. Use structure (bullets, paragraphs). Be specific and cite sources when possible. Avoid fluff.",
+      },
+      {
+        question: "Should I link in every Quora answer?",
+        answer:
+          "No. Link only when it adds value (e.g., a tool or guide). Overlinking can look spammy and get collapsed. Focus on earning upvotes and trust first.",
+      },
+      {
+        question: "How do I find the right questions to answer?",
+        answer:
+          "Search keywords related to your product or expertise. Choose questions with recent activity and enough views. Prioritize questions you can answer better than others.",
+      },
+      {
+        question: "Can Quora drive qualified leads?",
+        answer:
+          "Yes, when you consistently provide useful answers in your niche. Over time, profile views and link clicks can turn into signups or demos. Track which topics convert.",
+      },
+    ],
+  },
+  {
+    slug: "medium-article-subtitle-hook-creator",
+    categoryId: "business-writing",
+    title: "Medium Article Subtitle & Hook Creator",
+    description: "Create subtitles and opening hooks for Medium articles and long-form content.",
+    seoTitle: "Medium Article Subtitle & Hook Creator (Free) - Writers",
+    seoDescription:
+      "Generate Medium subtitles and opening hooks for articles. Free AI tool for writers and content creators.",
+    keywords: ["medium subtitle", "article hook", "medium hook", "long form hook"],
+    useCases: ["Essay openings", "How-to articles", "Personal stories", "Opinion pieces"],
+    examples: [
+      "Subtitle: [One line that expands the title and promises the takeaway]",
+      "Hook: [Question, stat, or bold claim] that pulls the reader into the first paragraph.",
+    ],
+    whoFor: ["Medium writers", "Bloggers", "Long-form content creators"],
+    commonMistakes: ["Subtitle repeats the title", "Hook is vague or slow", "No clear promise in first line"],
+    faqs: [
+      {
+        question: "What is a Medium subtitle?",
+        answer:
+          "The line under the headline that appears in previews and on the article. It should expand on the title and promise what the reader will learn or feel.",
+      },
+      {
+        question: "How long should a Medium subtitle be?",
+        answer:
+          "Often one sentence, 10–20 words. Make it specific and benefit-led. It’s the second thing people see after the title.",
+      },
+      {
+        question: "What makes a strong article hook?",
+        answer:
+          "A question, surprising stat, bold claim, or short story that creates curiosity or tension. The reader should want to know what comes next.",
+      },
+      {
+        question: "Should the hook be in the first sentence or first paragraph?",
+        answer:
+          "Ideally the first sentence. If you need one line of setup, keep it short. The hook should appear within the first 1–2 sentences.",
+      },
+      {
+        question: "Can I use the same formula for different articles?",
+        answer:
+          "Yes. Use a consistent structure (e.g., question hook, then subtitle that promises the answer). Vary the topic and angle for each piece.",
+      },
+    ],
+  },
+  {
+    slug: "user-persona-generator-marketing",
+    categoryId: "seo-marketing",
+    title: "User Persona Generator for Marketing",
+    description: "Generate user personas with demographics, goals, and pain points for targeting.",
+    seoTitle: "User Persona Generator for Marketing (Free) - Founders",
+    seoDescription:
+      "Generate marketing user personas: demographics, goals, pain points, and messaging angles. Free AI tool for founders and marketers.",
+    keywords: ["user persona generator", "marketing persona", "buyer persona", "customer persona"],
+    useCases: ["Ad targeting", "Content strategy", "Product messaging", "Sales enablement"],
+    examples: [
+      "[Name] – [Role], [Age range]. Goals: [X]. Pain points: [Y]. Message angle: [Z].",
+      "Demographics, goals, frustrations, where they spend time, sample messaging.",
+    ],
+    whoFor: ["Founders", "Marketing teams", "Product and growth teams"],
+    commonMistakes: ["Too many personas", "Vague pain points", "Personas not tied to messaging or channels"],
+    faqs: [
+      {
+        question: "What is a marketing user persona?",
+        answer:
+          "A semi-fictional profile of an ideal customer: demographics, goals, pain points, and behaviors. Used to align messaging, content, and ads.",
+      },
+      {
+        question: "How many personas should I create?",
+        answer:
+          "Start with 1–3. One primary and one or two secondary. Too many dilutes focus. Merge similar segments until you have distinct, actionable profiles.",
+      },
+      {
+        question: "What should a persona include?",
+        answer:
+          "Name/alias, role, goals, pain points, objections, where they get information, and 1–2 sample message angles. Keep it to one page.",
+      },
+      {
+        question: "How do I use personas for ads?",
+        answer:
+          "Use demographics and interests for targeting. Use pain points and goals for ad copy and landing page messaging. Test one persona per campaign when possible.",
+      },
+      {
+        question: "Should personas be based on real data?",
+        answer:
+          "Yes. Use interviews, surveys, and analytics. Avoid making up details. Update personas when you learn more about your customers.",
+      },
+    ],
+  },
+  {
+    slug: "tiktok-spark-ads-caption-writer",
+    categoryId: "tiktok",
+    title: "TikTok Spark Ads Caption Writer",
+    description: "Write captions for TikTok Spark Ads (organic-style paid posts) for paid media buyers.",
+    seoTitle: "TikTok Spark Ads Caption Writer (Free) - Paid Media Buyers",
+    seoDescription:
+      "Generate captions for TikTok Spark Ads that feel native and drive action. Free AI tool for paid media and performance teams.",
+    keywords: ["tiktok spark ads", "spark ads caption", "tiktok paid ads", "spark ads copy"],
+    useCases: ["Spark Ads from UGC", "In-feed ads", "Awareness and conversion campaigns"],
+    examples: [
+      "Caption: [Hook]. [Benefit or CTA]. [Hashtags if allowed].",
+      "Keep it short. Match the tone of the creative. Clear CTA.",
+    ],
+    whoFor: ["Paid media buyers", "TikTok advertisers", "Brands running Spark Ads"],
+    commonMistakes: ["Too salesy or off-brand tone", "Long captions", "No clear CTA"],
+    faqs: [
+      {
+        question: "What are TikTok Spark Ads?",
+        answer:
+          "Spark Ads boost existing organic TikTok posts (yours or creators’). They look like native content and often perform well because they’re authentic creative.",
+      },
+      {
+        question: "How long should a Spark Ad caption be?",
+        answer:
+          "Keep it short and native. One to three lines often work. Match the tone of the video. Include a clear CTA when the platform allows.",
+      },
+      {
+        question: "What should the caption do?",
+        answer:
+          "Support the video: add context, reinforce the hook, or state the CTA. Avoid repeating the script word-for-word. Sound like the creator or brand voice.",
+      },
+      {
+        question: "Can I use hashtags in Spark Ad captions?",
+        answer:
+          "Follow TikTok’s current policy for ads. When allowed, use 1–3 relevant hashtags. Don’t stuff; keep the caption clean and on-brand.",
+      },
+      {
+        question: "How do I test Spark Ad performance?",
+        answer:
+          "Test different creatives and captions. Hold one variable constant (e.g., same video, different caption). Track CTR, conversion, and cost per result.",
+      },
+    ],
+  },
+  {
+    slug: "meta-description-bulk-optimizer",
+    categoryId: "seo-marketing",
+    title: "Meta Description Bulk Optimizer",
+    description: "Generate and optimize meta descriptions at scale for SEO agencies and site owners.",
+    seoTitle: "Meta Description Bulk Optimizer (Free) - SEO Agencies",
+    seoDescription:
+      "Generate meta descriptions for multiple pages at once. Free AI tool for SEO agencies and in-house teams.",
+    keywords: ["meta description generator", "bulk meta description", "seo meta", "meta description optimizer"],
+    useCases: ["Site audits", "New site launches", "Template-based descriptions", "Refreshing old pages"],
+    examples: [
+      "[Primary keyword]: [Benefit or CTA] in [number] words. [Optional CTA].",
+      "Template: [Topic] – [Key point]. [Proof or offer]. Learn more.",
+    ],
+    whoFor: ["SEO agencies", "In-house SEO teams", "Content managers with many pages"],
+    commonMistakes: ["Duplicate or near-duplicate descriptions", "Over 160 characters", "No CTA or differentiation"],
+    faqs: [
+      {
+        question: "How long should a meta description be?",
+        answer:
+          "Typically 150–160 characters so it doesn’t get truncated in search results. Some SERPs show more; aim for under 160 to be safe.",
+      },
+      {
+        question: "Do meta descriptions affect ranking?",
+        answer:
+          "They don’t directly affect ranking but influence click-through rate. A clear, benefit-led description can improve CTR from search results.",
+      },
+      {
+        question: "Should every page have a unique meta description?",
+        answer:
+          "Yes. Unique descriptions help CTR and avoid duplicate content signals. Use templates (e.g., “[Topic] – [Key point]”) and customize per page.",
+      },
+      {
+        question: "What should a meta description include?",
+        answer:
+          "Primary keyword, clear benefit or summary, and a call to action or reason to click when space allows. Match search intent.",
+      },
+      {
+        question: "How do I bulk-optimize meta descriptions?",
+        answer:
+          "Use a consistent template (e.g., [Topic]: [Benefit]. [CTA].). Pull page title or focus keyword per URL. Generate, then review for uniqueness and length.",
+      },
+    ],
+  },
+  {
+    slug: "lead-magnet-idea-generator",
+    categoryId: "seo-marketing",
+    title: "Lead Magnet Idea Generator",
+    description: "Generate lead magnet ideas (eBooks, checklists, templates) for list builders.",
+    seoTitle: "Lead Magnet Idea Generator (Free) - List Builders",
+    seoDescription:
+      "Generate lead magnet ideas and angles for email list building. Free AI tool for marketers and list builders.",
+    keywords: ["lead magnet ideas", "lead magnet generator", "list building", "email lead magnet"],
+    useCases: ["Newsletter growth", "Product launch lists", "B2B lead gen", "Course waitlists"],
+    examples: [
+      "[Format]: [Topic] for [Audience] – e.g. Checklist: 10 Pre-Launch Steps for SaaS Founders",
+      "eBook, checklist, template, webinar, mini-course, swipe file.",
+    ],
+    whoFor: ["List builders", "Content marketers", "Course creators and coaches"],
+    commonMistakes: ["Ideas that don’t match audience pain", "Too broad or generic", "No clear delivery or follow-up"],
+    faqs: [
+      {
+        question: "What is a lead magnet?",
+        answer:
+          "A free resource (eBook, checklist, template, etc.) offered in exchange for an email address. It should solve a specific problem and align with your offer.",
+      },
+      {
+        question: "What formats work best for lead magnets?",
+        answer:
+          "Checklists, templates, and short guides often convert well because they’re easy to consume. Webinars and courses work for higher-consideration offers.",
+      },
+      {
+        question: "How do I choose a lead magnet topic?",
+        answer:
+          "Match your audience’s biggest pain or goal. The lead magnet should be a natural step before your paid product (e.g., checklist before a course).",
+      },
+      {
+        question: "Should I create one or many lead magnets?",
+        answer:
+          "Start with one strong lead magnet per audience or funnel. Test and optimize. Add more (e.g., by topic or stage) once the first performs.",
+      },
+      {
+        question: "How do I promote a lead magnet?",
+        answer:
+          "Use landing pages, paid ads, content (blogs, videos), and social. Mention it in relevant content and in your bio or footer. Track signup and conversion by source.",
+      },
+    ],
+  },
+  {
+    slug: "cold-outreach-linkedin-dm-script",
+    categoryId: "business-writing",
+    title: "Cold Outreach LinkedIn DM Script",
+    description: "Generate cold LinkedIn DM scripts for sales teams and SDRs.",
+    seoTitle: "Cold Outreach LinkedIn DM Script (Free) - Sales Teams",
+    seoDescription:
+      "Generate cold LinkedIn DM scripts for outreach and sales. Free AI tool for SDRs and sales teams.",
+    keywords: ["linkedin cold message", "linkedin dm script", "cold outreach linkedin", "sales dm script"],
+    useCases: ["B2B prospecting", "Recruiting", "Partnership outreach", "Event or webinar invites"],
+    examples: [
+      "Opener: [Personalized line]. [Reason for reaching out]. [One clear ask]. [Soft CTA].",
+      "Keep first message under 300 characters. No long paragraphs.",
+    ],
+    whoFor: ["Sales development reps (SDRs)", "Sales teams", "Recruiters and partnership managers"],
+    commonMistakes: ["Too long", "Generic copy-paste", "No personalization or clear ask"],
+    faqs: [
+      {
+        question: "How long should a cold LinkedIn DM be?",
+        answer:
+          "Keep the first message short: often 75–150 words. One or two short paragraphs. Lead with relevance, then one clear ask.",
+      },
+      {
+        question: "What should I include in a cold LinkedIn message?",
+        answer:
+          "A personalized opener (e.g., their role, company, or post), why you’re reaching out, and one specific ask (call, reply, resource). No lengthy pitch in the first message.",
+      },
+      {
+        question: "How do I personalize at scale?",
+        answer:
+          "Use variables: name, company, role, recent post or news. Avoid obvious templates. One or two genuine personalization points per message.",
+      },
+      {
+        question: "Should I follow up?",
+        answer:
+          "Yes. Send 1–2 follow-ups if no reply. Space them 3–5 days apart. Add value (e.g., a resource or new angle), don’t just repeat the first message.",
+      },
+      {
+        question: "What’s the best way to avoid sounding spammy?",
+        answer:
+          "Write like a human: short, specific, and relevant. No hype or excessive punctuation. Reference something real about them or their company.",
+      },
+    ],
+  },
 ];
 
 export function getToolBySlug(slug: string) {

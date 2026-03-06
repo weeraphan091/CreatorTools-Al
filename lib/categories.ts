@@ -1,4 +1,4 @@
-export type CategoryId = "tiktok" | "youtube" | "instagram" | "ecommerce" | "business-writing";
+export type CategoryId = "tiktok" | "youtube" | "instagram" | "ecommerce" | "business-writing" | "seo-marketing";
 
 export type Category = {
   id: CategoryId;
@@ -59,6 +59,16 @@ export const categories: Category[] = [
       "Generate LinkedIn posts, X thread hooks, email subject A/B tests, ad headlines, blog titles, and CTAs with ViralHookLab.",
     intro:
       "Business writing is a distribution lever: the same idea performs wildly differently depending on the hook, structure, and CTA. ViralHookLab helps you generate LinkedIn post drafts, X thread hooks, email subject line A/B variants, and ad headlines designed to improve clicks and replies. Use these tools to test angles quickly—curiosity, proof, benefit, urgency—then keep a swipe file of winners by audience and channel. The compounding advantage comes from speed: ship more tests, measure, and double down on the formats that earn attention.",
+  },
+  {
+    id: "seo-marketing",
+    label: "SEO & Marketing",
+    href: "/seo-marketing",
+    seoTitle: "Best AI Tools for SEO & Marketing",
+    seoDescription:
+      "Optimize meta descriptions, local SEO, lead magnets, user personas, and Quora answers with ViralHookLab—built for agencies and growth teams.",
+    intro:
+      "SEO and marketing copy drive discoverability and conversion. ViralHookLab helps you generate meta descriptions at scale, Google Business Profile copy for local visibility, user personas for targeting, lead magnet ideas for list building, and Quora answers tuned for lead generation. Use these tools to align messaging with search intent, improve CTR in SERPs, and qualify audiences before they reach your site. Consistency and clarity win: one strong angle per asset, then test and iterate.",
   },
 ];
 

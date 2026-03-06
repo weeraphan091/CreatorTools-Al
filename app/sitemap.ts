@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/instagram",
     "/ecommerce",
     "/business-writing",
+    "/seo-marketing",
     "/blog",
     "/templates",
     "/use-cases",

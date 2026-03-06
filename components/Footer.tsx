@@ -8,6 +8,7 @@ const primaryLinks = [
   { href: "/instagram", label: "Instagram" },
   { href: "/ecommerce", label: "E-commerce" },
   { href: "/business-writing", label: "Business Writing" },
+  { href: "/seo-marketing", label: "SEO & Marketing" },
   { href: "/viral-hooks", label: "Viral Hooks" },
   { href: "/templates", label: "Templates" },
   { href: "/blog", label: "Blog" },
