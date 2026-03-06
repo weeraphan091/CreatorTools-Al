@@ -6,6 +6,7 @@ import AdBanner from "@/components/AdBanner";
 import AffiliateBlock from "@/components/AffiliateBlock";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
+import FaqJsonLd from "@/components/FaqJsonLd";
 import IntentLinkSection from "@/components/IntentLinkSection";
 import ToolJsonLd from "@/components/ToolJsonLd";
 import { getIntentMatchedLinks } from "@/lib/intentLinks";
@@ -72,6 +73,7 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
   return (
     <div className="space-y-6">
       <ToolJsonLd tool={tool} />
+      <FaqJsonLd title={`${tool.title} FAQs`} slugPath={`/tools/${tool.slug}`} items={tool.faqs} />
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },
@@ -111,12 +113,55 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
         </ol>
       </section>
 
+      <section className="grid gap-4 lg:grid-cols-2">
+        <div className="card p-6">
+          <h2 className="text-2xl font-semibold text-slate-900">Who this is for</h2>
+          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-700">
+            {tool.whoFor.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="card p-6">
+          <h2 className="text-2xl font-semibold text-slate-900">Common mistakes</h2>
+          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-700">
+            {tool.commonMistakes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section className="card p-6">
         <h2 className="text-2xl font-semibold text-slate-900">Best Use Cases</h2>
         <ul className="mt-3 grid gap-2 sm:grid-cols-3">
           {tool.useCases.map((useCase) => (
             <li key={useCase} className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
               {useCase}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="card p-6">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-2xl font-semibold text-slate-900">Examples you can copy</h2>
+            <p className="mt-2 text-sm text-slate-600">
+              Use these as starting points, then generate variations with your exact topic for better performance.
+            </p>
+          </div>
+          <Link
+            href={`/tools/${tool.slug}#topic`}
+            className="text-sm font-semibold text-brand-700 hover:text-brand-600"
+          >
+            Generate more →
+          </Link>
+        </div>
+        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+          {tool.examples.map((example) => (
+            <li key={example} className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
+              {example}
             </li>
           ))}
         </ul>

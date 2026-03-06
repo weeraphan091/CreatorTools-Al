@@ -6,6 +6,9 @@ export type ToolConfig = {
   seoDescription: string;
   keywords: string[];
   useCases: string[];
+  examples: string[];
+  whoFor: string[];
+  commonMistakes: string[];
   faqs: Array<{
     question: string;
     answer: string;
@@ -22,6 +25,28 @@ export const tools: ToolConfig[] = [
       "Generate 5 high-CTR YouTube titles in seconds. Free AI tool for creators, channels, and marketers.",
     keywords: ["youtube title generator", "youtube seo title ideas", "viral youtube titles"],
     useCases: ["Gaming videos", "Tutorial channels", "Product reviews"],
+    examples: [
+      "I Tried [X] for 30 Days — Here's What Happened",
+      "Stop Doing This If You Want to Grow on YouTube",
+      "The 3-Minute Trick That Fixed My [Problem]",
+      "[Number] Mistakes Beginners Make in [Topic]",
+      "I Tested the Viral Advice… It Actually Worked",
+      "Before You Upload, Do This One Thing",
+      "How I Got [Outcome] Without [Pain]",
+      "This Simple Change Doubled My CTR (Proof)",
+      "The Fastest Way to Learn [Skill] (No Fluff)",
+      "[Topic] Explained for Absolute Beginners",
+    ],
+    whoFor: [
+      "Creators who want higher click-through rate (CTR)",
+      "Channels planning weekly title testing",
+      "Marketers repurposing video ideas into search-friendly topics",
+    ],
+    commonMistakes: [
+      "Using vague titles without a clear outcome",
+      "Stuffing keywords and losing clarity",
+      "Copying competitors without adding specificity or proof",
+    ],
     faqs: [
       {
         question: "How do I write a high-CTR YouTube title?",
@@ -44,6 +69,28 @@ export const tools: ToolConfig[] = [
       "Create 5 scroll-stopping TikTok captions instantly. Free AI caption tool to boost comments, saves, and reach.",
     keywords: ["tiktok caption generator", "tiktok caption ideas", "viral tiktok captions"],
     useCases: ["Short-form education", "Lifestyle creators", "Product showcase clips"],
+    examples: [
+      "If you’re still doing this in 2026… watch.",
+      "This took me 10 minutes and saved me hours.",
+      "Here’s the part nobody tells beginners.",
+      "Rate this setup 1–10 (be honest).",
+      "I wish I knew this sooner.",
+      "Comment “template” and I’ll share it.",
+      "Save this for later — you’ll need it.",
+      "I tried the viral method… results surprised me.",
+      "3 tips that instantly improved my results:",
+      "Which option would you pick? A or B?",
+    ],
+    whoFor: [
+      "Creators who want more comments and saves",
+      "Brands testing short-form hooks + captions",
+      "Social media managers batching content",
+    ],
+    commonMistakes: [
+      "Long captions with no hook in the first line",
+      "Too many hashtags before the message",
+      "No clear CTA (comment/save/follow) at the end",
+    ],
     faqs: [
       {
         question: "What makes a TikTok caption perform better?",
@@ -66,6 +113,28 @@ export const tools: ToolConfig[] = [
       "Generate 5 proven hook ideas for Reels, Shorts, TikTok, and ads. Free AI hook generator built for conversion.",
     keywords: ["ai hook generator", "marketing hook ideas", "viral hook generator"],
     useCases: ["Short-form videos", "Ad creative testing", "Email subject angles"],
+    examples: [
+      "You’re doing [X] wrong — do this instead.",
+      "This feels illegal… but it works.",
+      "If you only remember one thing, remember this.",
+      "The fastest way to get [Outcome] (without [Pain]).",
+      "I tested 5 strategies — only 1 worked.",
+      "Nobody talks about this because it’s uncomfortable.",
+      "I was today years old when I learned this.",
+      "Steal my exact script for [Outcome].",
+      "Here’s why your [thing] isn’t working.",
+      "The counterintuitive tip that changed everything:",
+    ],
+    whoFor: [
+      "Creators who need stronger first 2 seconds",
+      "Advertisers testing opening angles at scale",
+      "Teams building hook libraries for content batching",
+    ],
+    commonMistakes: [
+      "Starting with context instead of tension/curiosity",
+      "Making claims without proof or specificity",
+      "Using the same hook style for every audience",
+    ],
     faqs: [
       {
         question: "What is a marketing hook?",
@@ -88,6 +157,28 @@ export const tools: ToolConfig[] = [
       "Create 5 professional Instagram bio options instantly. Free AI bio generator for creators, coaches, and brands.",
     keywords: ["instagram bio generator", "instagram bio ideas", "bio for creators"],
     useCases: ["Creator profiles", "Coaches", "Small business accounts"],
+    examples: [
+      "Helping [audience] get [result] | DM “START”",
+      "[Role] • [Proof] • [Offer] ↓",
+      "I teach [topic] in 60s | Free guide below",
+      "[Niche] tips + templates | New posts weekly",
+      "From [before] → [after] | Get the playbook",
+      "⚡️ [Outcome] for [Audience]\n📩 Collabs: support@viralhooklab.com",
+      "Simple [topic] for busy people | Subscribe ↓",
+      "Build your [thing] without burnout | Follow",
+      "Tools + prompts for creators | Try free ↓",
+      "Make content that converts | Links below",
+    ],
+    whoFor: [
+      "Personal brands refining positioning fast",
+      "Coaches and creators optimizing profile conversion",
+      "Businesses needing a clear CTA in bio",
+    ],
+    commonMistakes: [
+      "No clear audience or outcome statement",
+      "Multiple competing CTAs",
+      "Too much jargon and not enough proof",
+    ],
     faqs: [
       {
         question: "What should an Instagram bio include?",
@@ -110,6 +201,28 @@ export const tools: ToolConfig[] = [
       "Generate 5 click-worthy ad headline ideas for Meta and Google ads. Free AI tool for higher CTR campaigns.",
     keywords: ["ad headline generator", "facebook ad headline ideas", "google ads headlines"],
     useCases: ["Meta ads", "Google ads", "Landing page hero copy"],
+    examples: [
+      "Get [Outcome] Without [Pain] — Start Today",
+      "[Number] Ways to Fix [Problem] Fast",
+      "New: The Simple [Tool] for [Audience]",
+      "Stop Wasting Money on [Thing] — Do This",
+      "Limited: [Offer] for [Audience] This Week",
+      "Proven System to Increase [Metric] (Free)",
+      "The Shortcut to [Outcome] (No Experience)",
+      "Build [Result] in [Timeframe] — Try Free",
+      "Finally: A Better Way to [Job-to-be-done]",
+      "Get Results in Days, Not Months",
+    ],
+    whoFor: [
+      "Paid media teams testing CTR angles",
+      "Founders writing landing page hero variants",
+      "Agencies generating headline batches",
+    ],
+    commonMistakes: [
+      "Benefits too generic (no metric/outcome)",
+      "Mismatch between headline and landing message",
+      "Overusing urgency without credibility",
+    ],
     faqs: [
       {
         question: "How do I improve ad headline CTR?",
@@ -132,6 +245,28 @@ export const tools: ToolConfig[] = [
       "Generate 5 SEO-friendly blog titles with high click potential. Free AI blog headline tool for better organic CTR.",
     keywords: ["blog title generator", "seo blog title ideas", "article headline generator"],
     useCases: ["Affiliate blogs", "SaaS content", "Niche authority sites"],
+    examples: [
+      "How to [Outcome] in [Time] (Beginner-Friendly)",
+      "[Number] Best [Thing] for [Audience] in 2026",
+      "[Thing] vs [Thing]: Which Should You Choose?",
+      "The Ultimate Guide to [Topic] (with Examples)",
+      "What Nobody Tells You About [Topic]",
+      "A Simple Framework to Improve [Metric]",
+      "The Checklist: [Topic] Before You Start",
+      "How I Improved [Metric] by [Number]%",
+      "The Common Mistakes That Kill [Outcome]",
+      "Best Tools for [Job-to-be-done] (Tested)",
+    ],
+    whoFor: [
+      "SEO writers improving organic CTR",
+      "Affiliate site owners targeting commercial keywords",
+      "SaaS content teams planning clusters",
+    ],
+    commonMistakes: [
+      "Targeting too broad keywords with weak intent match",
+      "Titles that promise outcomes the post doesn’t deliver",
+      "Duplicating formats across multiple posts without uniqueness",
+    ],
     faqs: [
       {
         question: "How can blog titles rank better on Google?",
@@ -154,6 +289,26 @@ export const tools: ToolConfig[] = [
       "Write 5 persuasive product descriptions in seconds. Free AI copy tool for ecommerce, Shopify, and DTC stores.",
     keywords: ["product description generator", "ecommerce product copy", "shopify description ai"],
     useCases: ["Shopify product pages", "Amazon listings", "DTC landing pages"],
+    examples: [
+      "Meet the [Product]: built for [Audience] who want [Outcome].",
+      "Why you’ll love it: [Benefit 1], [Benefit 2], [Benefit 3].",
+      "Designed to solve [Pain] without [Downside].",
+      "Perfect for: [Use case], [Use case], [Use case].",
+      "Feature → Benefit: [Feature] means you get [Benefit].",
+      "What’s included: [List].",
+      "Care & specs: [Key spec bullets].",
+      "FAQ: Will it work for [Scenario]? Yes—because [Reason].",
+    ],
+    whoFor: [
+      "Ecommerce teams improving conversion rate",
+      "Shopify owners launching new products fast",
+      "Marketers A/B testing product angles",
+    ],
+    commonMistakes: [
+      "Listing features with no benefits",
+      "Using generic adjectives instead of specifics",
+      "No objection handling (shipping, sizing, trust)",
+    ],
     faqs: [
       {
         question: "What makes product descriptions convert?",
@@ -176,6 +331,26 @@ export const tools: ToolConfig[] = [
       "Generate creative, memorable brand names for startups and ecommerce. Free AI naming tool with fast ideas.",
     keywords: ["brand name generator", "business name ideas", "startup name generator"],
     useCases: ["Startup naming", "Ecommerce brands", "Agency rebrands"],
+    examples: [
+      "Verb + Benefit: SnapScale, BrightLaunch",
+      "Two-word combo: PixelHarbor, NovaCraft",
+      "Invented brand: Zenvora, Lumivo",
+      "Category twist: HookFoundry, CaptionLab",
+      "Geometric/tech: HexaFlow, OrbitPress",
+      "Premium feel: VelvetSignal, SilverMetric",
+      "Playful: Hookaroo, CaptionPop",
+      "Short + punchy: Virlo, Hoolab",
+    ],
+    whoFor: [
+      "Founders naming products and startups",
+      "Ecommerce teams launching brands",
+      "Agencies doing fast naming sprints",
+    ],
+    commonMistakes: [
+      "Choosing names that are hard to pronounce/spell",
+      "Too close to existing competitors",
+      "Ignoring domain and social handle availability",
+    ],
     faqs: [
       {
         question: "How do I choose a good brand name?",
@@ -198,6 +373,26 @@ export const tools: ToolConfig[] = [
       "Generate 5 catchy slogan ideas for products, campaigns, and brands. Free AI slogan tool built for recall.",
     keywords: ["slogan generator", "tagline generator", "brand slogan ideas"],
     useCases: ["Brand campaigns", "Product launches", "Homepage hero messaging"],
+    examples: [
+      "Make [Outcome] feel effortless.",
+      "Built for [Audience]. Designed for results.",
+      "Less [Pain]. More [Benefit].",
+      "Your shortcut to [Outcome].",
+      "Create smarter. Publish faster.",
+      "Turn ideas into momentum.",
+      "Simple tools. Serious growth.",
+      "Clarity that converts.",
+    ],
+    whoFor: [
+      "Brands refreshing positioning",
+      "Landing pages needing punchy heroes",
+      "Campaign teams creating variants",
+    ],
+    commonMistakes: [
+      "Too long to remember",
+      "Vague promises without differentiation",
+      "Sounding like every competitor",
+    ],
     faqs: [
       {
         question: "What is a strong slogan formula?",
@@ -220,6 +415,28 @@ export const tools: ToolConfig[] = [
       "Create 5 high-converting CTA ideas for landing pages, email, and ads. Free AI call-to-action generator.",
     keywords: ["call to action generator", "cta copy generator", "high converting cta"],
     useCases: ["Landing pages", "Email campaigns", "Social content CTAs"],
+    examples: [
+      "Get the free template",
+      "Start free today",
+      "See pricing now",
+      "Generate my hooks",
+      "Download the swipe file",
+      "Show me examples",
+      "Send me the checklist",
+      "Try the generator",
+      "Book a quick call",
+      "Get instant access",
+    ],
+    whoFor: [
+      "Landing pages improving button CTR",
+      "Email marketers increasing clicks",
+      "Ads teams aligning CTA with intent",
+    ],
+    commonMistakes: [
+      "Using generic CTAs like “Submit”",
+      "CTA doesn’t match the page promise",
+      "Too many CTAs competing on one screen",
+    ],
     faqs: [
       {
         question: "What words increase CTA conversion?",

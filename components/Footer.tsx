@@ -3,11 +3,15 @@ import Link from "next/link";
 const primaryLinks = [
   { href: "/about", label: "About" },
   { href: "/tools", label: "Tools" },
+  { href: "/viral-hooks", label: "Viral Hooks" },
   { href: "/templates", label: "Templates" },
   { href: "/blog", label: "Blog" },
   { href: "/use-cases", label: "Use Cases" },
+  { href: "/top-results", label: "Saved Results" },
+  { href: "/recommendations", label: "Recommendations" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy-policy", label: "Privacy" },
+  { href: "/disclosure", label: "Disclosure" },
   { href: "/terms", label: "Terms" },
 ];
 
