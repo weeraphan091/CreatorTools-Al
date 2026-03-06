@@ -60,7 +60,7 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
     return `${base}?${params.toString()}`;
   };
 
-  const shareText = `I used ${toolTitle} on CreatorTools AI and got this idea: "${results[0] || "Great results"}"`;
+  const shareText = `I used ${toolTitle} on ViralHookLab.com and got this idea: "${results[0] || "Great results"}"`;
 
   const handleCopyShareLink = async () => {
     const shareUrl = buildShareUrl();
@@ -84,7 +84,7 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
     }
     try {
       await navigator.share({
-        title: `${toolTitle} - CreatorTools AI`,
+        title: `${toolTitle} - ViralHookLab.com`,
         text: shareText,
         url: shareUrl,
       });

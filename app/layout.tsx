@@ -10,8 +10,8 @@ import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
-    default: "CreatorTools AI | Free AI Generators for Creators",
-    template: "%s | CreatorTools AI",
+    default: "ViralHookLab.com | AI Viral Hook & Content Generators",
+    template: "%s | ViralHookLab.com",
   },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
@@ -22,8 +22,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: `${siteConfig.name} | Free AI Generators for Creators`,
-    description: "Create viral marketing content with 10 free AI tools for YouTube, TikTok, Instagram, blogs, and ads.",
+    title: "ViralHookLab.com | AI Viral Hook & Content Generators",
+    description:
+      "Generate viral hooks, titles, captions, CTAs, and ad copy fast with AI tools built for creators and marketers.",
     url: siteConfig.url,
     siteName: siteConfig.name,
     locale: siteConfig.locale,
@@ -33,13 +34,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "CreatorTools AI",
+        alt: "ViralHookLab.com",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | AI Content Generators`,
+    title: "ViralHookLab.com | AI Content Generators",
     description: siteConfig.description,
     creator: siteConfig.twitterHandle,
     images: ["/twitter-image"],

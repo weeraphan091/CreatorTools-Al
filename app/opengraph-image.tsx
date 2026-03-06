@@ -22,7 +22,7 @@ export default function OpenGraphImage() {
           padding: "60px",
         }}
       >
-        <div style={{ fontSize: 28, opacity: 0.9 }}>CreatorTools AI</div>
+        <div style={{ fontSize: 28, opacity: 0.9 }}>ViralHookLab.com</div>
         <div
           style={{
             marginTop: 16,
@@ -34,7 +34,7 @@ export default function OpenGraphImage() {
           }}
         >
           <span>AI Tools for</span>
-          <span>Google Traffic Growth</span>
+          <span>Viral Hooks & CTR</span>
         </div>
         <div style={{ marginTop: 20, fontSize: 30, opacity: 0.85 }}>
           YouTube Titles • TikTok Captions • Hooks • CTAs

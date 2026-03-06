@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Editorial Policy",
-  description: "How CreatorTools AI creates, reviews, and updates SEO and marketing content.",
+  description: "How ViralHookLab.com creates, reviews, and updates SEO and marketing content.",
   alternates: {
     canonical: "/editorial-policy",
   },
   openGraph: {
-    title: "Editorial Policy | CreatorTools AI",
+    title: "Editorial Policy | ViralHookLab.com",
     description: "Transparency on content quality, updates, and editorial standards.",
     url: "/editorial-policy",
   },
@@ -18,7 +18,7 @@ export default function EditorialPolicyPage() {
     <article className="card space-y-4 p-8 text-sm leading-7 text-slate-700">
       <h1 className="text-3xl font-bold text-slate-900">Editorial Policy</h1>
       <p>
-        CreatorTools AI publishes practical SEO and marketing content focused on creators, founders, and growth teams.
+        ViralHookLab.com publishes practical SEO and marketing content focused on creators, founders, and growth teams.
         We prioritize actionable, testable frameworks over generic advice.
       </p>
       <h2 className="text-xl font-semibold text-slate-900">Content Standards</h2>
@@ -34,8 +34,8 @@ export default function EditorialPolicyPage() {
       <h2 className="text-xl font-semibold text-slate-900">Corrections</h2>
       <p>
         If you find a factual issue, send feedback to{" "}
-        <a className="font-medium text-brand-700 hover:text-brand-600" href="mailto:contact@creatortoolsai.com">
-          contact@creatortoolsai.com
+        <a className="font-medium text-brand-700 hover:text-brand-600" href="mailto:support@viralhooklab.com">
+          support@viralhooklab.com
         </a>
         . We review correction requests promptly.
       </p>

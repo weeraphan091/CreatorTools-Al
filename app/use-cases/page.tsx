@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     canonical: "/use-cases",
   },
   openGraph: {
-    title: "AI Tool Use Cases | CreatorTools AI",
+    title: "AI Tool Use Cases | ViralHookLab.com",
     description:
       "Find use-case pages for YouTube titles, TikTok captions, hooks, bios, ad copy, and conversion-focused CTAs.",
     url: "/use-cases",

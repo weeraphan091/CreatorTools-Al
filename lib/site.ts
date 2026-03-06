@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: "CreatorTools AI",
+  name: "ViralHookLab",
   description:
-    "Free AI generators for YouTube titles, TikTok captions, hooks, bios, ad copy, and more.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://creatortools-ai.vercel.app",
+    "AI-powered viral hook, title, caption, and ad copy generators for creators and marketers.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://viralhooklab.com",
   locale: "en_US",
-  creator: "CreatorTools AI",
-  twitterHandle: "@creatortoolsai",
+  creator: "ViralHookLab",
+  twitterHandle: "@viralhooklab",
   keywords: [
     "youtube title generator",
     "tiktok caption generator",

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact CreatorTools AI",
-  description: "Contact CreatorTools AI for support, partnerships, and product feedback.",
+  title: "Contact ViralHookLab",
+  description: "Contact ViralHookLab.com for support, partnerships, and product feedback.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact CreatorTools AI Support",
+    title: "Contact ViralHookLab.com Support",
     description: "Get in touch for product support, partnerships, and collaborations.",
     url: "/contact",
   },
@@ -23,8 +23,8 @@ export default function ContactPage() {
 
       <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-700">
         <p className="font-semibold text-slate-900">Support Email</p>
-        <a className="mt-1 inline-block text-brand-700 hover:text-brand-600" href="mailto:contact@creatortoolsai.com">
-          contact@creatortoolsai.com
+        <a className="mt-1 inline-block text-brand-700 hover:text-brand-600" href="mailto:support@viralhooklab.com">
+          support@viralhooklab.com
         </a>
       </div>
 

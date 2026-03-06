@@ -1,4 +1,4 @@
-# CreatorTools AI
+# ViralHookLab.com
 
 A full AI tools website built with **Next.js 14 App Router**, **TypeScript**, **TailwindCSS**, and **Gemini/OpenAI APIs**.
 

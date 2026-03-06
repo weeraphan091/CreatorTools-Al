@@ -1,4 +1,5 @@
 import { absoluteUrl } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
 
 type BlogJsonLdProps = {
   title: string;
@@ -14,11 +15,11 @@ export default function BlogJsonLd({ title, description, slug }: BlogJsonLdProps
     description,
     author: {
       "@type": "Organization",
-      name: "CreatorTools AI",
+      name: siteConfig.name,
     },
     publisher: {
       "@type": "Organization",
-      name: "CreatorTools AI",
+      name: siteConfig.name,
     },
     mainEntityOfPage: absoluteUrl(`/blog/${slug}`),
   };

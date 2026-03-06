@@ -1,4 +1,4 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://creatortools-ai.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://viralhooklab.com";
 
 const cspDirectives = [
   "default-src 'self'",

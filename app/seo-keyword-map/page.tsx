@@ -5,7 +5,7 @@ import { keywordClusters } from "@/lib/keywordMap";
 
 export const metadata: Metadata = {
   title: "SEO Keyword Map",
-  description: "Keyword cluster map for CreatorTools AI growth strategy across tools, templates, and blog pages.",
+  description: "Keyword cluster map for ViralHookLab.com growth strategy across tools, templates, and blog pages.",
   robots: {
     index: false,
     follow: false,
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     canonical: "/seo-keyword-map",
   },
   openGraph: {
-    title: "SEO Keyword Map | CreatorTools AI",
+    title: "SEO Keyword Map | ViralHookLab.com",
     description: "Keyword clusters and intent mapping used to scale organic traffic.",
     url: "/seo-keyword-map",
   },

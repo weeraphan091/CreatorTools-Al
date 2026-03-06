@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     canonical: "/tools",
   },
   openGraph: {
-    title: "CreatorTools AI Tools",
+    title: "ViralHookLab.com Tools",
     description: "Generate titles, hooks, bios, ads, CTAs, and more with free AI tools.",
     url: "/tools",
   },

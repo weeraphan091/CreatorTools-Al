@@ -27,7 +27,7 @@ export default function Navbar() {
       <div className="container-shell">
         <div className="flex h-16 items-center justify-between gap-3">
           <Link href="/" className="text-base font-bold text-slate-900 sm:text-lg">
-            CreatorTools <span className="text-brand-600">AI</span>
+            ViralHookLab<span className="text-brand-600">.com</span>
           </Link>
 
           <button

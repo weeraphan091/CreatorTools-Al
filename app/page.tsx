@@ -11,16 +11,16 @@ import { siteConfig } from "@/lib/site";
 import { getFeaturedUseCases } from "@/lib/useCases";
 
 export const metadata: Metadata = {
-  title: "AI Content Generators for Creators",
+  title: "AI Viral Hook & Content Generators",
   description:
-    "Use CreatorTools AI to generate viral titles, hooks, captions, bios, and marketing copy with 10 powerful AI tools.",
+    "Use ViralHookLab.com to generate viral hooks, titles, captions, bios, and high-converting marketing copy with AI tools.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "CreatorTools AI - Free AI Generators for Creators",
+    title: "ViralHookLab.com - AI Viral Hook & Content Generators",
     description:
-      "Generate high-converting content for YouTube, TikTok, Instagram, blogs, and ads.",
+      "Generate viral hooks and high-converting content for YouTube, TikTok, Instagram, blogs, and ads.",
     url: siteConfig.url,
   },
 };
@@ -31,9 +31,9 @@ export default function HomePage() {
   return (
     <div className="space-y-10">
       <section className="card p-8">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand-700">CreatorTools AI</p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-700">ViralHookLab.com</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          Create Better Marketing Content in Minutes with AI
+          Create Viral Hooks and Better Content in Minutes with AI
         </h1>
         <p className="mt-4 max-w-2xl text-slate-600">
           Fast, SEO-friendly AI writing tools for content creators, marketers, founders, and agencies.

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     canonical: "/templates",
   },
   openGraph: {
-    title: "AI Content Templates | CreatorTools AI",
+    title: "AI Content Templates | ViralHookLab.com",
     description: "Long-tail AI generator templates designed to rank and convert.",
     url: "/templates",
   },
