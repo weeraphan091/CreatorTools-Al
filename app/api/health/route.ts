@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { headers } from "next/headers";
 
 /**
  * GET /api/health
@@ -6,6 +7,16 @@ import { NextResponse } from "next/server";
  * ใช้ดูว่า service ไหนยังไม่ตั้งหรือพัง (เฉพาะตอน debug)
  */
 export async function GET() {
+  const isProd = process.env.NODE_ENV === "production";
+  const token = process.env.HEALTHCHECK_TOKEN?.trim();
+  if (isProd && token) {
+    const h = await headers();
+    const provided = h.get("x-health-token") || "";
+    if (provided !== token) {
+      return NextResponse.json({ ok: false, message: "Unauthorized health check." }, { status: 401 });
+    }
+  }
+
   const checks: Record<string, { ok: boolean; message: string }> = {};
 
   checks["site_url"] = {

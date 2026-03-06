@@ -9,6 +9,7 @@ import AdSlot from "@/components/AdSlot";
 import WebsiteJsonLd from "@/components/WebsiteJsonLd";
 import LaunchBanner from "@/components/LaunchBanner";
 import CreditModal from "@/components/CreditModal";
+import { CLERK_CLIENT_ENABLED } from "@/lib/clerk";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -84,8 +85,8 @@ export default function RootLayout({
     </html>
   );
 
-  const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.trim();
-  if (!clerkKey) {
+  const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.trim() || "";
+  if (!CLERK_CLIENT_ENABLED || !clerkKey) {
     return content;
   }
 

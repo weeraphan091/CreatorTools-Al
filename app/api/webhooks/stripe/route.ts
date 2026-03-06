@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import type Stripe from "stripe";
 import { supabaseAdmin } from "@/lib/supabase/admin";
+import { grantLifetimeCredits } from "@/lib/credits";
+import { logError, logInfo } from "@/lib/observability/logger";
 import { stripe } from "@/lib/stripe";
 import { getStripePriceMapping, MONTHLY_CREDITS_BY_TIER, tierFromPriceId } from "@/lib/billing/plans";
 
@@ -16,29 +18,6 @@ async function setTierAndMonthlyCredits(userId: string, tier: "free" | "starter"
 
   if (error) {
     throw new Error(`Supabase profile update failed: ${error.message}`);
-  }
-}
-
-async function addLifetimeCredits(userId: string, amount: number) {
-  const supabase = supabaseAdmin();
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("lifetime_credits")
-    .eq("user_id", userId)
-    .maybeSingle();
-
-  if (error) {
-    throw new Error(`Supabase profile select failed: ${error.message}`);
-  }
-
-  const current = Number(data?.lifetime_credits || 0);
-  const { error: updateError } = await supabase
-    .from("profiles")
-    .update({ lifetime_credits: current + amount })
-    .eq("user_id", userId);
-
-  if (updateError) {
-    throw new Error(`Supabase lifetime credits update failed: ${updateError.message}`);
   }
 }
 
@@ -77,6 +56,29 @@ async function userIdFromStripeCustomerId(stripeCustomerId: string) {
   return data?.user_id ? String(data.user_id) : null;
 }
 
+async function markWebhookProcessed(params: {
+  eventId: string;
+  provider: "stripe";
+  eventType: string;
+}) {
+  const supabase = supabaseAdmin();
+  const table = (supabase as unknown as {
+    from: (tableName: string) => { insert: (value: Record<string, unknown>) => Promise<{ error: { message: string } | null }> };
+  }).from("processed_webhooks");
+  const { error } = await table.insert({
+    event_id: params.eventId,
+    provider: params.provider,
+    event_type: params.eventType,
+  });
+  if (!error) {
+    return { inserted: true as const };
+  }
+  if (error.message.toLowerCase().includes("duplicate key")) {
+    return { inserted: false as const };
+  }
+  throw new Error(`Webhook dedupe insert failed: ${error.message}`);
+}
+
 export async function POST(request: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!secret) {
@@ -98,6 +100,16 @@ export async function POST(request: Request) {
   }
 
   try {
+    const dedupe = await markWebhookProcessed({
+      eventId: event.id,
+      provider: "stripe",
+      eventType: event.type,
+    });
+    if (!dedupe.inserted) {
+      logInfo("stripe.webhook.duplicate", { eventId: event.id, eventType: event.type });
+      return NextResponse.json({ ok: true, duplicate: true });
+    }
+
     const mapping = getStripePriceMapping();
 
     if (event.type === "checkout.session.completed") {
@@ -127,8 +139,14 @@ export async function POST(request: Request) {
         priceId: priceId || null,
       });
 
-      if (full.mode === "payment" && priceId === mapping.topup100) {
-        await addLifetimeCredits(userId, 100);
+      if (full.mode === "payment" && mapping.topup100All.includes(priceId)) {
+        await grantLifetimeCredits({
+          userId,
+          amount: 100,
+          reason: "stripe_topup_100",
+          externalId: full.payment_intent ? String(full.payment_intent) : session.id,
+          requestId: `stripe-checkout-${session.id}`,
+        });
       }
 
       if (full.mode === "subscription") {
@@ -169,6 +187,41 @@ export async function POST(request: Request) {
       }
     }
 
+    if (event.type === "customer.subscription.updated") {
+      const subscription = event.data.object as Stripe.Subscription;
+      const customerId =
+        typeof subscription.customer === "string" ? subscription.customer : subscription.customer?.id || "";
+      const userId = customerId ? await userIdFromStripeCustomerId(customerId) : null;
+      if (userId) {
+        const status = subscription.status;
+        if (status === "active" || status === "trialing") {
+          const priceId = String(subscription.items.data[0]?.price?.id || "");
+          const tier = priceId ? tierFromPriceId(priceId) : null;
+          if (tier === "starter" || tier === "agency") {
+            await setTierAndMonthlyCredits(userId, tier);
+            await upsertBillingCustomer({
+              userId,
+              stripeCustomerId: customerId,
+              stripeSubscriptionId: subscription.id,
+              priceId,
+            });
+          }
+        }
+        if (["canceled", "incomplete_expired", "unpaid"].includes(status)) {
+          await setTierAndMonthlyCredits(userId, "free");
+        }
+      }
+    }
+
+    if (event.type === "invoice.payment_failed") {
+      const invoice = event.data.object as Stripe.Invoice;
+      const customerId = typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id || "";
+      const userId = customerId ? await userIdFromStripeCustomerId(customerId) : null;
+      if (userId) {
+        await setTierAndMonthlyCredits(userId, "free");
+      }
+    }
+
     if (event.type === "customer.subscription.deleted") {
       const subscription = event.data.object as Stripe.Subscription;
       const customerId =
@@ -182,6 +235,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Webhook handler failed";
+    logError("stripe.webhook.failed", { message, eventType: event.type, eventId: event.id });
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

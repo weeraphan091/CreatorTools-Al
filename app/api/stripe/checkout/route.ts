@@ -58,13 +58,30 @@ export async function POST(request: Request) {
     });
     const customerId = await getOrCreateStripeCustomerId(userId, email);
 
+    if (!isTopup) {
+      const activeSubs = await stripe().subscriptions.list({
+        customer: customerId,
+        status: "active",
+        limit: 1,
+      });
+      if (activeSubs.data.length > 0) {
+        return NextResponse.json(
+          {
+            error:
+              "You already have an active subscription. Please use Customer Portal to update your billing plan.",
+          },
+          { status: 409 },
+        );
+      }
+    }
+
     const session = await stripe().checkout.sessions.create({
       customer: customerId,
       client_reference_id: userId,
       mode: isTopup ? "payment" : "subscription",
       line_items: [{ price: priceId, quantity: 1 }],
       allow_promotion_codes: true,
-      success_url: `${siteConfig.url}/pricing?success=1`,
+      success_url: `${siteConfig.url}/pricing?success=1&checkout_session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteConfig.url}/pricing?canceled=1`,
       metadata: {
         clerk_user_id: userId,

@@ -10,7 +10,8 @@ import {
 } from "@/lib/security/input";
 import { checkRateLimit } from "@/lib/security/rateLimit";
 import { getClientIp, hasValidJsonContentType, isBlockedBot } from "@/lib/security/request";
-import { deductOneCredit } from "@/lib/credits";
+import { deductOneCreditIdempotent, getCreditsSnapshot } from "@/lib/credits";
+import { logError, logInfo, logWarn } from "@/lib/observability/logger";
 import { supabaseAdminRpc } from "@/lib/supabase/rpc";
 
 type GenerateRequestBody = {
@@ -18,6 +19,7 @@ type GenerateRequestBody = {
   tool?: string;
   website?: string;
   clientTs?: number;
+  requestId?: string;
 };
 
 type GeminiModelCache = {
@@ -100,6 +102,11 @@ function isValidClientTimestamp(value: unknown) {
   const now = Date.now();
   const delta = Math.abs(now - value);
   return delta <= MAX_SKEW_MS;
+}
+
+function sanitizeRequestId(value: unknown) {
+  if (typeof value !== "string") return "";
+  return value.trim().slice(0, 120);
 }
 
 async function getGeminiModelName(apiKey: string) {
@@ -272,12 +279,16 @@ export async function POST(request: Request) {
     const rawTopic = String(body.topic || "");
     const rawTool = String(body.tool || "AI Generator");
     const honeypot = String(body.website || "").trim();
+    const requestId = sanitizeRequestId(body.requestId);
 
     if (honeypot) {
       return jsonWithCors({ error: "Spam request blocked." }, 400, origin);
     }
     if (!isValidClientTimestamp(body.clientTs)) {
       return jsonWithCors({ error: "Invalid request timestamp." }, 400, origin);
+    }
+    if (!requestId || requestId.length < 10) {
+      return jsonWithCors({ error: "Invalid request id." }, 400, origin);
     }
 
     const topic = sanitizeTopicInput(rawTopic);
@@ -291,7 +302,7 @@ export async function POST(request: Request) {
     }
 
     const clientIp = getClientIp(request);
-    const rate = checkRateLimit({
+    const rate = await checkRateLimit({
       key: `api:generate:${clientIp}`,
       limit: RATE_LIMIT_MAX,
       windowMs: RATE_LIMIT_WINDOW_MS,
@@ -299,6 +310,7 @@ export async function POST(request: Request) {
 
     if (!rate.allowed) {
       const retrySeconds = Math.max(1, Math.ceil((rate.resetAt - Date.now()) / 1000));
+      logWarn("generate.rate_limited", { clientIp, retrySeconds });
       return jsonWithCors(
         { error: "Rate limit exceeded. Please wait and try again." },
         429,
@@ -318,18 +330,6 @@ export async function POST(request: Request) {
       // Continue; deduct_credits RPC will create profile if needed
     }
 
-    const creditDeduction = await deductOneCredit(userId);
-    if (!creditDeduction.ok) {
-      return jsonWithCors(
-        { error: "Out of credits." },
-        403,
-        origin,
-        { "X-Credits-Remaining": String(creditDeduction.total_credits ?? 0) },
-      );
-    }
-
-    const creditsHeader = { "X-Credits-Remaining": String(creditDeduction.total_credits ?? 0) };
-
     const openAiKey = process.env.OPENAI_API_KEY;
     const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
     const cacheKey = `${tool.toLowerCase()}::${topic.toLowerCase()}`;
@@ -344,13 +344,23 @@ export async function POST(request: Request) {
             results: cached.results,
             source: cached.source,
             cacheHit: true,
-            creditsRemaining: creditDeduction.total_credits ?? 0,
+            creditsRemaining: null,
           },
           200,
           origin,
-          creditsHeader,
         );
       }
+    }
+
+    const creditsSnapshot = await getCreditsSnapshot(userId);
+    if ((creditsSnapshot.total_credits || 0) <= 0) {
+      logInfo("generate.out_of_credits", { userId, requestId });
+      return jsonWithCors(
+        { error: "Out of credits." },
+        403,
+        origin,
+        { "X-Credits-Remaining": String(creditsSnapshot.total_credits ?? 0) },
+      );
     }
 
     let results: string[] = [];
@@ -364,10 +374,9 @@ export async function POST(request: Request) {
         expiresAt: Date.now() + CACHE_TTL_MS,
       });
       return jsonWithCors(
-        { results, source, cacheHit: false, creditsRemaining: creditDeduction.total_credits ?? 0 },
+        { results, source, cacheHit: false, creditsRemaining: creditsSnapshot.total_credits ?? 0 },
         200,
         origin,
-        creditsHeader,
       );
     }
 
@@ -411,6 +420,18 @@ export async function POST(request: Request) {
       source = "fallback";
     }
 
+    const creditDeduction = await deductOneCreditIdempotent(userId, requestId);
+    if (!creditDeduction.ok) {
+      logInfo("generate.deduct_failed_out_of_credits", { userId, requestId });
+      return jsonWithCors(
+        { error: "Out of credits." },
+        403,
+        origin,
+        { "X-Credits-Remaining": String(creditDeduction.total_credits ?? 0) },
+      );
+    }
+    const creditsHeader = { "X-Credits-Remaining": String(creditDeduction.total_credits ?? 0) };
+
     aiResultCache.set(cacheKey, {
       results,
       source,
@@ -429,6 +450,9 @@ export async function POST(request: Request) {
       creditsHeader,
     );
   } catch (error) {
+    logError("generate.unhandled_error", {
+      message: error instanceof Error ? error.message : "unknown",
+    });
     const detail =
       process.env.NODE_ENV === "production"
         ? undefined

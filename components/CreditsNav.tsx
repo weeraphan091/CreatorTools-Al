@@ -10,6 +10,7 @@ type Snapshot = {
 
 export default function CreditsNav() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
+  const [isUnavailable, setIsUnavailable] = useState(false);
 
   const fetchCredits = useCallback(async (retryAfterEnsure = false) => {
     if (!retryAfterEnsure) {
@@ -22,6 +23,7 @@ export default function CreditsNav() {
       const total = data.total_credits;
       if (typeof total === "number") {
         setSnapshot({ tier: String(data.tier || "free"), total_credits: total });
+        setIsUnavailable(false);
         return;
       }
     }
@@ -29,7 +31,7 @@ export default function CreditsNav() {
       await fetch("/api/profile/ensure", { method: "POST", credentials: "same-origin" }).catch(() => {});
       await fetchCredits(true);
     } else {
-      setSnapshot({ tier: "free", total_credits: 0 });
+      setIsUnavailable(true);
     }
   }, []);
 
@@ -59,6 +61,7 @@ export default function CreditsNav() {
   }, [fetchCredits]);
 
   const creditsText = snapshot ? `Credits: ${snapshot.total_credits}` : "Credits: —";
+  const displayText = isUnavailable ? "Credits: unavailable" : creditsText;
   const isPaid = snapshot ? snapshot.tier !== "free" : false;
 
   return (
@@ -68,7 +71,7 @@ export default function CreditsNav() {
         className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-200"
         title="View pricing and credits"
       >
-        {creditsText}
+        {displayText}
       </Link>
       {isPaid ? (
         <a

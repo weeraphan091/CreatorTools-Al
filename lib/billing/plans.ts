@@ -12,12 +12,26 @@ export type PriceMapping = {
   starterMonthly: string;
   agencyMonthly: string;
   topup100: string;
+  starterMonthlyAll: string[];
+  agencyMonthlyAll: string[];
+  topup100All: string[];
 };
 
+function parsePriceList(value: string) {
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
 export function getStripePriceMapping(): PriceMapping {
-  const starterMonthly = process.env.STRIPE_PRICE_STARTER_MONTHLY || "";
-  const agencyMonthly = process.env.STRIPE_PRICE_AGENCY_MONTHLY || "";
-  const topup100 = process.env.STRIPE_PRICE_TOPUP_100 || "";
+  const starterMonthlyList = parsePriceList(process.env.STRIPE_PRICE_STARTER_MONTHLY || "");
+  const agencyMonthlyList = parsePriceList(process.env.STRIPE_PRICE_AGENCY_MONTHLY || "");
+  const topup100List = parsePriceList(process.env.STRIPE_PRICE_TOPUP_100 || "");
+
+  const starterMonthly = starterMonthlyList[0] || "";
+  const agencyMonthly = agencyMonthlyList[0] || "";
+  const topup100 = topup100List[0] || "";
 
   if (!starterMonthly || !agencyMonthly || !topup100) {
     throw new Error(
@@ -25,13 +39,20 @@ export function getStripePriceMapping(): PriceMapping {
     );
   }
 
-  return { starterMonthly, agencyMonthly, topup100 };
+  return {
+    starterMonthly,
+    agencyMonthly,
+    topup100,
+    starterMonthlyAll: starterMonthlyList,
+    agencyMonthlyAll: agencyMonthlyList,
+    topup100All: topup100List,
+  };
 }
 
 export function tierFromPriceId(priceId: string): Tier | null {
-  const { starterMonthly, agencyMonthly } = getStripePriceMapping();
-  if (priceId === starterMonthly) return "starter";
-  if (priceId === agencyMonthly) return "agency";
+  const { starterMonthlyAll, agencyMonthlyAll } = getStripePriceMapping();
+  if (starterMonthlyAll.includes(priceId)) return "starter";
+  if (agencyMonthlyAll.includes(priceId)) return "agency";
   return null;
 }
 

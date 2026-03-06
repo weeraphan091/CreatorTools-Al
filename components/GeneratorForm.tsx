@@ -100,6 +100,9 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
 
   const handleGenerate = async () => {
     const normalizedTopic = topic.replace(/\s+/g, " ").trim();
+    const requestId = typeof crypto !== "undefined" && "randomUUID" in crypto
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
     if (!normalizedTopic) {
       setError("Please enter a topic.");
@@ -122,6 +125,7 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
           tool: toolTitle,
           website: "",
           clientTs: Date.now(),
+          requestId,
         }),
       });
 

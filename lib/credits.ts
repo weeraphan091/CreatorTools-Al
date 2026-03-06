@@ -52,3 +52,71 @@ export async function deductOneCredit(userId: string): Promise<DeductCreditsResu
   return row as DeductCreditsResult;
 }
 
+export type DeductCreditsIdempotentResult = CreditsSnapshot & {
+  ok: boolean;
+  charged: boolean;
+};
+
+export async function deductOneCreditIdempotent(
+  userId: string,
+  requestId: string,
+): Promise<DeductCreditsIdempotentResult> {
+  const { data, error } = await supabaseAdminRpc("deduct_credits_idempotent", {
+    p_user_id: userId,
+    p_amount: 1,
+    p_request_id: requestId,
+    p_reason: "generate",
+  });
+  if (error) {
+    throw new Error(`Supabase deduct_credits_idempotent failed: ${error.message}`);
+  }
+
+  const row = Array.isArray(data) ? data[0] : null;
+  if (!row) {
+    return {
+      ok: false,
+      charged: false,
+      tier: "free",
+      total_credits: 0,
+      daily_free_credits: 0,
+      monthly_credits: 0,
+      lifetime_credits: 0,
+    };
+  }
+
+  return row as DeductCreditsIdempotentResult;
+}
+
+export async function grantLifetimeCredits(params: {
+  userId: string;
+  amount: number;
+  reason: string;
+  externalId?: string | null;
+  requestId?: string | null;
+}): Promise<CreditsSnapshot & { ok: boolean }> {
+  const { data, error } = await supabaseAdminRpc("grant_credits", {
+    p_user_id: params.userId,
+    p_amount: params.amount,
+    p_reason: params.reason,
+    p_external_id: params.externalId || null,
+    p_request_id: params.requestId || null,
+  });
+  if (error) {
+    throw new Error(`Supabase grant_credits failed: ${error.message}`);
+  }
+
+  const row = Array.isArray(data) ? data[0] : null;
+  if (!row) {
+    return {
+      ok: false,
+      tier: "free",
+      total_credits: 0,
+      daily_free_credits: 0,
+      monthly_credits: 0,
+      lifetime_credits: 0,
+    };
+  }
+
+  return row as CreditsSnapshot & { ok: boolean };
+}
+

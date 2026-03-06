@@ -18,10 +18,11 @@ function forbidden(message = "Forbidden") {
   return NextResponse.json({ error: message }, { status: 403 });
 }
 
-export default clerkMiddleware((_, request) => {
+export default clerkMiddleware(async (_, request) => {
   const pathname = request.nextUrl.pathname;
   const search = request.nextUrl.search;
   const userAgent = request.headers.get("user-agent") || "";
+  const isWebhook = pathname.startsWith("/api/webhooks/");
 
   if (isSuspiciousRequestUrl(pathname, search)) {
     return forbidden("Suspicious request blocked.");
@@ -39,12 +40,16 @@ export default clerkMiddleware((_, request) => {
   if (pathname === "/api/health" && method === "GET") {
     return NextResponse.next();
   }
-  if (!["POST", "OPTIONS"].includes(method)) {
+  if (isWebhook) {
+    return NextResponse.next();
+  }
+
+  if (!["GET", "POST", "OPTIONS"].includes(method)) {
     return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
   }
 
   const ip = getClientIp(request);
-  const rate = checkRateLimit({
+  const rate = await checkRateLimit({
     key: `mw:api:${ip}`,
     limit: API_LIMIT,
     windowMs: API_WINDOW_MS,
@@ -71,11 +76,7 @@ export default clerkMiddleware((_, request) => {
   }
 
   if (method === "POST") {
-    const isWebhook = pathname.startsWith("/api/webhooks/");
     const isCheckout = pathname === "/api/stripe/checkout";
-    if (isWebhook) {
-      return NextResponse.next();
-    }
 
     const origin = request.headers.get("origin");
     const allowedOrigin = getAllowedOriginForRequest(origin);
