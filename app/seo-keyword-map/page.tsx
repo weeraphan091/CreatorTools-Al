@@ -6,6 +6,10 @@ import { keywordClusters } from "@/lib/keywordMap";
 export const metadata: Metadata = {
   title: "SEO Keyword Map",
   description: "Keyword cluster map for CreatorTools AI growth strategy across tools, templates, and blog pages.",
+  robots: {
+    index: false,
+    follow: false,
+  },
   alternates: {
     canonical: "/seo-keyword-map",
   },
