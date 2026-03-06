@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { useAuth } from "@clerk/nextjs";
 import AdSlot from "@/components/AdSlot";
 import ResultList from "@/components/ResultList";
 import { trackEvent } from "@/lib/analytics";
@@ -16,6 +17,9 @@ type GeneratorFormProps = {
 export default function GeneratorForm({ toolTitle, starterPrompts = [] }: GeneratorFormProps) {
   const showDebugPanel = process.env.NEXT_PUBLIC_ENABLE_DEBUG_PANEL === "true";
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { isSignedIn, isLoaded } = useAuth();
+  const signInUrl = `/sign-in?redirect_url=${encodeURIComponent(pathname || "/tools")}`;
   const [topic, setTopic] = useState("");
   const [results, setResults] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -112,6 +116,7 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "same-origin",
         body: JSON.stringify({
           topic: normalizedTopic,
           tool: toolTitle,
@@ -120,19 +125,31 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
         }),
       });
 
-      if (!response.ok) {
-        const errorData = (await response.json()) as { error?: string; detail?: string };
-        setDetail(errorData.detail || null);
-        if (response.status === 403 && typeof window !== "undefined") {
-          window.dispatchEvent(new CustomEvent("viralhooklab:out_of_credits"));
-        }
-        throw new Error(errorData.error || "Generation failed.");
-      }
-
-      const data = (await response.json()) as {
+      const body = (await response.json().catch(() => ({}))) as {
+        error?: string;
+        detail?: string;
         results?: string[];
         source?: string;
       };
+      if (!response.ok) {
+        setDetail(body.detail || null);
+        if (response.status === 401) {
+          setError("Please sign in to generate results. You get 3 free credits per day.");
+          return;
+        }
+        if (response.status === 403 && typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("viralhooklab:out_of_credits"));
+        }
+        if (response.status === 429) {
+          const retryAfter = response.headers.get("Retry-After");
+          const waitHint = retryAfter ? ` Wait ${retryAfter} seconds.` : "";
+          setError(`Too many requests. Please wait a moment and try again.${waitHint}`);
+          return;
+        }
+        throw new Error(body.error || "Generation failed.");
+      }
+
+      const data = body;
       const generatedResults = Array.isArray(data.results) ? data.results.slice(0, 5) : [];
       setResults(generatedResults);
       setSource(data.source || null);
@@ -152,7 +169,12 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
         });
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Unexpected error";
+      const message =
+        err instanceof TypeError && err.message === "Failed to fetch"
+          ? "Network error. Please check your connection and try again."
+          : err instanceof Error
+            ? err.message
+            : "Something went wrong. Please try again.";
       setError(message);
       setResults([]);
       setSource(null);
@@ -204,10 +226,31 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
           />
         </div>
 
+        {isLoaded && !isSignedIn && (
+          <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+            <p className="font-medium">Sign in to generate results</p>
+            <p className="mt-1 text-amber-800">Free accounts get 3 credits per day. Sign in or create an account to continue.</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <Link
+                href={signInUrl}
+                className="inline-flex rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-700"
+              >
+                Sign in
+              </Link>
+              <Link
+                href={`/sign-up?redirect_url=${encodeURIComponent(pathname || "/tools")}`}
+                className="inline-flex rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                Sign up
+              </Link>
+            </div>
+          </div>
+        )}
+
         <button
           type="button"
           onClick={handleGenerate}
-          disabled={isLoading}
+          disabled={isLoading || (isLoaded && !isSignedIn)}
           className="mt-3 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isLoading ? (
@@ -215,12 +258,26 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
               Generating...
             </>
+          ) : isLoaded && !isSignedIn ? (
+            "Sign in to generate"
           ) : (
             "Generate 5 Results"
           )}
         </button>
 
-        {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
+        {error ? (
+          <div className="mt-3">
+            <p className="text-sm text-red-600">{error}</p>
+            {error.includes("Sign in") && (
+              <Link
+                href={signInUrl}
+                className="mt-2 inline-block text-sm font-semibold text-brand-600 hover:text-brand-700"
+              >
+                Sign in to generate →
+              </Link>
+            )}
+          </div>
+        ) : null}
         {showDebugPanel && error && detail ? <p className="mt-1 text-xs text-red-500">{detail}</p> : null}
         {showDebugPanel && !error && source ? (
           <p className="mt-3 text-xs text-slate-500">Source: {source.toUpperCase()}</p>

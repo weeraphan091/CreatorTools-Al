@@ -10,7 +10,6 @@ import WebsiteJsonLd from "@/components/WebsiteJsonLd";
 import LaunchBanner from "@/components/LaunchBanner";
 import CreditModal from "@/components/CreditModal";
 import { siteConfig } from "@/lib/site";
-import { CLERK_ENABLED } from "@/lib/clerk";
 
 export const metadata: Metadata = {
   title: {
@@ -49,9 +48,11 @@ export const metadata: Metadata = {
     creator: siteConfig.twitterHandle,
     images: ["/twitter-image"],
   },
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-  },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    },
+  }),
   metadataBase: new URL(siteConfig.url),
 };
 
@@ -83,13 +84,14 @@ export default function RootLayout({
     </html>
   );
 
-  if (!CLERK_ENABLED) {
+  const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.trim();
+  if (!clerkKey) {
     return content;
   }
 
   return (
     <ClerkProvider
-      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      publishableKey={clerkKey}
       signInUrl="/sign-in"
       signUpUrl="/sign-up"
       afterSignOutUrl="/"

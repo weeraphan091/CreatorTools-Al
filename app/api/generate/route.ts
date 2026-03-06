@@ -11,6 +11,7 @@ import {
 import { checkRateLimit } from "@/lib/security/rateLimit";
 import { getClientIp, hasValidJsonContentType, isBlockedBot } from "@/lib/security/request";
 import { deductOneCredit } from "@/lib/credits";
+import { supabaseAdminRpc } from "@/lib/supabase/rpc";
 
 type GenerateRequestBody = {
   topic?: string;
@@ -234,11 +235,23 @@ export async function OPTIONS(request: Request) {
   return response;
 }
 
+function isSameSiteReferer(request: Request): boolean {
+  const referer = request.headers.get("referer");
+  if (!referer) return false;
+  try {
+    const refOrigin = new URL(referer).origin;
+    const reqOrigin = new URL(request.url).origin;
+    return refOrigin === reqOrigin;
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(request: Request) {
   const origin = request.headers.get("origin");
   const allowedOrigin = getAllowedOriginForRequest(origin);
 
-  if (process.env.NODE_ENV === "production" && !origin) {
+  if (process.env.NODE_ENV === "production" && !origin && !isSameSiteReferer(request)) {
     return jsonWithCors({ error: "Missing origin header." }, 403, origin);
   }
   if (origin && !allowedOrigin) {
@@ -297,6 +310,12 @@ export async function POST(request: Request) {
     const { userId } = await auth();
     if (!userId) {
       return jsonWithCors({ error: "Unauthorized. Please sign in." }, 401, origin);
+    }
+
+    try {
+      await supabaseAdminRpc("ensure_profile", { p_user_id: userId, p_email: null });
+    } catch {
+      // Continue; deduct_credits RPC will create profile if needed
     }
 
     const creditDeduction = await deductOneCredit(userId);

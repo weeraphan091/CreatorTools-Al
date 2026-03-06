@@ -81,14 +81,15 @@ export default clerkMiddleware((_, request) => {
     const allowedOrigin = getAllowedOriginForRequest(origin);
     if (process.env.NODE_ENV === "production" && !origin) {
       const referer = request.headers.get("referer");
-      const isSameSiteCheckout = isCheckout && referer && (() => {
+      const isSameSite = referer && (() => {
         try {
           return new URL(referer).origin === request.nextUrl.origin;
         } catch {
           return false;
         }
       })();
-      if (!isSameSiteCheckout) {
+      const allowNoOrigin = (isCheckout || pathname === "/api/generate") && isSameSite;
+      if (!allowNoOrigin) {
         return forbidden("Missing origin header.");
       }
     }

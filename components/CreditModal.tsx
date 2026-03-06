@@ -15,9 +15,14 @@ export default function CreditModal() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/50 p-4">
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/50 p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="credit-modal-title"
+    >
       <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-xl">
-        <h2 className="text-xl font-semibold text-slate-900">You are out of credits!</h2>
+        <h2 id="credit-modal-title" className="text-xl font-semibold text-slate-900">You are out of credits!</h2>
         <p className="mt-2 text-sm text-slate-600">
           Upgrade your plan or buy a top-up to continue.
         </p>

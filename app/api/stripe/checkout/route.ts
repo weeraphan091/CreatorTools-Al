@@ -4,6 +4,7 @@ import { siteConfig } from "@/lib/site";
 import { getStripePriceMapping } from "@/lib/billing/plans";
 import { getOrCreateStripeCustomerId } from "@/lib/billing/customer";
 import { stripe } from "@/lib/stripe";
+import { supabaseAdminRpc } from "@/lib/supabase/rpc";
 
 type CheckoutBody = {
   plan?: "starter" | "agency" | "topup100";
@@ -51,6 +52,10 @@ export async function POST(request: Request) {
   try {
     const user = await currentUser();
     const email = user?.emailAddresses?.[0]?.emailAddress || null;
+    await supabaseAdminRpc("ensure_profile", {
+      p_user_id: userId,
+      p_email: email,
+    });
     const customerId = await getOrCreateStripeCustomerId(userId, email);
 
     const session = await stripe().checkout.sessions.create({

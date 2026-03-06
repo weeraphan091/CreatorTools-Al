@@ -13,9 +13,9 @@ export default function CreditsNav() {
 
   const fetchCredits = useCallback(async (retryAfterEnsure = false) => {
     if (!retryAfterEnsure) {
-      await fetch("/api/profile/ensure", { method: "POST" }).catch(() => {});
+      await fetch("/api/profile/ensure", { method: "POST", credentials: "same-origin" }).catch(() => {});
     }
-    const res = await fetch("/api/credits", { method: "GET" });
+    const res = await fetch("/api/credits", { method: "GET", credentials: "same-origin" });
     const raw: unknown = await res.json().catch(() => null);
     if (res.ok && raw && typeof raw === "object") {
       const data = raw as Record<string, unknown>;
@@ -26,7 +26,7 @@ export default function CreditsNav() {
       }
     }
     if (!retryAfterEnsure && res.status === 500) {
-      await fetch("/api/profile/ensure", { method: "POST" }).catch(() => {});
+      await fetch("/api/profile/ensure", { method: "POST", credentials: "same-origin" }).catch(() => {});
       await fetchCredits(true);
     } else {
       setSnapshot({ tier: "free", total_credits: 0 });
