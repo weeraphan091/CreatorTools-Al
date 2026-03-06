@@ -9,6 +9,7 @@ type GeneratorFormProps = {
 };
 
 export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
+  const showDebugPanel = process.env.NEXT_PUBLIC_ENABLE_DEBUG_PANEL === "true";
   const [topic, setTopic] = useState("");
   const [results, setResults] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -109,8 +110,8 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
         </button>
 
         {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
-        {error && detail ? <p className="mt-1 text-xs text-red-500">{detail}</p> : null}
-        {!error && source ? (
+        {showDebugPanel && error && detail ? <p className="mt-1 text-xs text-red-500">{detail}</p> : null}
+        {showDebugPanel && !error && source ? (
           <p className="mt-3 text-xs text-slate-500">Source: {source.toUpperCase()}</p>
         ) : null}
       </div>
