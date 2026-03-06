@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import PricingFeedbackBanner from "@/components/PricingFeedbackBanner";
 import PricingPlanCta from "@/components/PricingPlanCta";
@@ -68,7 +68,9 @@ function TierCard(props: {
 export default function PricingPage() {
   return (
     <div className="space-y-10">
-      <PricingFeedbackBanner />
+      <Suspense fallback={null}>
+        <PricingFeedbackBanner />
+      </Suspense>
       <section className="card p-8">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-700">Pricing</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
