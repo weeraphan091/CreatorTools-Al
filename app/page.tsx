@@ -52,7 +52,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <AdBanner slot="Homepage Hero Banner" />
+      <AdBanner slot="Homepage Hero Banner" adSlotId={siteConfig.ads.homepageHero} />
 
       <section>
         <div className="mb-4 flex items-end justify-between">
@@ -75,27 +75,6 @@ export default function HomePage() {
           <NewsletterForm action={joinNewsletterAction} />
         </div>
         <AffiliateBlock title="Creator Stack: Editing, SEO, and Growth Tools" />
-      </section>
-
-      <section className="card p-6">
-        <h2 className="text-xl font-semibold text-slate-900">SEO Growth Resources</h2>
-        <p className="mt-2 text-sm text-slate-600">
-          Explore our keyword cluster map and editorial standards to scale search traffic with quality content.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Link
-            href="/seo-keyword-map"
-            className="inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
-          >
-            View SEO Keyword Map
-          </Link>
-          <Link
-            href="/editorial-policy"
-            className="inline-flex rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
-          >
-            Read Editorial Policy
-          </Link>
-        </div>
       </section>
 
       <section className="card p-6">
@@ -133,7 +112,7 @@ export default function HomePage() {
           {
             question: "How does this site make money?",
             answer:
-              "Revenue can come from display ads, affiliate offers, and premium upgrades. This project already includes ad and affiliate placeholders ready for activation.",
+              "Revenue can come from display ads, affiliate recommendations, and premium upgrades while keeping core tools free to use.",
           },
           {
             question: "Which tools get the most SEO traffic?",

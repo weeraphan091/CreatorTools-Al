@@ -96,7 +96,7 @@ export default function TemplateDetailPage({ params }: TemplatePageProps) {
       </section>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <AdBanner slot={`${page.title} Banner`} />
+        <AdBanner slot={`${page.title} Banner`} adSlotId={siteConfig.ads.templateDetail} />
         <AffiliateBlock title="Affiliate Offer: Creator Marketing Toolkit" />
       </div>
 

@@ -7,7 +7,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
 import IntentLinkSection from "@/components/IntentLinkSection";
 import { getIntentMatchedLinks } from "@/lib/intentLinks";
-import { getAllUseCasePages, getUseCaseBySlug, getUseCasesByTool } from "@/lib/useCases";
+import { siteConfig } from "@/lib/site";
+import { getIndexableUseCasePages, getUseCaseBySlug, getUseCasesByTool } from "@/lib/useCases";
 
 type UseCaseDetailPageProps = {
   params: {
@@ -16,7 +17,7 @@ type UseCaseDetailPageProps = {
 };
 
 export function generateStaticParams() {
-  return getAllUseCasePages().map((page) => ({ slug: page.slug }));
+  return getIndexableUseCasePages().map((page) => ({ slug: page.slug }));
 }
 
 export async function generateMetadata({ params }: UseCaseDetailPageProps): Promise<Metadata> {
@@ -52,6 +53,10 @@ export default function UseCaseDetailPage({ params }: UseCaseDetailPageProps) {
   const page = getUseCaseBySlug(params.slug);
 
   if (!page) {
+    notFound();
+  }
+
+  if (!page.indexable) {
     notFound();
   }
 
@@ -102,7 +107,7 @@ export default function UseCaseDetailPage({ params }: UseCaseDetailPageProps) {
       </section>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <AdBanner slot={`${page.title} Banner`} />
+        <AdBanner slot={`${page.title} Banner`} adSlotId={siteConfig.ads.useCaseDetail} />
         <AffiliateBlock title={`${page.audienceName} Growth Stack`} />
       </div>
 

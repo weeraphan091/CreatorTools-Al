@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AdBanner from "@/components/AdBanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { siteConfig } from "@/lib/site";
 import { templatePages } from "@/lib/templates";
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ export default function TemplatesPage() {
         </p>
       </section>
 
-      <AdBanner slot="Templates Top Banner" />
+      <AdBanner slot="Templates Top Banner" adSlotId={siteConfig.ads.templatesIndex} />
 
       <section className="grid gap-4 md:grid-cols-2">
         {templatePages.map((page) => (

@@ -3,6 +3,7 @@ import Link from "next/link";
 import AdBanner from "@/components/AdBanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { blogPosts } from "@/lib/blog";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -32,7 +33,7 @@ export default function BlogPage() {
         <p className="mt-3 text-slate-600">Actionable guides to help you grow faster with better content.</p>
       </section>
 
-      <AdBanner slot="Blog Index Banner" />
+      <AdBanner slot="Blog Index Banner" adSlotId={siteConfig.ads.blogIndex} />
 
       <section className="grid gap-4 md:grid-cols-2">
         {blogPosts.map((post) => (

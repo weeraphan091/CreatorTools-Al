@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AdBanner from "@/components/AdBanner";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About CreatorTools AI",
@@ -30,7 +31,7 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <AdBanner slot="About Page Banner" />
+      <AdBanner slot="About Page Banner" adSlotId={siteConfig.ads.about} />
     </div>
   );
 }

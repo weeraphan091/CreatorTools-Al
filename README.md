@@ -22,7 +22,7 @@ A full AI tools website built with **Next.js 14 App Router**, **TypeScript**, **
 - Security hardening: HTTP security headers, middleware bot filtering, input sanitization, strict CORS, and API rate limiting
 - Homepage, tools listing, tool details, blog, and about pages
 - Reusable components (Navbar, Footer, ToolCard, GeneratorForm, ResultList, AdBanner)
-- Monetization placeholders for Google Adsense and affiliate blocks
+- Monetization-ready blocks for Google AdSense and partner recommendations
 - Server actions example for newsletter signup
 - Mobile responsive, modern SaaS card layout
 
@@ -81,7 +81,7 @@ Generation provider priority:
 1. Submit `https://your-domain.com/sitemap.xml` in Google Search Console.
 2. Configure GA4 and connect `NEXT_PUBLIC_GA_ID`.
 3. Enable AdSense and set `NEXT_PUBLIC_ADSENSE_CLIENT`.
-4. Replace placeholder `adSlotId` values in `AdBanner` usage with your real ad unit slots.
+4. Set `NEXT_PUBLIC_ADSENSE_SLOT_*` values in environment variables to render real ad units.
 5. Publish new template/blog pages weekly to grow long-tail organic traffic.
 6. Expand `lib/useCases.ts` with new audiences to create additional indexable pages quickly.
 

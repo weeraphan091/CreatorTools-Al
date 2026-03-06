@@ -322,7 +322,10 @@ function buildUseCasePage(
     audience,
     intent,
   );
-  const indexable = qualityScore >= 80;
+  const indexable =
+    qualityScore >= 88 &&
+    intent.slug !== "for-awareness-growth" &&
+    audience.specificityScore >= 18;
 
   return {
     slug,

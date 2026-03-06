@@ -3,6 +3,7 @@ import Link from "next/link";
 import ToolCard from "@/components/ToolCard";
 import AdBanner from "@/components/AdBanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { siteConfig } from "@/lib/site";
 import { tools } from "@/lib/tools";
 import { getFeaturedUseCases } from "@/lib/useCases";
 
@@ -37,7 +38,7 @@ export default function ToolsPage() {
         </p>
       </section>
 
-      <AdBanner slot="Tools Listing Banner" />
+      <AdBanner slot="Tools Listing Banner" adSlotId={siteConfig.ads.toolsListing} />
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tools.map((tool) => (

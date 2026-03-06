@@ -18,6 +18,18 @@ export const siteConfig = {
     "slogan generator",
     "call to action generator",
   ],
+  ads: {
+    homepageHero: process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_HERO || "",
+    toolsListing: process.env.NEXT_PUBLIC_ADSENSE_SLOT_TOOLS_LIST || "",
+    toolDetail: process.env.NEXT_PUBLIC_ADSENSE_SLOT_TOOL_DETAIL || "",
+    blogIndex: process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_LIST || "",
+    blogPost: process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST || "",
+    templatesIndex: process.env.NEXT_PUBLIC_ADSENSE_SLOT_TEMPLATES_LIST || "",
+    templateDetail: process.env.NEXT_PUBLIC_ADSENSE_SLOT_TEMPLATE_DETAIL || "",
+    useCasesIndex: process.env.NEXT_PUBLIC_ADSENSE_SLOT_USE_CASES_LIST || "",
+    useCaseDetail: process.env.NEXT_PUBLIC_ADSENSE_SLOT_USE_CASE_DETAIL || "",
+    about: process.env.NEXT_PUBLIC_ADSENSE_SLOT_ABOUT || "",
+  },
 };
 
 export function absoluteUrl(pathname: string) {

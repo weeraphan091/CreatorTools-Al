@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AdBanner from "@/components/AdBanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { siteConfig } from "@/lib/site";
 import { getIndexableUseCasePages, getUseCaseStats } from "@/lib/useCases";
 
 const allUseCasePages = getIndexableUseCasePages();
@@ -44,7 +45,7 @@ export default function UseCasesPage() {
         </p>
       </section>
 
-      <AdBanner slot="Use Cases Listing Banner" />
+      <AdBanner slot="Use Cases Listing Banner" adSlotId={siteConfig.ads.useCasesIndex} />
 
       <section className="card p-6">
         <h2 className="text-xl font-semibold text-slate-900">All indexable use-case pages</h2>

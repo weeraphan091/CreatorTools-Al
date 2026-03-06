@@ -9,6 +9,7 @@ import FAQSection from "@/components/FAQSection";
 import IntentLinkSection from "@/components/IntentLinkSection";
 import ToolJsonLd from "@/components/ToolJsonLd";
 import { getIntentMatchedLinks } from "@/lib/intentLinks";
+import { siteConfig } from "@/lib/site";
 import { getRelatedTools, getToolBySlug, tools } from "@/lib/tools";
 import { getUseCasesByTool } from "@/lib/useCases";
 
@@ -96,6 +97,21 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
       />
 
       <section className="card p-6">
+        <h2 className="text-2xl font-semibold text-slate-900">How to get better results</h2>
+        <ol className="mt-3 space-y-2 text-sm text-slate-700">
+          <li className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+            1. Start with a specific niche and audience instead of broad topics.
+          </li>
+          <li className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+            2. Include one clear outcome (clicks, sales, watch time, signups).
+          </li>
+          <li className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+            3. Generate multiple rounds and combine your top-performing ideas.
+          </li>
+        </ol>
+      </section>
+
+      <section className="card p-6">
         <h2 className="text-2xl font-semibold text-slate-900">Best Use Cases</h2>
         <ul className="mt-3 grid gap-2 sm:grid-cols-3">
           {tool.useCases.map((useCase) => (
@@ -107,7 +123,7 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
       </section>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <AdBanner slot={`${tool.title} Banner`} />
+        <AdBanner slot={`${tool.title} Banner`} adSlotId={siteConfig.ads.toolDetail} />
         <AffiliateBlock title={`${tool.title} - Partner Offer`} />
       </div>
 

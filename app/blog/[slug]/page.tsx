@@ -8,6 +8,7 @@ import BlogJsonLd from "@/components/BlogJsonLd";
 import IntentLinkSection from "@/components/IntentLinkSection";
 import { blogPosts, getBlogPostBySlug } from "@/lib/blog";
 import { getIntentMatchedLinks } from "@/lib/intentLinks";
+import { siteConfig } from "@/lib/site";
 import { tools } from "@/lib/tools";
 import { getFeaturedUseCases } from "@/lib/useCases";
 
@@ -82,7 +83,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       </section>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <AdBanner slot={`Blog Post Banner - ${post.title}`} />
+        <AdBanner slot={`Blog Post Banner - ${post.title}`} adSlotId={siteConfig.ads.blogPost} />
         <AffiliateBlock title="Creator Monetization Toolkit" />
       </div>
 
