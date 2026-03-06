@@ -23,7 +23,10 @@ export async function POST(request: Request) {
 
   if (!process.env.STRIPE_SECRET_KEY) {
     return NextResponse.json(
-      { error: "Billing is not configured yet. Please try again later." },
+      {
+        error:
+          "Payment is not set up yet. Please contact support@viralhooklab.com to complete your subscription.",
+      },
       { status: 503 },
     );
   }
@@ -33,7 +36,10 @@ export async function POST(request: Request) {
     mapping = getStripePriceMapping();
   } catch {
     return NextResponse.json(
-      { error: "Billing plans are not configured yet. Please try again later." },
+      {
+        error:
+          "Payment plans are not configured. Please contact support@viralhooklab.com to complete your subscription.",
+      },
       { status: 503 },
     );
   }
@@ -42,24 +48,36 @@ export async function POST(request: Request) {
     plan === "starter" ? mapping.starterMonthly : plan === "agency" ? mapping.agencyMonthly : mapping.topup100;
   const isTopup = plan === "topup100";
 
-  const user = await currentUser();
-  const email = user?.emailAddresses?.[0]?.emailAddress || null;
-  const customerId = await getOrCreateStripeCustomerId(userId, email);
+  try {
+    const user = await currentUser();
+    const email = user?.emailAddresses?.[0]?.emailAddress || null;
+    const customerId = await getOrCreateStripeCustomerId(userId, email);
 
-  const session = await stripe().checkout.sessions.create({
-    customer: customerId,
-    client_reference_id: userId,
-    mode: isTopup ? "payment" : "subscription",
-    line_items: [{ price: priceId, quantity: 1 }],
-    allow_promotion_codes: true,
-    success_url: `${siteConfig.url}/pricing?success=1`,
-    cancel_url: `${siteConfig.url}/pricing?canceled=1`,
-    metadata: {
-      clerk_user_id: userId,
-      purchase_type: isTopup ? "topup" : "subscription",
-    },
-  });
+    const session = await stripe().checkout.sessions.create({
+      customer: customerId,
+      client_reference_id: userId,
+      mode: isTopup ? "payment" : "subscription",
+      line_items: [{ price: priceId, quantity: 1 }],
+      allow_promotion_codes: true,
+      success_url: `${siteConfig.url}/pricing?success=1`,
+      cancel_url: `${siteConfig.url}/pricing?canceled=1`,
+      metadata: {
+        clerk_user_id: userId,
+        purchase_type: isTopup ? "topup" : "subscription",
+      },
+    });
 
-  return NextResponse.json({ url: session.url }, { status: 200 });
+    const url = session?.url ?? null;
+    if (!url) {
+      return NextResponse.json(
+        { error: "Checkout session created but no URL returned. Please try again." },
+        { status: 502 },
+      );
+    }
+    return NextResponse.json({ url }, { status: 200 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Checkout failed. Please try again.";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
 

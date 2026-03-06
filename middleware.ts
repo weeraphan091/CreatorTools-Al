@@ -69,15 +69,25 @@ export default clerkMiddleware((_, request) => {
 
   if (method === "POST") {
     const isWebhook = pathname.startsWith("/api/webhooks/");
+    const isCheckout = pathname === "/api/stripe/checkout";
     if (isWebhook) {
       return NextResponse.next();
     }
 
     const origin = request.headers.get("origin");
     const allowedOrigin = getAllowedOriginForRequest(origin);
-
     if (process.env.NODE_ENV === "production" && !origin) {
-      return forbidden("Missing origin header.");
+      const referer = request.headers.get("referer");
+      const isSameSiteCheckout = isCheckout && referer && (() => {
+        try {
+          return new URL(referer).origin === request.nextUrl.origin;
+        } catch {
+          return false;
+        }
+      })();
+      if (!isSameSiteCheckout) {
+        return forbidden("Missing origin header.");
+      }
     }
 
     if (origin && !allowedOrigin) {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import PricingCheckoutButton from "@/components/PricingCheckoutButton";
+import PricingPlanCta from "@/components/PricingPlanCta";
 import { CLERK_ENABLED } from "@/lib/clerk";
 
 export const metadata: Metadata = {
@@ -75,6 +75,12 @@ export default function PricingPage() {
         <p className="mt-3 max-w-2xl text-slate-600">
           Credits are deducted per generation. Free users get 3 daily credits. Upgrade for monthly credits or add one-time credits.
         </p>
+        {CLERK_ENABLED && (
+          <p className="mt-2 text-sm text-slate-500">
+            <SignedIn>You are signed in. Use the buttons below to subscribe or buy credits.</SignedIn>
+            <SignedOut>Sign in first, then choose a plan to see the checkout buttons.</SignedOut>
+          </p>
+        )}
       </section>
 
       <section className="grid gap-4 lg:grid-cols-3">
@@ -131,29 +137,19 @@ export default function PricingPage() {
           ]}
           cta={
             CLERK_ENABLED ? (
-              <>
-                <SignedOut>
-                  <Link
-                    href="/sign-up"
-                    className="inline-flex w-full justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
-                  >
-                    Start Starter
-                  </Link>
-                </SignedOut>
-                <SignedIn>
-                  <PricingCheckoutButton
-                    plan="starter"
-                    label="Checkout Starter"
-                    className="inline-flex w-full justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-60"
-                  />
-                </SignedIn>
-              </>
+              <PricingPlanCta
+                plan="starter"
+                label="Subscribe – $9/mo"
+                signInLabel="Sign in to subscribe"
+                className="inline-flex w-full justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-60"
+                signInClassName="inline-flex w-full justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+              />
             ) : (
               <Link
-                href="/sign-up"
+                href="/sign-in"
                 className="inline-flex w-full justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
               >
-                Start Starter
+                Sign in to subscribe
               </Link>
             )
           }
@@ -170,29 +166,19 @@ export default function PricingPage() {
           ]}
           cta={
             CLERK_ENABLED ? (
-              <>
-                <SignedOut>
-                  <Link
-                    href="/sign-up"
-                    className="inline-flex w-full justify-center rounded-lg border border-brand-600 bg-white px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50"
-                  >
-                    Start Agency
-                  </Link>
-                </SignedOut>
-                <SignedIn>
-                  <PricingCheckoutButton
-                    plan="agency"
-                    label="Checkout Agency"
-                    className="inline-flex w-full justify-center rounded-lg border border-brand-600 bg-white px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50 disabled:opacity-60"
-                  />
-                </SignedIn>
-              </>
+              <PricingPlanCta
+                plan="agency"
+                label="Subscribe – $29/mo"
+                signInLabel="Sign in to subscribe"
+                className="inline-flex w-full justify-center rounded-lg border border-brand-600 bg-white px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50 disabled:opacity-60"
+                signInClassName="inline-flex w-full justify-center rounded-lg border border-brand-600 bg-white px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50"
+              />
             ) : (
               <Link
-                href="/sign-up"
+                href="/sign-in"
                 className="inline-flex w-full justify-center rounded-lg border border-brand-600 bg-white px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50"
               >
-                Start Agency
+                Sign in to subscribe
               </Link>
             )
           }
@@ -215,23 +201,13 @@ export default function PricingPage() {
 
         <div className="mt-5 flex flex-wrap gap-3">
           {CLERK_ENABLED ? (
-            <>
-              <SignedOut>
-                <Link
-                  href="/sign-in"
-                  className="inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
-                >
-                  Sign in to buy top-up
-                </Link>
-              </SignedOut>
-              <SignedIn>
-                <PricingCheckoutButton
-                  plan="topup100"
-                  label="Buy 100 credits"
-                  className="inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-60"
-                />
-              </SignedIn>
-            </>
+            <PricingPlanCta
+              plan="topup100"
+              label="Buy 100 credits – $2.99"
+              signInLabel="Sign in to buy credits"
+              className="inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-60"
+              signInClassName="inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+            />
           ) : (
             <Link
               href="/sign-in"

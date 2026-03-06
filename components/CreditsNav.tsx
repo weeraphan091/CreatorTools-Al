@@ -11,15 +11,25 @@ type Snapshot = {
 export default function CreditsNav() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
 
-  const fetchCredits = async () => {
+  const fetchCredits = async (retryAfterEnsure = false) => {
+    if (!retryAfterEnsure) {
+      await fetch("/api/profile/ensure", { method: "POST" }).catch(() => {});
+    }
     const res = await fetch("/api/credits", { method: "GET" });
-    if (!res.ok) return;
     const raw: unknown = await res.json().catch(() => null);
-    if (!raw || typeof raw !== "object") return;
-    const data = raw as Record<string, unknown>;
-    const total = data.total_credits;
-    if (typeof total === "number") {
-      setSnapshot({ tier: String(data.tier || "free"), total_credits: total });
+    if (res.ok && raw && typeof raw === "object") {
+      const data = raw as Record<string, unknown>;
+      const total = data.total_credits;
+      if (typeof total === "number") {
+        setSnapshot({ tier: String(data.tier || "free"), total_credits: total });
+        return;
+      }
+    }
+    if (!retryAfterEnsure && res.status === 500) {
+      await fetch("/api/profile/ensure", { method: "POST" }).catch(() => {});
+      await fetchCredits(true);
+    } else {
+      setSnapshot({ tier: "free", total_credits: 0 });
     }
   };
 
