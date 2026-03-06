@@ -32,15 +32,15 @@ export async function generateMetadata({ params }: TemplatePageProps): Promise<M
   }
 
   return {
-    title: page.title,
-    description: page.description,
+    title: page.seoTitle,
+    description: page.seoDescription,
     keywords: [page.keyword],
     alternates: {
       canonical: `/templates/${page.slug}`,
     },
     openGraph: {
-      title: page.title,
-      description: page.description,
+      title: page.seoTitle,
+      description: page.seoDescription,
       url: `${siteConfig.url}/templates/${page.slug}`,
     },
   };

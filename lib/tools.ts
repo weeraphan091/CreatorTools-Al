@@ -17,8 +17,9 @@ export const tools: ToolConfig[] = [
     slug: "youtube-title-generator",
     title: "YouTube Title Generator",
     description: "Generate viral, click-worthy YouTube titles in seconds.",
-    seoTitle: "Free AI YouTube Title Generator",
-    seoDescription: "Generate viral YouTube titles instantly using AI.",
+    seoTitle: "YouTube Title Generator (Free) - 5 Viral Ideas Fast",
+    seoDescription:
+      "Generate 5 high-CTR YouTube titles in seconds. Free AI tool for creators, channels, and marketers.",
     keywords: ["youtube title generator", "youtube seo title ideas", "viral youtube titles"],
     useCases: ["Gaming videos", "Tutorial channels", "Product reviews"],
     faqs: [
@@ -38,8 +39,9 @@ export const tools: ToolConfig[] = [
     slug: "tiktok-caption-generator",
     title: "TikTok Caption Generator",
     description: "Write engaging TikTok captions optimized for reach.",
-    seoTitle: "Free AI TikTok Caption Generator",
-    seoDescription: "Create scroll-stopping TikTok captions with AI.",
+    seoTitle: "TikTok Caption Generator (Free) - Viral Caption Ideas",
+    seoDescription:
+      "Create 5 scroll-stopping TikTok captions instantly. Free AI caption tool to boost comments, saves, and reach.",
     keywords: ["tiktok caption generator", "tiktok caption ideas", "viral tiktok captions"],
     useCases: ["Short-form education", "Lifestyle creators", "Product showcase clips"],
     faqs: [
@@ -59,8 +61,9 @@ export const tools: ToolConfig[] = [
     slug: "ai-hook-generator",
     title: "AI Hook Generator",
     description: "Craft attention-grabbing hooks for social and ads.",
-    seoTitle: "Free AI Hook Generator",
-    seoDescription: "Generate high-converting marketing hooks with AI.",
+    seoTitle: "AI Hook Generator (Free) - 5 High-Converting Hooks",
+    seoDescription:
+      "Generate 5 proven hook ideas for Reels, Shorts, TikTok, and ads. Free AI hook generator built for conversion.",
     keywords: ["ai hook generator", "marketing hook ideas", "viral hook generator"],
     useCases: ["Short-form videos", "Ad creative testing", "Email subject angles"],
     faqs: [
@@ -80,8 +83,9 @@ export const tools: ToolConfig[] = [
     slug: "instagram-bio-generator",
     title: "Instagram Bio Generator",
     description: "Build memorable Instagram bios for personal brands.",
-    seoTitle: "Free AI Instagram Bio Generator",
-    seoDescription: "Create professional Instagram bios in one click.",
+    seoTitle: "Instagram Bio Generator (Free) - Better Bio in Seconds",
+    seoDescription:
+      "Create 5 professional Instagram bio options instantly. Free AI bio generator for creators, coaches, and brands.",
     keywords: ["instagram bio generator", "instagram bio ideas", "bio for creators"],
     useCases: ["Creator profiles", "Coaches", "Small business accounts"],
     faqs: [
@@ -101,8 +105,9 @@ export const tools: ToolConfig[] = [
     slug: "ad-headline-generator",
     title: "Ad Headline Generator",
     description: "Generate persuasive ad headlines for paid campaigns.",
-    seoTitle: "Free AI Ad Headline Generator",
-    seoDescription: "Write high-CTR ad headlines instantly using AI.",
+    seoTitle: "Ad Headline Generator (Free) - Boost CTR Fast",
+    seoDescription:
+      "Generate 5 click-worthy ad headline ideas for Meta and Google ads. Free AI tool for higher CTR campaigns.",
     keywords: ["ad headline generator", "facebook ad headline ideas", "google ads headlines"],
     useCases: ["Meta ads", "Google ads", "Landing page hero copy"],
     faqs: [
@@ -122,8 +127,9 @@ export const tools: ToolConfig[] = [
     slug: "blog-title-generator",
     title: "Blog Title Generator",
     description: "Get SEO-friendly blog title ideas for any niche.",
-    seoTitle: "Free AI Blog Title Generator",
-    seoDescription: "Generate blog title ideas that improve clicks and SEO.",
+    seoTitle: "Blog Title Generator (Free) - SEO Title Ideas",
+    seoDescription:
+      "Generate 5 SEO-friendly blog titles with high click potential. Free AI blog headline tool for better organic CTR.",
     keywords: ["blog title generator", "seo blog title ideas", "article headline generator"],
     useCases: ["Affiliate blogs", "SaaS content", "Niche authority sites"],
     faqs: [
@@ -143,8 +149,9 @@ export const tools: ToolConfig[] = [
     slug: "product-description-generator",
     title: "Product Description Generator",
     description: "Create compelling product copy that sells faster.",
-    seoTitle: "Free AI Product Description Generator",
-    seoDescription: "Write product descriptions that increase conversions.",
+    seoTitle: "Product Description Generator (Free) - Convert More",
+    seoDescription:
+      "Write 5 persuasive product descriptions in seconds. Free AI copy tool for ecommerce, Shopify, and DTC stores.",
     keywords: ["product description generator", "ecommerce product copy", "shopify description ai"],
     useCases: ["Shopify product pages", "Amazon listings", "DTC landing pages"],
     faqs: [
@@ -164,8 +171,9 @@ export const tools: ToolConfig[] = [
     slug: "brand-name-generator",
     title: "Brand Name Generator",
     description: "Discover unique and memorable brand name ideas.",
-    seoTitle: "Free AI Brand Name Generator",
-    seoDescription: "Generate creative brand names for your business.",
+    seoTitle: "Brand Name Generator (Free) - 5 Name Ideas Instantly",
+    seoDescription:
+      "Generate creative, memorable brand names for startups and ecommerce. Free AI naming tool with fast ideas.",
     keywords: ["brand name generator", "business name ideas", "startup name generator"],
     useCases: ["Startup naming", "Ecommerce brands", "Agency rebrands"],
     faqs: [
@@ -185,8 +193,9 @@ export const tools: ToolConfig[] = [
     slug: "slogan-generator",
     title: "Slogan Generator",
     description: "Produce catchy slogans for products and campaigns.",
-    seoTitle: "Free AI Slogan Generator",
-    seoDescription: "Create catchy slogans that stick in your audience's mind.",
+    seoTitle: "Slogan Generator (Free) - Catchy Taglines in Seconds",
+    seoDescription:
+      "Generate 5 catchy slogan ideas for products, campaigns, and brands. Free AI slogan tool built for recall.",
     keywords: ["slogan generator", "tagline generator", "brand slogan ideas"],
     useCases: ["Brand campaigns", "Product launches", "Homepage hero messaging"],
     faqs: [
@@ -206,8 +215,9 @@ export const tools: ToolConfig[] = [
     slug: "call-to-action-generator",
     title: "Call To Action Generator",
     description: "Generate strong CTAs to improve clicks and conversions.",
-    seoTitle: "Free AI Call To Action Generator",
-    seoDescription: "Create high-converting call-to-action copy using AI.",
+    seoTitle: "Call To Action Generator (Free) - High-Converting CTA",
+    seoDescription:
+      "Create 5 high-converting CTA ideas for landing pages, email, and ads. Free AI call-to-action generator.",
     keywords: ["call to action generator", "cta copy generator", "high converting cta"],
     useCases: ["Landing pages", "Email campaigns", "Social content CTAs"],
     faqs: [
