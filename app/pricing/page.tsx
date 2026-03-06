@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
 import PricingPlanCta from "@/components/PricingPlanCta";
 import { CLERK_ENABLED } from "@/lib/clerk";
 
@@ -52,7 +51,7 @@ function TierCard(props: {
         {props.features.map((item) => (
           <li key={item} className="flex gap-2">
             <span className="mt-[2px] inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-50 text-brand-700">
-              ✓
+              &#10003;
             </span>
             <span>{item}</span>
           </li>
@@ -77,8 +76,7 @@ export default function PricingPage() {
         </p>
         {CLERK_ENABLED && (
           <p className="mt-2 text-sm text-slate-500">
-            <SignedIn>You are signed in. Use the buttons below to subscribe or buy credits.</SignedIn>
-            <SignedOut>Sign in first, then choose a plan to see the checkout buttons.</SignedOut>
+            Sign in first, then choose a plan below to subscribe or buy credits.
           </p>
         )}
       </section>
@@ -94,33 +92,12 @@ export default function PricingPage() {
             "Fast generation + clean UI",
           ]}
           cta={
-            CLERK_ENABLED ? (
-              <>
-                <SignedOut>
-                  <Link
-                    href="/sign-up"
-                    className="inline-flex w-full justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
-                  >
-                    Create free account
-                  </Link>
-                </SignedOut>
-                <SignedIn>
-                  <Link
-                    href="/tools"
-                    className="inline-flex w-full justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
-                  >
-                    You’re signed in — open tools
-                  </Link>
-                </SignedIn>
-              </>
-            ) : (
-              <Link
-                href="/sign-up"
-                className="inline-flex w-full justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
-              >
-                Create free account
-              </Link>
-            )
+            <Link
+              href="/sign-up"
+              className="inline-flex w-full justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
+            >
+              Create free account
+            </Link>
           }
         />
 
@@ -139,7 +116,7 @@ export default function PricingPage() {
             CLERK_ENABLED ? (
               <PricingPlanCta
                 plan="starter"
-                label="Subscribe – $9/mo"
+                label="Subscribe - $9/mo"
                 signInLabel="Sign in to subscribe"
                 className="inline-flex w-full justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-60"
                 signInClassName="inline-flex w-full justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
@@ -168,7 +145,7 @@ export default function PricingPage() {
             CLERK_ENABLED ? (
               <PricingPlanCta
                 plan="agency"
-                label="Subscribe – $29/mo"
+                label="Subscribe - $29/mo"
                 signInLabel="Sign in to subscribe"
                 className="inline-flex w-full justify-center rounded-lg border border-brand-600 bg-white px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50 disabled:opacity-60"
                 signInClassName="inline-flex w-full justify-center rounded-lg border border-brand-600 bg-white px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50"
@@ -203,7 +180,7 @@ export default function PricingPage() {
           {CLERK_ENABLED ? (
             <PricingPlanCta
               plan="topup100"
-              label="Buy 100 credits – $2.99"
+              label="Buy 100 credits - $2.99"
               signInLabel="Sign in to buy credits"
               className="inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-60"
               signInClassName="inline-flex rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
@@ -227,4 +204,3 @@ export default function PricingPage() {
     </div>
   );
 }
-
