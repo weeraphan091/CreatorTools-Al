@@ -1,5 +1,8 @@
+import type { CategoryId } from "@/lib/categories";
+
 export type ToolConfig = {
   slug: string;
+  categoryId: CategoryId;
   title: string;
   description: string;
   seoTitle: string;
@@ -18,6 +21,7 @@ export type ToolConfig = {
 export const tools: ToolConfig[] = [
   {
     slug: "youtube-title-generator",
+    categoryId: "youtube",
     title: "YouTube Title Generator",
     description: "Generate viral, click-worthy YouTube titles in seconds.",
     seoTitle: "YouTube Title Generator (Free) - 5 Viral Ideas Fast",
@@ -62,6 +66,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "tiktok-caption-generator",
+    categoryId: "tiktok",
     title: "TikTok Caption Generator",
     description: "Write engaging TikTok captions optimized for reach.",
     seoTitle: "TikTok Caption Generator (Free) - Viral Caption Ideas",
@@ -106,6 +111,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "ai-hook-generator",
+    categoryId: "tiktok",
     title: "AI Hook Generator",
     description: "Craft attention-grabbing hooks for social and ads.",
     seoTitle: "AI Hook Generator (Free) - 5 High-Converting Hooks",
@@ -150,6 +156,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "instagram-bio-generator",
+    categoryId: "instagram",
     title: "Instagram Bio Generator",
     description: "Build memorable Instagram bios for personal brands.",
     seoTitle: "Instagram Bio Generator (Free) - Better Bio in Seconds",
@@ -194,6 +201,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "ad-headline-generator",
+    categoryId: "business-writing",
     title: "Ad Headline Generator",
     description: "Generate persuasive ad headlines for paid campaigns.",
     seoTitle: "Ad Headline Generator (Free) - Boost CTR Fast",
@@ -238,6 +246,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "blog-title-generator",
+    categoryId: "business-writing",
     title: "Blog Title Generator",
     description: "Get SEO-friendly blog title ideas for any niche.",
     seoTitle: "Blog Title Generator (Free) - SEO Title Ideas",
@@ -282,6 +291,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "product-description-generator",
+    categoryId: "ecommerce",
     title: "Product Description Generator",
     description: "Create compelling product copy that sells faster.",
     seoTitle: "Product Description Generator (Free) - Convert More",
@@ -324,6 +334,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "brand-name-generator",
+    categoryId: "ecommerce",
     title: "Brand Name Generator",
     description: "Discover unique and memorable brand name ideas.",
     seoTitle: "Brand Name Generator (Free) - 5 Name Ideas Instantly",
@@ -366,6 +377,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "slogan-generator",
+    categoryId: "business-writing",
     title: "Slogan Generator",
     description: "Produce catchy slogans for products and campaigns.",
     seoTitle: "Slogan Generator (Free) - Catchy Taglines in Seconds",
@@ -408,6 +420,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "call-to-action-generator",
+    categoryId: "business-writing",
     title: "Call To Action Generator",
     description: "Generate strong CTAs to improve clicks and conversions.",
     seoTitle: "Call To Action Generator (Free) - High-Converting CTA",
@@ -452,6 +465,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "linkedin-viral-post-generator",
+    categoryId: "business-writing",
     title: "LinkedIn Viral Post Generator",
     description: "Write high-performing LinkedIn posts for professionals and founders.",
     seoTitle: "LinkedIn Viral Post Generator (Free) - Post Ideas That Get Comments",
@@ -497,6 +511,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "x-thread-hook-writer",
+    categoryId: "business-writing",
     title: "X (Twitter) Thread Hook Writer",
     description: "Generate thread hooks built for tech and crypto audiences.",
     seoTitle: "X Thread Hook Writer (Free) - Tech & Crypto Hook Ideas",
@@ -538,6 +553,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "amazon-product-description-ai",
+    categoryId: "ecommerce",
     title: "Amazon Product Description AI",
     description: "Write Amazon-ready product descriptions that convert.",
     seoTitle: "Amazon Product Description AI (Free) - Bullet + Benefit Copy",
@@ -576,6 +592,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "faceless-youtube-channel-idea-generator",
+    categoryId: "youtube",
     title: "Faceless YouTube Channel Idea Generator",
     description: "Generate faceless channel ideas with niches, formats, and hooks.",
     seoTitle: "Faceless YouTube Channel Idea Generator (Free) - Niche + Format Ideas",
@@ -612,6 +629,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "pinterest-pin-title-desc-optimizer",
+    categoryId: "business-writing",
     title: "Pinterest Pin Title & Description Optimizer",
     description: "Optimize Pin titles and descriptions for clicks and saves.",
     seoTitle: "Pinterest Pin Title & Description Optimizer (Free) - More Clicks",
@@ -648,6 +666,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "facebook-ad-copywriter",
+    categoryId: "business-writing",
     title: "Facebook Ad Copywriter",
     description: "Write Facebook ad copy built for testing and conversion.",
     seoTitle: "Facebook Ad Copywriter (Free) - Test Winning Angles Fast",
@@ -684,6 +703,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "instagram-reel-script-generator",
+    categoryId: "instagram",
     title: "Instagram Reel Script Generator",
     description: "Generate Reels scripts with hooks, beats, and CTAs.",
     seoTitle: "Instagram Reel Script Generator (Free) - Hook to CTA Script",
@@ -720,6 +740,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "email-subject-line-ab-tester",
+    categoryId: "business-writing",
     title: "Email Subject Line A/B Tester AI",
     description: "Generate A/B subject line variants and test angles faster.",
     seoTitle: "Email Subject Line A/B Tester (Free) - Generate A/B Variants",
@@ -755,6 +776,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "tiktok-script-hook-generator-us-uk",
+    categoryId: "tiktok",
     title: "TikTok Script Hook Generator (US/UK)",
     description: "Generate TikTok hook lines tailored for US/UK trend styles.",
     seoTitle: "TikTok Script Hook Generator (US/UK) (Free) - Hook Lines That Fit Trends",
@@ -794,6 +816,7 @@ export const tools: ToolConfig[] = [
   },
   {
     slug: "google-ads-headline-optimizer",
+    categoryId: "business-writing",
     title: "Google Ads Headline Optimizer",
     description: "Optimize Google Ads headlines for CTR and message match.",
     seoTitle: "Google Ads Headline Optimizer (Free) - Better CTR Headlines",
@@ -836,5 +859,12 @@ export function getToolBySlug(slug: string) {
 }
 
 export function getRelatedTools(slug: string) {
-  return tools.filter((tool) => tool.slug !== slug).slice(0, 3);
+  const base = getToolBySlug(slug);
+  if (!base) {
+    return tools.filter((tool) => tool.slug !== slug).slice(0, 3);
+  }
+
+  const sameCategory = tools.filter((tool) => tool.slug !== slug && tool.categoryId === base.categoryId);
+  const others = tools.filter((tool) => tool.slug !== slug && tool.categoryId !== base.categoryId);
+  return [...sameCategory, ...others].slice(0, 3);
 }

@@ -9,6 +9,7 @@ import FAQSection from "@/components/FAQSection";
 import FaqJsonLd from "@/components/FaqJsonLd";
 import IntentLinkSection from "@/components/IntentLinkSection";
 import ToolJsonLd from "@/components/ToolJsonLd";
+import { getCategoryById } from "@/lib/categories";
 import { getIntentMatchedLinks } from "@/lib/intentLinks";
 import { siteConfig } from "@/lib/site";
 import { getRelatedTools, getToolBySlug, tools } from "@/lib/tools";
@@ -63,6 +64,7 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
     notFound();
   }
 
+  const category = getCategoryById(tool.categoryId);
   const toolUseCases = getUseCasesByTool(tool.slug, 12);
   const intentLinks = getIntentMatchedLinks({
     query: `${tool.title} ${tool.description} ${tool.keywords.join(" ")}`,
@@ -77,8 +79,8 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },
-          { label: "Tools", href: "/tools" },
-          { label: tool.title, href: `/tools/${tool.slug}` },
+          ...(category ? [{ label: category.label, href: category.href }] : [{ label: "Tools", href: "/tools" }]),
+          { label: tool.title },
         ]}
       />
       <section className="card p-8">

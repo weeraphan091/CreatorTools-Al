@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "Saved Results",
   description:
     "View and reuse your saved AI results from ViralHookLab.com. Copy hooks, titles, captions, and CTAs in one place.",
+  robots: {
+    index: false,
+    follow: false,
+  },
   alternates: { canonical: "/top-results" },
   openGraph: {
     title: "Saved Results | ViralHookLab.com",

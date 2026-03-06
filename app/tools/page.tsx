@@ -3,6 +3,7 @@ import Link from "next/link";
 import ToolCard from "@/components/ToolCard";
 import AdBanner from "@/components/AdBanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { categories } from "@/lib/categories";
 import { siteConfig } from "@/lib/site";
 import { tools } from "@/lib/tools";
 import { getFeaturedUseCases } from "@/lib/useCases";
@@ -22,6 +23,10 @@ export const metadata: Metadata = {
 
 export default function ToolsPage() {
   const useCases = getFeaturedUseCases(9);
+  const toolsByCategory = categories.map((category) => ({
+    category,
+    items: tools.filter((tool) => tool.categoryId === category.id),
+  }));
 
   return (
     <div className="space-y-6">
@@ -40,9 +45,24 @@ export default function ToolsPage() {
 
       <AdBanner slot="Tools Listing Banner" adSlotId={siteConfig.ads.toolsListing} />
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {tools.map((tool) => (
-          <ToolCard key={tool.slug} tool={tool} />
+      <section className="space-y-10">
+        {toolsByCategory.map(({ category, items }) => (
+          <div key={category.id} className="space-y-3">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <h2 className="text-2xl font-semibold text-slate-900">{category.label}</h2>
+                <p className="mt-1 text-sm text-slate-600">{category.seoDescription}</p>
+              </div>
+              <Link href={category.href} className="text-sm font-semibold text-brand-700 hover:text-brand-600">
+                View {category.label} page →
+              </Link>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {items.map((tool) => (
+                <ToolCard key={tool.slug} tool={tool} />
+              ))}
+            </div>
+          </div>
         ))}
       </section>
 
