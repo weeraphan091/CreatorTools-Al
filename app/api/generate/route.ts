@@ -352,15 +352,24 @@ export async function POST(request: Request) {
       }
     }
 
-    const creditsSnapshot = await getCreditsSnapshot(userId);
-    if ((creditsSnapshot.total_credits || 0) <= 0) {
-      logInfo("generate.out_of_credits", { userId, requestId });
-      return jsonWithCors(
-        { error: "Out of credits." },
-        403,
-        origin,
-        { "X-Credits-Remaining": String(creditsSnapshot.total_credits ?? 0) },
-      );
+    let creditsSnapshot: { total_credits?: number } = {};
+    try {
+      creditsSnapshot = await getCreditsSnapshot(userId);
+      if ((creditsSnapshot.total_credits || 0) <= 0) {
+        logInfo("generate.out_of_credits", { userId, requestId });
+        return jsonWithCors(
+          { error: "Out of credits." },
+          403,
+          origin,
+          { "X-Credits-Remaining": String(creditsSnapshot.total_credits ?? 0) },
+        );
+      }
+    } catch (creditsError) {
+      logWarn("generate.credits_snapshot_failed", {
+        userId,
+        requestId,
+        message: creditsError instanceof Error ? creditsError.message : "unknown",
+      });
     }
 
     let results: string[] = [];
@@ -389,30 +398,35 @@ export async function POST(request: Request) {
         output = await generateWithGemini(input, geminiKey);
         source = "gemini";
       } catch (geminiError) {
+        logWarn("generate.gemini_failed", {
+          userId,
+          requestId,
+          message: geminiError instanceof Error ? geminiError.message : "unknown",
+        });
         if (openAiKey) {
-          output = await generateWithOpenAI(input, openAiKey);
-          source = "openai";
-        } else {
-          const detail =
-            process.env.NODE_ENV === "production"
-              ? undefined
-              : geminiError instanceof Error
-                ? geminiError.message.slice(0, 220)
-                : "Unknown Gemini error";
-          return jsonWithCors(
-            {
-              error:
-                "Gemini API call failed. Please verify GEMINI_API_KEY/GOOGLE_API_KEY, quota, and API restrictions.",
-              ...(detail ? { detail } : {}),
-            },
-            502,
-            origin,
-          );
+          try {
+            output = await generateWithOpenAI(input, openAiKey);
+            source = "openai";
+          } catch (openAiError) {
+            logWarn("generate.openai_failed_after_gemini", {
+              userId,
+              requestId,
+              message: openAiError instanceof Error ? openAiError.message : "unknown",
+            });
+          }
         }
       }
     } else if (openAiKey) {
-      output = await generateWithOpenAI(input, openAiKey);
-      source = "openai";
+      try {
+        output = await generateWithOpenAI(input, openAiKey);
+        source = "openai";
+      } catch (openAiError) {
+        logWarn("generate.openai_failed", {
+          userId,
+          requestId,
+          message: openAiError instanceof Error ? openAiError.message : "unknown",
+        });
+      }
     }
 
     results = output ? parseToFiveResults(output, topic) : fallbackResults(topic);

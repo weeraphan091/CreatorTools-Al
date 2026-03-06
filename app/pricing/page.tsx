@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense, type ReactNode } from "react";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
 import PricingFeedbackBanner from "@/components/PricingFeedbackBanner";
 import PricingPlanCta from "@/components/PricingPlanCta";
 import { CLERK_ENABLED } from "@/lib/clerk";
@@ -80,10 +79,7 @@ export default function PricingPage() {
           Credits are deducted per generation. Free users get 3 daily credits. Upgrade for monthly credits or add one-time credits.
         </p>
         {CLERK_ENABLED && (
-          <p className="mt-2 text-sm text-slate-500">
-            <SignedIn>You are signed in. Use the buttons below to subscribe or buy credits.</SignedIn>
-            <SignedOut>Sign in first, then choose a plan to see the checkout buttons.</SignedOut>
-          </p>
+          <p className="mt-2 text-sm text-slate-500">Sign in first, then choose a plan to subscribe or buy credits.</p>
         )}
       </section>
 
@@ -98,33 +94,12 @@ export default function PricingPage() {
             "Fast generation + clean UI",
           ]}
           cta={
-            CLERK_ENABLED ? (
-              <>
-                <SignedOut>
-                  <Link
-                    href="/sign-up"
-                    className="inline-flex w-full justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
-                  >
-                    Create free account
-                  </Link>
-                </SignedOut>
-                <SignedIn>
-                  <Link
-                    href="/tools"
-                    className="inline-flex w-full justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
-                  >
-                    You’re signed in — open tools
-                  </Link>
-                </SignedIn>
-              </>
-            ) : (
-              <Link
-                href="/sign-up"
-                className="inline-flex w-full justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
-              >
-                Create free account
-              </Link>
-            )
+            <Link
+              href={CLERK_ENABLED ? "/sign-up?redirect_url=/tools" : "/tools"}
+              className="inline-flex w-full justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
+            >
+              Create free account
+            </Link>
           }
         />
 
