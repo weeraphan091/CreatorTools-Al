@@ -80,9 +80,15 @@ export default function Navbar() {
                 <SignedOut>
                   <Link
                     href="/sign-in"
-                    className="rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white hover:bg-slate-800"
+                    className="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900"
                   >
                     Sign in
+                  </Link>
+                  <Link
+                    href="/sign-up"
+                    className="rounded-full bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-800"
+                  >
+                    Sign up
                   </Link>
                 </SignedOut>
                 <SignedIn>
@@ -91,12 +97,20 @@ export default function Navbar() {
                 </SignedIn>
               </>
             ) : (
-              <Link
-                href="/sign-in"
-                className="rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white hover:bg-slate-800"
-              >
-                Sign in
-              </Link>
+              <>
+                <Link
+                  href="/sign-in"
+                  className="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/sign-up"
+                  className="rounded-full bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-800"
+                >
+                  Sign up
+                </Link>
+              </>
             )}
           </nav>
         </div>
@@ -128,15 +142,21 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              <div className="mt-2 rounded-lg bg-slate-50 px-2 py-2">
+              <div className="mt-2 flex flex-col gap-2 rounded-lg bg-slate-50 px-2 py-2">
                 {CLERK_ENABLED ? (
                   <>
                     <SignedOut>
                       <Link
                         href="/sign-in"
-                        className="block rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800"
+                        className="block rounded-lg border border-slate-300 bg-white px-3 py-2 text-center text-sm font-semibold text-slate-800 hover:bg-slate-100"
                       >
                         Sign in
+                      </Link>
+                      <Link
+                        href="/sign-up"
+                        className="block rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800"
+                      >
+                        Sign up
                       </Link>
                     </SignedOut>
                     <SignedIn>
@@ -147,12 +167,20 @@ export default function Navbar() {
                     </SignedIn>
                   </>
                 ) : (
-                  <Link
-                    href="/sign-in"
-                    className="block rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800"
-                  >
-                    Sign in
-                  </Link>
+                  <>
+                    <Link
+                      href="/sign-in"
+                      className="block rounded-lg border border-slate-300 bg-white px-3 py-2 text-center text-sm font-semibold text-slate-800 hover:bg-slate-100"
+                    >
+                      Sign in
+                    </Link>
+                    <Link
+                      href="/sign-up"
+                      className="block rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800"
+                    >
+                      Sign up
+                    </Link>
+                  </>
                 )}
               </div>
             </div>
