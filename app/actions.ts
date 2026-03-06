@@ -1,9 +1,15 @@
 "use server";
 
-export async function joinNewsletterAction(formData: FormData) {
-  const email = String(formData.get("email") || "").trim();
+import {
+  containsSuspiciousInput,
+  isValidEmailInput,
+  sanitizeEmailInput,
+} from "@/lib/security/input";
 
-  if (!email || !email.includes("@")) {
+export async function joinNewsletterAction(formData: FormData) {
+  const email = sanitizeEmailInput(String(formData.get("email") || ""));
+
+  if (!email || !isValidEmailInput(email) || containsSuspiciousInput(email)) {
     return;
   }
 

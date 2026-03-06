@@ -15,10 +15,11 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [detail, setDetail] = useState<string | null>(null);
   const [source, setSource] = useState<string | null>(null);
-  const [envStatusText, setEnvStatusText] = useState<string | null>(null);
 
   const handleGenerate = async () => {
-    if (!topic.trim()) {
+    const normalizedTopic = topic.replace(/\s+/g, " ").trim();
+
+    if (!normalizedTopic) {
       setError("Please enter a topic.");
       return;
     }
@@ -34,21 +35,15 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          topic,
+          topic: normalizedTopic,
           tool: toolTitle,
+          website: "",
+          clientTs: Date.now(),
         }),
       });
 
       if (!response.ok) {
-        const errorData = (await response.json()) as {
-          error?: string;
-          detail?: string;
-          envStatus?: { geminiConfigured?: boolean; openaiConfigured?: boolean; deploymentSha?: string | null };
-        };
-        if (errorData.envStatus) {
-          const status = `Deployment ${errorData.envStatus.deploymentSha || "unknown"} | geminiConfigured=${Boolean(errorData.envStatus.geminiConfigured)} | openaiConfigured=${Boolean(errorData.envStatus.openaiConfigured)}`;
-          setEnvStatusText(status);
-        }
+        const errorData = (await response.json()) as { error?: string; detail?: string };
         setDetail(errorData.detail || null);
         throw new Error(errorData.error || "Generation failed.");
       }
@@ -56,18 +51,10 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
       const data = (await response.json()) as {
         results?: string[];
         source?: string;
-        cacheHit?: boolean;
-        envStatus?: { geminiConfigured?: boolean; openaiConfigured?: boolean; deploymentSha?: string | null };
       };
       const generatedResults = Array.isArray(data.results) ? data.results.slice(0, 5) : [];
       setResults(generatedResults);
       setSource(data.source || null);
-      if (data.envStatus) {
-        const status = `Deployment ${data.envStatus.deploymentSha || "unknown"} | geminiConfigured=${Boolean(data.envStatus.geminiConfigured)} | openaiConfigured=${Boolean(data.envStatus.openaiConfigured)} | cacheHit=${Boolean(data.cacheHit)}`;
-        setEnvStatusText(status);
-      } else {
-        setEnvStatusText(null);
-      }
       trackEvent("generate_click", {
         tool_name: toolTitle,
       });
@@ -126,7 +113,6 @@ export default function GeneratorForm({ toolTitle }: GeneratorFormProps) {
         {!error && source ? (
           <p className="mt-3 text-xs text-slate-500">Source: {source.toUpperCase()}</p>
         ) : null}
-        {envStatusText ? <p className="mt-1 text-xs text-slate-500">{envStatusText}</p> : null}
       </div>
 
       <ResultList results={results} toolTitle={toolTitle} />

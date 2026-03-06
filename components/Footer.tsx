@@ -1,8 +1,6 @@
 import Link from "next/link";
 
 export default function Footer() {
-  const commitSha = process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7);
-
   return (
     <footer className="mt-14 border-t border-slate-200 bg-white">
       <div className="container-shell flex flex-col gap-3 py-8 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
@@ -38,7 +36,7 @@ export default function Footer() {
           <Link href="/robots.txt" className="hover:text-brand-600">
             Robots
           </Link>
-          <p>Built with Next.js 14, TailwindCSS, Gemini/OpenAI{commitSha ? ` • ${commitSha}` : ""}.</p>
+          <p>Built with Next.js 14, TailwindCSS, and AI APIs.</p>
         </div>
       </div>
     </footer>

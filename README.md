@@ -1,6 +1,6 @@
 # CreatorTools AI
 
-A full AI tools website built with **Next.js 14 App Router**, **TypeScript**, **TailwindCSS**, and **OpenAI API**.
+A full AI tools website built with **Next.js 14 App Router**, **TypeScript**, **TailwindCSS**, and **Gemini/OpenAI APIs**.
 
 ## Features
 
@@ -19,6 +19,7 @@ A full AI tools website built with **Next.js 14 App Router**, **TypeScript**, **
 - SEO keyword map page at `/seo-keyword-map`
 - RSS feed at `/feed.xml`
 - Analytics + AdSense script support via environment variables
+- Security hardening: HTTP security headers, middleware bot filtering, input sanitization, strict CORS, and API rate limiting
 - Homepage, tools listing, tool details, blog, and about pages
 - Reusable components (Navbar, Footer, ToolCard, GeneratorForm, ResultList, AdBanner)
 - Monetization placeholders for Google Adsense and affiliate blocks
@@ -49,15 +50,10 @@ Open http://localhost:3000
 
 ## Environment Variables
 
-Create `.env.local`:
+Copy `.env.example` to `.env.local` and fill values:
 
 ```bash
-GEMINI_API_KEY=your_google_ai_studio_key
-# or use GOOGLE_API_KEY=your_google_ai_studio_key
-OPENAI_API_KEY=your_openai_api_key
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
-NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-xxxxxxxxxxxxxxxx
-NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=google-site-verification-code
+cp .env.example .env.local
 ```
 
 Generation provider priority:
@@ -65,6 +61,20 @@ Generation provider priority:
 1. `GEMINI_API_KEY` (or `GOOGLE_API_KEY`)
 2. `OPENAI_API_KEY`
 3. Fallback sample results (if no key is set)
+
+## Security Controls Included
+
+- Strict HTTP headers configured in `next.config.js`:
+  - `Content-Security-Policy`
+  - `X-Frame-Options`
+  - `X-Content-Type-Options`
+  - `Referrer-Policy`
+  - `Strict-Transport-Security`
+- Input sanitization and suspicious-pattern validation in server actions and API routes
+- IP-based rate limiting in both `middleware.ts` and `/api/generate`
+- CORS allowlist and origin validation via `ALLOWED_ORIGINS`
+- Basic anti-bot and suspicious-request filtering in middleware
+- Anti-spam checks for API payloads (content-type, honeypot field, request timestamp)
 
 ## Traffic + Monetization Setup
 

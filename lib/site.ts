@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "CreatorTools AI",
   description:
     "Free AI generators for YouTube titles, TikTok captions, hooks, bios, ad copy, and more.",
-  url: "https://creatortools-ai.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://creatortools-ai.vercel.app",
   locale: "en_US",
   creator: "CreatorTools AI",
   twitterHandle: "@creatortoolsai",

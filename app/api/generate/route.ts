@@ -1,21 +1,64 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
+import { buildCorsHeaders, getAllowedOriginForRequest } from "@/lib/security/cors";
+import {
+  containsSuspiciousInput,
+  isValidTopicInput,
+  sanitizeToolInput,
+  sanitizeTopicInput,
+} from "@/lib/security/input";
+import { checkRateLimit } from "@/lib/security/rateLimit";
+import { getClientIp, hasValidJsonContentType, isBlockedBot } from "@/lib/security/request";
 
 type GenerateRequestBody = {
   topic?: string;
   tool?: string;
-};
-
-type EnvStatus = {
-  geminiConfigured: boolean;
-  openaiConfigured: boolean;
-  deploymentSha: string | null;
+  website?: string;
+  clientTs?: number;
 };
 
 type GeminiModelCache = {
   expiresAt: number;
   modelName: string;
 };
+
+type CachedResult = {
+  expiresAt: number;
+  results: string[];
+  source: "gemini" | "openai" | "fallback";
+};
+
+const CACHE_TTL_MS = 12 * 60 * 60 * 1000;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX = Number(process.env.API_GENERATE_RATE_LIMIT || "25");
+const MAX_SKEW_MS = 15 * 60 * 1000;
+
+const globalForApiStore = globalThis as unknown as {
+  aiResultCache?: Map<string, CachedResult>;
+  geminiModelCache?: GeminiModelCache;
+};
+
+const aiResultCache = globalForApiStore.aiResultCache ?? new Map<string, CachedResult>();
+globalForApiStore.aiResultCache = aiResultCache;
+
+function jsonWithCors(
+  payload: Record<string, unknown>,
+  status: number,
+  origin: string | null,
+  extraHeaders: Record<string, string> = {},
+) {
+  const response = NextResponse.json(payload, { status });
+  const corsHeaders = buildCorsHeaders(origin);
+
+  for (const [key, value] of Object.entries(corsHeaders)) {
+    response.headers.set(key, value);
+  }
+  for (const [key, value] of Object.entries(extraHeaders)) {
+    response.headers.set(key, value);
+  }
+
+  return response;
+}
 
 function sanitizeLine(line: string) {
   return line
@@ -34,33 +77,6 @@ function fallbackResults(topic: string) {
   ];
 }
 
-type CachedResult = {
-  expiresAt: number;
-  results: string[];
-  source: "gemini" | "openai" | "fallback";
-};
-
-type RateLimitEntry = {
-  count: number;
-  resetAt: number;
-};
-
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-const RATE_LIMIT_MAX = 25;
-const CACHE_TTL_MS = 12 * 60 * 60 * 1000;
-
-const globalForApiStore = globalThis as unknown as {
-  aiResultCache?: Map<string, CachedResult>;
-  aiRateLimit?: Map<string, RateLimitEntry>;
-  geminiModelCache?: GeminiModelCache;
-};
-
-const aiResultCache = globalForApiStore.aiResultCache ?? new Map<string, CachedResult>();
-const aiRateLimit = globalForApiStore.aiRateLimit ?? new Map<string, RateLimitEntry>();
-
-globalForApiStore.aiResultCache = aiResultCache;
-globalForApiStore.aiRateLimit = aiRateLimit;
-
 function parseToFiveResults(rawText: string, topic: string) {
   const lines = rawText
     .split("\n")
@@ -68,43 +84,19 @@ function parseToFiveResults(rawText: string, topic: string) {
     .filter(Boolean);
 
   const unique = Array.from(new Set(lines));
-
   if (unique.length >= 5) {
     return unique.slice(0, 5);
   }
-
   return [...unique, ...fallbackResults(topic)].slice(0, 5);
 }
 
-function getClientIp(request: Request) {
-  const forwarded = request.headers.get("x-forwarded-for");
-  if (forwarded) {
-    return forwarded.split(",")[0]?.trim() || "anonymous";
-  }
-  return request.headers.get("x-real-ip") || "anonymous";
-}
-
-function isRateLimited(ip: string) {
-  const now = Date.now();
-  const current = aiRateLimit.get(ip);
-
-  if (!current || current.resetAt < now) {
-    aiRateLimit.set(ip, {
-      count: 1,
-      resetAt: now + RATE_LIMIT_WINDOW_MS,
-    });
+function isValidClientTimestamp(value: unknown) {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
     return false;
   }
-
-  if (current.count >= RATE_LIMIT_MAX) {
-    return true;
-  }
-
-  aiRateLimit.set(ip, {
-    ...current,
-    count: current.count + 1,
-  });
-  return false;
+  const now = Date.now();
+  const delta = Math.abs(now - value);
+  return delta <= MAX_SKEW_MS;
 }
 
 async function getGeminiModelName(apiKey: string) {
@@ -119,16 +111,14 @@ async function getGeminiModelName(apiKey: string) {
     `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       cache: "no-store",
     },
   );
 
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(`Gemini list models failed (${response.status}): ${text.slice(0, 200)}`);
+    throw new Error(`Gemini list models failed (${response.status}): ${text.slice(0, 180)}`);
   }
 
   const data = (await response.json()) as {
@@ -156,7 +146,7 @@ async function getGeminiModelName(apiKey: string) {
     available[0]?.name;
 
   if (!selected) {
-    throw new Error("No Gemini generateContent model available for this API key.");
+    throw new Error("No Gemini generateContent model available for this key.");
   }
 
   globalForApiStore.geminiModelCache = {
@@ -190,7 +180,7 @@ async function generateWithGemini(prompt: string, apiKey: string) {
 
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(`Gemini generate failed (${response.status}) with ${modelName}: ${text.slice(0, 200)}`);
+    throw new Error(`Gemini generate failed (${response.status}) with ${modelName}: ${text.slice(0, 180)}`);
   }
 
   const data = (await response.json()) as {
@@ -226,45 +216,96 @@ async function generateWithOpenAI(prompt: string, apiKey: string) {
   return completion.output_text || "";
 }
 
+export async function OPTIONS(request: Request) {
+  const origin = request.headers.get("origin");
+  const allowedOrigin = getAllowedOriginForRequest(origin);
+
+  if (origin && !allowedOrigin) {
+    return jsonWithCors({ error: "Origin is not allowed." }, 403, origin);
+  }
+
+  const response = new NextResponse(null, { status: 204 });
+  const corsHeaders = buildCorsHeaders(origin);
+  for (const [key, value] of Object.entries(corsHeaders)) {
+    response.headers.set(key, value);
+  }
+  return response;
+}
+
 export async function POST(request: Request) {
+  const origin = request.headers.get("origin");
+  const allowedOrigin = getAllowedOriginForRequest(origin);
+
+  if (process.env.NODE_ENV === "production" && !origin) {
+    return jsonWithCors({ error: "Missing origin header." }, 403, origin);
+  }
+  if (origin && !allowedOrigin) {
+    return jsonWithCors({ error: "Origin is not allowed." }, 403, origin);
+  }
+
+  if (!hasValidJsonContentType(request.headers.get("content-type"))) {
+    return jsonWithCors({ error: "Invalid content type." }, 415, origin);
+  }
+
+  const userAgent = request.headers.get("user-agent") || "";
+  if (!userAgent || isBlockedBot(userAgent)) {
+    return jsonWithCors({ error: "Suspicious automated traffic blocked." }, 403, origin);
+  }
+
   try {
     const body = (await request.json()) as GenerateRequestBody;
-    const topic = String(body.topic || "").trim();
-    const tool = String(body.tool || "AI Generator").trim();
-    const clientIp = getClientIp(request);
+    const rawTopic = String(body.topic || "");
+    const rawTool = String(body.tool || "AI Generator");
+    const honeypot = String(body.website || "").trim();
 
-    if (!topic) {
-      return NextResponse.json({ error: "Topic is required." }, { status: 400 });
+    if (honeypot) {
+      return jsonWithCors({ error: "Spam request blocked." }, 400, origin);
+    }
+    if (!isValidClientTimestamp(body.clientTs)) {
+      return jsonWithCors({ error: "Invalid request timestamp." }, 400, origin);
     }
 
-    if (isRateLimited(clientIp)) {
-      return NextResponse.json(
-        { error: "Rate limit exceeded. Please wait a few minutes and try again." },
-        { status: 429 },
+    const topic = sanitizeTopicInput(rawTopic);
+    const tool = sanitizeToolInput(rawTool);
+
+    if (!isValidTopicInput(topic)) {
+      return jsonWithCors({ error: "Topic must be 3-280 characters." }, 400, origin);
+    }
+    if (containsSuspiciousInput(topic) || containsSuspiciousInput(tool)) {
+      return jsonWithCors({ error: "Suspicious input blocked." }, 400, origin);
+    }
+
+    const clientIp = getClientIp(request);
+    const rate = checkRateLimit({
+      key: `api:generate:${clientIp}`,
+      limit: RATE_LIMIT_MAX,
+      windowMs: RATE_LIMIT_WINDOW_MS,
+    });
+
+    if (!rate.allowed) {
+      const retrySeconds = Math.max(1, Math.ceil((rate.resetAt - Date.now()) / 1000));
+      return jsonWithCors(
+        { error: "Rate limit exceeded. Please wait and try again." },
+        429,
+        origin,
+        { "Retry-After": String(retrySeconds) },
       );
     }
 
     const openAiKey = process.env.OPENAI_API_KEY;
     const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
-    const envStatus: EnvStatus = {
-      geminiConfigured: Boolean(geminiKey),
-      openaiConfigured: Boolean(openAiKey),
-      deploymentSha: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) || null,
-    };
-
     const cacheKey = `${tool.toLowerCase()}::${topic.toLowerCase()}`;
     const cached = aiResultCache.get(cacheKey);
+
     if (cached && cached.expiresAt > Date.now()) {
-      // If keys are now configured, skip stale fallback cache and regenerate real AI output.
       if (cached.source === "fallback" && (geminiKey || openAiKey)) {
         aiResultCache.delete(cacheKey);
       } else {
-        return NextResponse.json({
-          results: cached.results,
-          source: cached.source,
-          cacheHit: true,
-          envStatus,
-        });
+        return jsonWithCors(
+          { results: cached.results, source: cached.source, cacheHit: true },
+          200,
+          origin,
+        );
       }
     }
 
@@ -273,18 +314,16 @@ export async function POST(request: Request) {
 
     if (!geminiKey && !openAiKey) {
       results = fallbackResults(topic);
-      source = "fallback";
       aiResultCache.set(cacheKey, {
         results,
-        source,
+        source: "fallback",
         expiresAt: Date.now() + CACHE_TTL_MS,
       });
-      return NextResponse.json({ results, source, cacheHit: false, envStatus });
+      return jsonWithCors({ results, source, cacheHit: false }, 200, origin);
     }
 
     const prompt = `You are an expert social media marketer. Generate 5 high converting results based on this topic: ${topic}`;
     const input = `${prompt}\nTool context: ${tool}\nReturn exactly 5 concise lines.`;
-
     let output = "";
 
     if (geminiKey) {
@@ -297,17 +336,19 @@ export async function POST(request: Request) {
           source = "openai";
         } else {
           const detail =
-            geminiError instanceof Error
-              ? geminiError.message.slice(0, 220)
-              : "Unknown Gemini SDK error";
-          return NextResponse.json(
+            process.env.NODE_ENV === "production"
+              ? undefined
+              : geminiError instanceof Error
+                ? geminiError.message.slice(0, 220)
+                : "Unknown Gemini error";
+          return jsonWithCors(
             {
               error:
                 "Gemini API call failed. Please verify GEMINI_API_KEY/GOOGLE_API_KEY, quota, and API restrictions.",
-              detail,
-              envStatus,
+              ...(detail ? { detail } : {}),
             },
-            { status: 502 },
+            502,
+            origin,
           );
         }
       }
@@ -316,11 +357,9 @@ export async function POST(request: Request) {
       source = "openai";
     }
 
+    results = output ? parseToFiveResults(output, topic) : fallbackResults(topic);
     if (!output) {
-      results = fallbackResults(topic);
       source = "fallback";
-    } else {
-      results = parseToFiveResults(output, topic);
     }
 
     aiResultCache.set(cacheKey, {
@@ -329,14 +368,27 @@ export async function POST(request: Request) {
       expiresAt: Date.now() + CACHE_TTL_MS,
     });
 
-    return NextResponse.json({
-      results: [results[0], results[1], results[2], results[3], results[4]],
-      source,
-      cacheHit: false,
-      envStatus,
-    });
+    return jsonWithCors(
+      {
+        results: [results[0], results[1], results[2], results[3], results[4]],
+        source,
+        cacheHit: false,
+      },
+      200,
+      origin,
+    );
   } catch (error) {
-    const detail = error instanceof Error ? error.message.slice(0, 220) : "Unknown server error";
-    return NextResponse.json({ error: "Unable to generate results.", detail }, { status: 500 });
+    const detail =
+      process.env.NODE_ENV === "production"
+        ? undefined
+        : error instanceof Error
+          ? error.message.slice(0, 220)
+          : "Unknown server error";
+
+    return jsonWithCors(
+      { error: "Unable to generate results.", ...(detail ? { detail } : {}) },
+      500,
+      origin,
+    );
   }
 }
