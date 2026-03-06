@@ -6,7 +6,6 @@ import AdBanner from "@/components/AdBanner";
 import AffiliateBlock from "@/components/AffiliateBlock";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
-import FaqJsonLd from "@/components/FaqJsonLd";
 import IntentLinkSection from "@/components/IntentLinkSection";
 import ToolJsonLd from "@/components/ToolJsonLd";
 import { getCategoryById } from "@/lib/categories";
@@ -54,6 +53,11 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
       description: tool.seoDescription,
       url: `/tools/${tool.slug}`,
     },
+    twitter: {
+      card: "summary_large_image",
+      title: tool.seoTitle,
+      description: tool.seoDescription,
+    },
   };
 }
 
@@ -75,7 +79,6 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
   return (
     <div className="space-y-6">
       <ToolJsonLd tool={tool} />
-      <FaqJsonLd title={`${tool.title} FAQs`} slugPath={`/tools/${tool.slug}`} items={tool.faqs} />
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },

@@ -62,6 +62,21 @@ export const tools: ToolConfig[] = [
         answer:
           "Yes. Start with your target keyword and the generator returns titles that combine search intent with curiosity to improve discoverability.",
       },
+      {
+        question: "How many YouTube title options should I generate?",
+        answer:
+          "Generate at least five variants per video, then pick the one that balances curiosity, clarity, and keyword relevance for your target audience.",
+      },
+      {
+        question: "Should I include numbers in my YouTube title?",
+        answer:
+          "Numbers add specificity and boost CTR. Titles like '7 Tips' or '30-Day Challenge' set clear expectations and stand out in search results.",
+      },
+      {
+        question: "How long should a YouTube title be?",
+        answer:
+          "Keep titles under 60 characters so they display fully on mobile. Front-load the most compelling words before the cutoff point.",
+      },
     ],
   },
   {
@@ -106,6 +121,21 @@ export const tools: ToolConfig[] = [
         question: "How long should a TikTok caption be?",
         answer:
           "Keep it concise and easy to scan. Lead with a compelling first line, then add a quick CTA like 'save this' or 'comment yes'.",
+      },
+      {
+        question: "Should I include a CTA in my TikTok caption?",
+        answer:
+          "Yes. A short CTA like 'save this,' 'comment YES,' or 'follow for more' tells viewers what to do next and can boost engagement metrics.",
+      },
+      {
+        question: "How many hashtags should I use on TikTok?",
+        answer:
+          "Use 3–5 relevant hashtags after the caption. Mix niche and trending tags, and don't let hashtags overshadow the message itself.",
+      },
+      {
+        question: "Can I reuse captions across multiple TikTok videos?",
+        answer:
+          "You can reuse structures and CTA styles, but personalize each caption to the specific video content for better relevance and engagement.",
       },
     ],
   },
@@ -152,6 +182,21 @@ export const tools: ToolConfig[] = [
         answer:
           "Test at least five hooks per concept. Keep the core offer the same and vary only opening angles to identify top performers quickly.",
       },
+      {
+        question: "What is the ideal length for a hook?",
+        answer:
+          "Keep hooks under two sentences. The goal is to spark curiosity or tension in the first 1–3 seconds of a video or the first line of copy.",
+      },
+      {
+        question: "Can I use the same hook for different platforms?",
+        answer:
+          "Yes, but adjust length and tone per platform. A Reel hook can be more visual while an email hook should be more benefit-driven.",
+      },
+      {
+        question: "How do I know if my hook is working?",
+        answer:
+          "Track watch time (video) or open rate (email) for the first few seconds or lines. A strong hook keeps at least 70% of viewers past the opening.",
+      },
     ],
   },
   {
@@ -196,6 +241,21 @@ export const tools: ToolConfig[] = [
         question: "Can I use emojis in my Instagram bio?",
         answer:
           "Yes. Emojis can improve readability when used sparingly. Use them to structure lines, not to replace key words.",
+      },
+      {
+        question: "How often should I update my Instagram bio?",
+        answer:
+          "Update whenever your offer, niche, or CTA changes. A fresh bio every few months keeps your profile aligned with your current goals.",
+      },
+      {
+        question: "Should my Instagram bio include a link?",
+        answer:
+          "Yes. Use the single link or a link-in-bio tool to direct visitors to your most important page, whether it's a landing page, shop, or free resource.",
+      },
+      {
+        question: "How do I make my Instagram bio stand out?",
+        answer:
+          "Use line breaks for structure, lead with your unique value, and end with one clear CTA. Avoid clichés and focus on what makes you different.",
       },
     ],
   },
@@ -242,6 +302,21 @@ export const tools: ToolConfig[] = [
         answer:
           "Start short and specific. For high-intent audiences, slightly longer headlines with proof often convert better.",
       },
+      {
+        question: "How many ad headline variants should I test?",
+        answer:
+          "Test at least 5–10 variants per campaign. Keep the offer constant and vary only the headline angle to isolate what drives the highest CTR.",
+      },
+      {
+        question: "What's the difference between headlines for Meta and Google?",
+        answer:
+          "Google headlines need keyword relevance for search intent. Meta headlines rely more on curiosity and scroll-stopping appeal since users aren't actively searching.",
+      },
+      {
+        question: "Can I use questions in ad headlines?",
+        answer:
+          "Yes. Questions that address a pain point or desired outcome can increase engagement, especially for awareness campaigns targeting cold audiences.",
+      },
     ],
   },
   {
@@ -287,6 +362,21 @@ export const tools: ToolConfig[] = [
         answer:
           "Prepare five to ten options, then pick the one that balances SEO intent and click appeal.",
       },
+      {
+        question: "What blog title formats get the most clicks?",
+        answer:
+          "How-to guides, numbered lists, and comparison posts consistently earn high CTR because they set clear expectations for the reader.",
+      },
+      {
+        question: "Should I include the year in my blog title?",
+        answer:
+          "Yes, for time-sensitive topics like 'Best Tools in 2026.' It signals freshness to both readers and search engines.",
+      },
+      {
+        question: "How do I write blog titles for featured snippets?",
+        answer:
+          "Use question-based titles that match exact search queries. Structure the article so the answer appears clearly in the first paragraph or a dedicated section.",
+      },
     ],
   },
   {
@@ -329,6 +419,21 @@ export const tools: ToolConfig[] = [
         question: "Can I use this for multiple products?",
         answer:
           "Yes. Enter each product angle separately to generate targeted descriptions for different audiences or campaigns.",
+      },
+      {
+        question: "How long should a product description be?",
+        answer:
+          "Aim for 100–300 words depending on product complexity. Lead with benefits, follow with specs, and end with a CTA or trust signal.",
+      },
+      {
+        question: "Should I write different descriptions for different channels?",
+        answer:
+          "Yes. Amazon listings need keyword-rich bullets, while your own site can use more storytelling and brand voice. Tailor copy to each platform's format.",
+      },
+      {
+        question: "How do I handle objections in product copy?",
+        answer:
+          "Address common concerns (sizing, durability, shipping) directly in the description. A short FAQ section near the buy button can reduce hesitation.",
       },
     ],
   },
@@ -373,6 +478,21 @@ export const tools: ToolConfig[] = [
         answer:
           "Not always. Keyword names can aid clarity, but unique names often perform better for long-term brand identity.",
       },
+      {
+        question: "How do I check if a brand name is available?",
+        answer:
+          "Search domain registrars, social media handles, and trademark databases (e.g., USPTO). Check availability before committing to any name.",
+      },
+      {
+        question: "Should my brand name be short or descriptive?",
+        answer:
+          "Shorter names (1–2 syllables) are easier to remember and type. Descriptive names aid initial clarity but can limit future pivots.",
+      },
+      {
+        question: "Can I change my brand name later?",
+        answer:
+          "You can, but rebranding is costly and risks losing recognition. Invest time upfront to choose a name that can grow with your business.",
+      },
     ],
   },
   {
@@ -415,6 +535,21 @@ export const tools: ToolConfig[] = [
         question: "How many slogan ideas should I shortlist?",
         answer:
           "Start with five options, test with your audience, then keep one primary slogan and two alternates.",
+      },
+      {
+        question: "What is the difference between a slogan and a tagline?",
+        answer:
+          "A slogan is often campaign-specific, while a tagline is a permanent brand phrase. Both should be short, memorable, and tied to your core promise.",
+      },
+      {
+        question: "How do I test which slogan works best?",
+        answer:
+          "Run A/B tests on landing pages or ads using different slogans. Measure recall, preference, and conversion to find the strongest option.",
+      },
+      {
+        question: "Can a slogan work across different languages?",
+        answer:
+          "Test translations carefully. Some slogans lose meaning or impact when translated, so consider creating region-specific versions for global campaigns.",
       },
     ],
   },
@@ -460,6 +595,21 @@ export const tools: ToolConfig[] = [
         question: "Where should I place CTAs?",
         answer:
           "Place primary CTAs above the fold and repeat at decision points like after benefits, proof, and pricing sections.",
+      },
+      {
+        question: "How many CTAs should a landing page have?",
+        answer:
+          "Use one primary CTA repeated 2–3 times on the page. Avoid competing CTAs that split attention and reduce conversion.",
+      },
+      {
+        question: "Should CTAs be personalized?",
+        answer:
+          "Yes. First-person CTAs like 'Start my free trial' often outperform generic ones like 'Start free trial' because they feel more personal.",
+      },
+      {
+        question: "What colors work best for CTA buttons?",
+        answer:
+          "High-contrast colors that stand out from the page background work best. Test button color alongside copy changes to isolate what drives clicks.",
       },
     ],
   },
@@ -507,6 +657,16 @@ export const tools: ToolConfig[] = [
         answer:
           "Ask a specific question tied to the post’s main point (e.g., “What would you do in this situation?”) rather than generic prompts like “Thoughts?”.",
       },
+      {
+        question: "When is the best time to post on LinkedIn?",
+        answer:
+          "Weekday mornings (Tuesday–Thursday, 7–9 AM in your audience’s timezone) tend to see strong engagement. Test different times and check your post analytics.",
+      },
+      {
+        question: "Should I use images or text-only posts on LinkedIn?",
+        answer:
+          "Both can work. Text-only posts often get strong reach in the feed. Use images or carousels when visuals add value; avoid stock photos that feel generic.",
+      },
     ],
   },
   {
@@ -549,6 +709,16 @@ export const tools: ToolConfig[] = [
         answer:
           "Yes. End with one clear CTA: follow for more, bookmark, or reply with a question. Keep it aligned with the thread’s topic.",
       },
+      {
+        question: "What topics perform best for tech and crypto threads?",
+        answer:
+          "Deep dives, contrarian takes with data, and actionable frameworks get the most engagement. Pair timely news with lasting insights for wider reach.",
+      },
+      {
+        question: "How often should I post threads on X?",
+        answer:
+          "One to two quality threads per week is a strong pace. Consistency matters more than volume; supplement with shorter single-tweet posts between threads.",
+      },
     ],
   },
   {
@@ -588,6 +758,16 @@ export const tools: ToolConfig[] = [
         answer:
           "Yes. Generate a base version, then adjust benefits and bullets for each variation (size, color, bundle, audience).",
       },
+      {
+        question: "How long should Amazon product descriptions be?",
+        answer:
+          "Use the full allowed space. Bullet points should be 1–2 lines each. Descriptions can be 200–300 words focused on benefits, use cases, and trust signals.",
+      },
+      {
+        question: "Should I include competitor comparisons in my listing?",
+        answer:
+          "Avoid naming competitors directly. Instead, highlight your unique advantages (materials, warranty, features) so buyers can draw their own conclusions.",
+      },
     ],
   },
   {
@@ -624,6 +804,16 @@ export const tools: ToolConfig[] = [
         question: "How many ideas should I test before committing?",
         answer:
           "Test 10–20 short videos across 2–3 niches. Double down on the niche that shows consistent CTR and retention.",
+      },
+      {
+        question: "What tools do I need for a faceless YouTube channel?",
+        answer:
+          "A script, AI voiceover or recorded narration, stock footage or screen recordings, and a simple editor. Many creators start with free tools and scale up.",
+      },
+      {
+        question: "How long does it take for a faceless channel to grow?",
+        answer:
+          "Expect 3–6 months of consistent uploads before seeing meaningful traction. Focus on a repeatable format and study analytics to improve CTR and retention.",
       },
     ],
   },
@@ -662,6 +852,16 @@ export const tools: ToolConfig[] = [
         answer:
           "Use save-friendly language, include checklists or steps, and create Pins that feel like resources people want to reference later.",
       },
+      {
+        question: "How often should I post Pins?",
+        answer:
+          "Consistency matters more than volume. Aim for 5–15 Pins per week, mixing fresh content with repins. Schedule ahead to maintain a steady presence.",
+      },
+      {
+        question: "Should I use the same description on multiple Pins?",
+        answer:
+          "Vary descriptions even for similar content. Unique descriptions help each Pin rank for different keywords and avoid appearing repetitive to Pinterest's algorithm.",
+      },
     ],
   },
   {
@@ -698,6 +898,16 @@ export const tools: ToolConfig[] = [
         question: "How long should primary text be?",
         answer:
           "Short and scannable wins for cold traffic. Use a clear hook, one benefit, one proof line, then a CTA.",
+      },
+      {
+        question: "What is the ideal Facebook ad copy structure?",
+        answer:
+          "Hook (first line), benefit or story (2–3 lines), proof or credibility (one line), and a clear CTA. Keep paragraphs short for mobile readability.",
+      },
+      {
+        question: "Should I use emojis in Facebook ad copy?",
+        answer:
+          "Emojis can increase visual contrast and readability when used sparingly. Test ads with and without emojis to see what your audience prefers.",
       },
     ],
   },
@@ -736,6 +946,16 @@ export const tools: ToolConfig[] = [
         answer:
           "Use pattern interrupts, quick cuts, and numbered steps. Deliver value early and tease one extra detail near the end.",
       },
+      {
+        question: "Should I add text overlays to my Reels?",
+        answer:
+          "Yes. Text overlays reinforce your message for viewers watching without sound, which is common. Keep text short and sync it with your voiceover.",
+      },
+      {
+        question: "How do I batch-produce Reel scripts?",
+        answer:
+          "Use a repeatable format (hook, 3 tips, CTA) and swap topics. Write 5–10 scripts in one sitting, then film and edit in batches for efficiency.",
+      },
     ],
   },
   {
@@ -771,6 +991,16 @@ export const tools: ToolConfig[] = [
         question: "How many variants should I run?",
         answer:
           "Start with A/B, then keep a swipe file of winners by segment. Over time, test 3–5 angles for major campaigns.",
+      },
+      {
+        question: "When should I send the winning subject line?",
+        answer:
+          "Most email platforms auto-send the winner after a test window (e.g., 2–4 hours). Set the window based on your list size and typical open timing.",
+      },
+      {
+        question: "Do emojis improve email open rates?",
+        answer:
+          "It depends on your audience. Some segments respond well to a single relevant emoji; others prefer plain text. Always A/B test before committing.",
       },
     ],
   },
@@ -812,6 +1042,16 @@ export const tools: ToolConfig[] = [
         answer:
           "Test at least 5–10 hooks per concept. Keep the visuals constant so you can isolate hook performance.",
       },
+      {
+        question: "Can I use trending audio with scripted hooks?",
+        answer:
+          "Yes. Pair a trending sound with a strong text hook overlay or voiceover. The combination of familiar audio and a fresh hook can boost watch time.",
+      },
+      {
+        question: "What's the best way to test hooks on TikTok?",
+        answer:
+          "Post 3–5 variations of the same concept with different hooks. Keep visuals and content the same so you can isolate which opening line performs best.",
+      },
     ],
   },
   {
@@ -849,6 +1089,16 @@ export const tools: ToolConfig[] = [
         question: "Should I include the keyword in every headline?",
         answer:
           "Not every one. Include keywords in a few headline slots for relevance, and use other slots for benefits and proof to improve conversion quality.",
+      },
+      {
+        question: "How do I write headlines for different match types?",
+        answer:
+          "Broad match headlines should cover intent themes. Exact match headlines should mirror the search query closely. Tailor specificity to match type for better relevance.",
+      },
+      {
+        question: "What's the character limit for Google Ads headlines?",
+        answer:
+          "Each headline can be up to 30 characters. Write concise, benefit-led copy and use every character wisely. Test short vs. full-length headlines.",
       },
     ],
   },

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { absoluteUrl } from "@/lib/site";
 
 type BreadcrumbItem = {
   label: string;
@@ -21,7 +22,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
       "@type": "ListItem",
       position: index + 1,
       name: item.label,
-      ...(item.href ? { item: item.href } : {}),
+      ...(item.href ? { item: absoluteUrl(item.href) } : {}),
     })),
   };
 

@@ -8,6 +8,7 @@ import AdsenseScript from "@/components/AdsenseScript";
 import AdSlot from "@/components/AdSlot";
 import WebsiteJsonLd from "@/components/WebsiteJsonLd";
 import LaunchBanner from "@/components/LaunchBanner";
+import CookieConsent from "@/components/CookieConsent";
 import CreditModal from "@/components/CreditModal";
 import { CLERK_CLIENT_ENABLED } from "@/lib/clerk";
 import { siteConfig } from "@/lib/site";
@@ -73,6 +74,7 @@ export default function RootLayout({
         <main className="container-shell py-8">{children}</main>
         <Footer />
         <CreditModal />
+        <CookieConsent />
         <AdSlot
           variant="sticky"
           label="Mobile Sticky Footer"
