@@ -450,6 +450,385 @@ export const tools: ToolConfig[] = [
       },
     ],
   },
+  {
+    slug: "linkedin-viral-post-generator",
+    title: "LinkedIn Viral Post Generator",
+    description: "Write high-performing LinkedIn posts for professionals and founders.",
+    seoTitle: "LinkedIn Viral Post Generator (Free) - Post Ideas That Get Comments",
+    seoDescription:
+      "Generate 5 LinkedIn post drafts designed to increase comments, saves, and profile views. Built for professionals, founders, and creators.",
+    keywords: ["linkedin post generator", "linkedin viral post", "linkedin content ideas"],
+    useCases: ["Founder updates", "Career lessons", "B2B insights"],
+    examples: [
+      "I used to think [belief]. Then I learned this the hard way:",
+      "If you're struggling with [problem], read this:",
+      "3 lessons I wish I knew before [milestone]:",
+      "Hot take: [contrarian claim]. Here’s why.",
+      "What nobody tells you about [topic] in B2B:",
+      "The framework I use to get results in [area]:",
+      "I went from [before] to [after] by doing this:",
+      "Stop doing [common habit]. Do this instead:",
+      "Here’s the exact template I use for [outcome]:",
+      "One small change that improved my [metric] by [number]%.",
+    ],
+    whoFor: ["Professionals building a personal brand", "Founders marketing in public", "B2B marketers posting weekly"],
+    commonMistakes: [
+      "Writing long intros without a strong first line",
+      "Sharing opinions without examples or proof",
+      "Ending posts without a clear discussion question",
+    ],
+    faqs: [
+      {
+        question: "What makes a LinkedIn post go viral?",
+        answer:
+          "A strong opening line, clear story or framework, and a discussion prompt that invites replies. Consistency and relevance to your audience matter more than gimmicks.",
+      },
+      {
+        question: "How long should LinkedIn posts be?",
+        answer:
+          "Longer posts can work when they are scannable. Use short lines, whitespace, and one core point per section to keep retention high.",
+      },
+      {
+        question: "What should I ask people to comment?",
+        answer:
+          "Ask a specific question tied to the post’s main point (e.g., “What would you do in this situation?”) rather than generic prompts like “Thoughts?”.",
+      },
+    ],
+  },
+  {
+    slug: "x-thread-hook-writer",
+    title: "X (Twitter) Thread Hook Writer",
+    description: "Generate thread hooks built for tech and crypto audiences.",
+    seoTitle: "X Thread Hook Writer (Free) - Tech & Crypto Hook Ideas",
+    seoDescription:
+      "Generate 5 thread hook options optimized for tech/crypto timelines. Use proven curiosity and proof frameworks to increase reads and follows.",
+    keywords: ["twitter thread hook", "x thread hook", "crypto thread hooks", "tech twitter writing"],
+    useCases: ["Tech lessons", "Crypto research threads", "Product launches"],
+    examples: [
+      "Most people misunderstand [topic]. Here’s the truth:",
+      "I spent 100 hours on [thing]. Here’s what I learned:",
+      "This simple framework changed how I think about [topic]:",
+      "I reviewed [number] projects — these are the winners:",
+      "If you’re building in crypto, read this before shipping:",
+      "The playbook to go from 0 → 1 in [area]:",
+      "A contrarian take on [topic] (with receipts):",
+      "Here’s why your [thing] is failing (and how to fix it):",
+      "The fastest way to learn [topic] (without fluff):",
+      "I made every mistake so you don’t have to. Thread:",
+    ],
+    whoFor: ["Tech Twitter creators", "Crypto researchers and traders", "Builders launching products in public"],
+    commonMistakes: ["Overpromising without delivering proof", "Hooks that are too vague", "No clear payoff per tweet"],
+    faqs: [
+      {
+        question: "What is the best format for an X thread hook?",
+        answer:
+          "Use a strong claim + specific proof + clear payoff (what the reader will learn). Curiosity works best when paired with credibility.",
+      },
+      {
+        question: "How do I keep readers through the thread?",
+        answer:
+          "Make each tweet earn the next: short paragraphs, numbered steps, and concrete examples. Avoid long preambles.",
+      },
+      {
+        question: "Should I include a call to action?",
+        answer:
+          "Yes. End with one clear CTA: follow for more, bookmark, or reply with a question. Keep it aligned with the thread’s topic.",
+      },
+    ],
+  },
+  {
+    slug: "amazon-product-description-ai",
+    title: "Amazon Product Description AI",
+    description: "Write Amazon-ready product descriptions that convert.",
+    seoTitle: "Amazon Product Description AI (Free) - Bullet + Benefit Copy",
+    seoDescription:
+      "Generate 5 Amazon-style descriptions with clear benefits, scannable bullets, and conversion-focused language for ecommerce sellers.",
+    keywords: ["amazon product description", "amazon listing copy", "ecommerce description ai"],
+    useCases: ["Amazon FBA listings", "Product relaunches", "A+ content drafts"],
+    examples: [
+      "✅ Benefit-first headline: Get [Outcome] in [Timeframe]",
+      "Bullet: [Feature] → [Benefit] (why it matters)",
+      "Perfect for: [Use case] / [Use case] / [Use case]",
+      "Built to last: [Material] + [Warranty/quality note]",
+      "What you get: [Included items] + quick setup steps",
+      "Care instructions: simple, clear, and specific",
+      "Trust note: designed for [audience], tested for [scenario]",
+    ],
+    whoFor: ["Amazon sellers optimizing conversion", "Ecommerce brands launching new SKUs", "Agencies managing listings"],
+    commonMistakes: ["Listing features without benefits", "Generic copy that matches competitors", "No objection handling"],
+    faqs: [
+      {
+        question: "What makes an Amazon description convert better?",
+        answer:
+          "Clear benefits, scannable bullets, and specificity (materials, sizes, outcomes). Answer common objections like fit, durability, and ease of use.",
+      },
+      {
+        question: "Should I use keywords in the description?",
+        answer:
+          "Yes, but naturally. Prioritize readability and benefits. Keyword stuffing can reduce trust and hurt conversion.",
+      },
+      {
+        question: "Can I use this for different variations?",
+        answer:
+          "Yes. Generate a base version, then adjust benefits and bullets for each variation (size, color, bundle, audience).",
+      },
+    ],
+  },
+  {
+    slug: "faceless-youtube-channel-idea-generator",
+    title: "Faceless YouTube Channel Idea Generator",
+    description: "Generate faceless channel ideas with niches, formats, and hooks.",
+    seoTitle: "Faceless YouTube Channel Idea Generator (Free) - Niche + Format Ideas",
+    seoDescription:
+      "Generate 5 faceless YouTube channel ideas with niche, format, and content pillars. Built for creators who want scalable content.",
+    keywords: ["faceless youtube channel ideas", "youtube niche ideas", "automation channel ideas"],
+    useCases: ["Channel launches", "Content pillar planning", "Shorts series ideas"],
+    examples: [
+      "Niche: [topic] | Format: 60s explainers | Hook: “You’re doing X wrong…”",
+      "Niche: [topic] | Format: Top 5 lists | Hook: “Most people don’t know…”",
+      "Niche: [topic] | Format: Before/after | Hook: “I tested this for 7 days…”",
+      "Niche: [topic] | Format: Case studies | Hook: “Here’s how X works…”",
+      "Niche: [topic] | Format: Myth busting | Hook: “Stop believing this…”",
+    ],
+    whoFor: ["Creators who prefer voiceover/AI visuals", "Teams building channel portfolios", "Anyone starting YouTube automation"],
+    commonMistakes: ["Picking niches with weak demand", "No repeatable format", "Ideas that are too broad to stand out"],
+    faqs: [
+      {
+        question: "What faceless YouTube formats scale well?",
+        answer:
+          "List videos, explainers, comparisons, and story summaries scale well because they are repeatable and easy to template across topics.",
+      },
+      {
+        question: "How do I choose a niche?",
+        answer:
+          "Pick a niche with clear audiences and searchable problems. Validate by checking existing channels and identifying content gaps.",
+      },
+      {
+        question: "How many ideas should I test before committing?",
+        answer:
+          "Test 10–20 short videos across 2–3 niches. Double down on the niche that shows consistent CTR and retention.",
+      },
+    ],
+  },
+  {
+    slug: "pinterest-pin-title-desc-optimizer",
+    title: "Pinterest Pin Title & Description Optimizer",
+    description: "Optimize Pin titles and descriptions for clicks and saves.",
+    seoTitle: "Pinterest Pin Title & Description Optimizer (Free) - More Clicks",
+    seoDescription:
+      "Generate 5 optimized Pinterest Pin titles and descriptions with clear keywords, benefits, and save-worthy phrasing for lifestyle and blog content.",
+    keywords: ["pinterest pin title", "pinterest description", "pinterest seo", "pin optimizer"],
+    useCases: ["Recipe pins", "DIY tutorials", "Lifestyle blog pins"],
+    examples: [
+      "Title: [Keyword] for [Audience] (Step-by-Step)",
+      "Title: [Number] Easy [Thing] Ideas for [Season]",
+      "Description: Learn how to [outcome] with this simple checklist + tips.",
+      "Description: Save this pin for later and use the printable template.",
+      "Description: Includes [benefit], [benefit], and a quick tutorial.",
+    ],
+    whoFor: ["Lifestyle bloggers", "Pinterest marketers", "Creators repurposing posts into Pins"],
+    commonMistakes: ["No keyword in title", "Descriptions that don’t explain the benefit", "Overly generic wording"],
+    faqs: [
+      {
+        question: "What should a Pinterest Pin title include?",
+        answer:
+          "Include the primary keyword and a clear benefit. Titles that promise an outcome and specify the audience usually earn more clicks.",
+      },
+      {
+        question: "Do hashtags matter on Pinterest?",
+        answer:
+          "They matter less than keywords and clarity. Focus on searchable phrasing and a strong benefit statement first.",
+      },
+      {
+        question: "How do I increase saves?",
+        answer:
+          "Use save-friendly language, include checklists or steps, and create Pins that feel like resources people want to reference later.",
+      },
+    ],
+  },
+  {
+    slug: "facebook-ad-copywriter",
+    title: "Facebook Ad Copywriter",
+    description: "Write Facebook ad copy built for testing and conversion.",
+    seoTitle: "Facebook Ad Copywriter (Free) - Test Winning Angles Fast",
+    seoDescription:
+      "Generate 5 Facebook ad copy variations (hooks + primary text + CTAs) to test angles faster and improve CTR and conversions.",
+    keywords: ["facebook ad copy", "meta ad copywriter", "facebook ad text", "meta ads copy"],
+    useCases: ["Lead gen ads", "Ecommerce offers", "Retargeting campaigns"],
+    examples: [
+      "Hook: Stop [pain]. Start [outcome].",
+      "Primary text: Here’s how [audience] get [result] in [timeframe].",
+      "Proof line: Rated [rating]/5 by [number]+ customers.",
+      "Offer line: Try it free / limited bonus / discount (if true).",
+      "CTA: Get the template / See pricing / Shop now",
+    ],
+    whoFor: ["Performance marketers", "Agencies running Meta ads", "Founders testing paid acquisition"],
+    commonMistakes: ["Testing too many variables at once", "Weak offer clarity", "No proof/credibility signal"],
+    faqs: [
+      {
+        question: "How many ad copy variants should I test?",
+        answer:
+          "Start with 5–10 variants per offer. Keep the offer constant and test hook angles first to isolate what drives CTR.",
+      },
+      {
+        question: "What ad copy angles work best on Meta?",
+        answer:
+          "Benefit-first, proof-first, and curiosity-first angles often perform well. The best angle depends on audience awareness and offer maturity.",
+      },
+      {
+        question: "How long should primary text be?",
+        answer:
+          "Short and scannable wins for cold traffic. Use a clear hook, one benefit, one proof line, then a CTA.",
+      },
+    ],
+  },
+  {
+    slug: "instagram-reel-script-generator",
+    title: "Instagram Reel Script Generator",
+    description: "Generate Reels scripts with hooks, beats, and CTAs.",
+    seoTitle: "Instagram Reel Script Generator (Free) - Hook to CTA Script",
+    seoDescription:
+      "Generate 5 short-form scripts for Instagram Reels with a strong hook, clear structure, and a conversion-friendly CTA.",
+    keywords: ["instagram reels script", "reel script generator", "short form script", "reels hooks"],
+    useCases: ["Educational Reels", "Product demos", "Influencer storytelling"],
+    examples: [
+      "Hook (0–2s): “Stop scrolling if you want [outcome].”",
+      "Context (2–5s): “Here’s the mistake most people make…”",
+      "Steps (5–20s): 1) … 2) … 3) …",
+      "Proof (optional): “I used this to get [result].”",
+      "CTA (final): “Save this and follow for part 2.”",
+    ],
+    whoFor: ["Influencers and creators", "Brands making product Reels", "Social teams scripting content batches"],
+    commonMistakes: ["Hook arrives too late", "Too much context before value", "No CTA to drive saves/comments"],
+    faqs: [
+      {
+        question: "How long should a Reel script be?",
+        answer:
+          "Aim for 20–45 seconds for most topics. Keep it tight: one hook, 2–3 points, and one CTA.",
+      },
+      {
+        question: "What CTAs work best on Reels?",
+        answer:
+          "“Save this”, “Follow for part 2”, and a direct question that invites comments tend to perform well.",
+      },
+      {
+        question: "How do I improve watch time?",
+        answer:
+          "Use pattern interrupts, quick cuts, and numbered steps. Deliver value early and tease one extra detail near the end.",
+      },
+    ],
+  },
+  {
+    slug: "email-subject-line-ab-tester",
+    title: "Email Subject Line A/B Tester AI",
+    description: "Generate A/B subject line variants and test angles faster.",
+    seoTitle: "Email Subject Line A/B Tester (Free) - Generate A/B Variants",
+    seoDescription:
+      "Generate 5 A/B-ready email subject lines with different angles (curiosity, benefit, urgency, proof) to improve open rates.",
+    keywords: ["email subject line generator", "ab test subject lines", "email open rate"],
+    useCases: ["Newsletter sends", "Product launches", "Sales sequences"],
+    examples: [
+      "A: “Quick question about [topic]” | B: “The fastest way to [outcome]”",
+      "A: “Before you do [thing]…” | B: “3 mistakes that kill [outcome]”",
+      "A: “New: [offer] inside” | B: “Last chance: [offer] ends today”",
+      "A: “What nobody tells you about [topic]” | B: “The simple framework for [outcome]”",
+    ],
+    whoFor: ["Business newsletters", "Lifecycle email marketers", "Founders writing launch emails"],
+    commonMistakes: ["Testing multiple changes at once", "Vague subjects with no outcome", "Overusing urgency repeatedly"],
+    faqs: [
+      {
+        question: "What should I test in subject lines?",
+        answer:
+          "Test one variable at a time: angle (curiosity vs benefit), length, personalization, and proof. Keep the email body consistent.",
+      },
+      {
+        question: "What length performs best?",
+        answer:
+          "Shorter often wins on mobile, but the best length depends on the list. Use clarity first, then test shorter variants.",
+      },
+      {
+        question: "How many variants should I run?",
+        answer:
+          "Start with A/B, then keep a swipe file of winners by segment. Over time, test 3–5 angles for major campaigns.",
+      },
+    ],
+  },
+  {
+    slug: "tiktok-script-hook-generator-us-uk",
+    title: "TikTok Script Hook Generator (US/UK)",
+    description: "Generate TikTok hook lines tailored for US/UK trend styles.",
+    seoTitle: "TikTok Script Hook Generator (US/UK) (Free) - Hook Lines That Fit Trends",
+    seoDescription:
+      "Generate 5 TikTok script hook lines inspired by common US/UK trend phrasing—built to increase watch time and comments.",
+    keywords: ["tiktok script hooks", "tiktok hook generator", "uk tiktok hooks", "us tiktok hooks"],
+    useCases: ["Trend-driven videos", "Storytime scripts", "UGC creator hooks"],
+    examples: [
+      "POV: you’ve been doing [thing] wrong this whole time.",
+      "Be so honest… do you do this too?",
+      "Wait, why did nobody tell me this?",
+      "This is your sign to stop [bad habit].",
+      "I’m not gatekeeping this anymore:",
+      "If you’re in the UK/US and you do [thing], you need this.",
+      "Tell me you’re [type] without telling me you’re [type].",
+      "The way this changed my life in 7 days…",
+    ],
+    whoFor: ["Creators targeting US/UK audiences", "UGC creators and brands", "Teams scripting short-form batches"],
+    commonMistakes: ["Generic hooks that don’t match trend tone", "Overstuffing slang unnaturally", "No payoff promised"],
+    faqs: [
+      {
+        question: "Do hooks need slang to perform in US/UK?",
+        answer:
+          "Not necessarily. Natural tone matters more than slang. Use familiar phrasing, keep it short, and promise a clear payoff.",
+      },
+      {
+        question: "How do I turn a hook into a full script?",
+        answer:
+          "Follow a simple structure: hook (0–2s), context (2–5s), 2–3 steps, then a CTA to save or comment.",
+      },
+      {
+        question: "How many hooks should I test?",
+        answer:
+          "Test at least 5–10 hooks per concept. Keep the visuals constant so you can isolate hook performance.",
+      },
+    ],
+  },
+  {
+    slug: "google-ads-headline-optimizer",
+    title: "Google Ads Headline Optimizer",
+    description: "Optimize Google Ads headlines for CTR and message match.",
+    seoTitle: "Google Ads Headline Optimizer (Free) - Better CTR Headlines",
+    seoDescription:
+      "Generate 5 optimized Google Ads headline options with benefits, keywords, and proof angles. Built for SEM teams and agencies.",
+    keywords: ["google ads headlines", "rsa headlines", "headline optimizer", "sem copy"],
+    useCases: ["RSA testing", "Agency account audits", "Landing page message match"],
+    examples: [
+      "[Keyword] for [Audience] — Try Free",
+      "Get [Outcome] in [Timeframe] | Official Site",
+      "Rated [Rating]/5 by [Number]+ Users",
+      "Save Time on [Task] — Start Today",
+      "All-in-One [Category] Tool | No Credit Card",
+      "Stop Wasting Budget on [Problem]",
+    ],
+    whoFor: ["SEM agencies", "In-house PPC managers", "Teams running RSA headline testing"],
+    commonMistakes: ["Headlines that are too generic", "No message match with landing page", "Not testing proof angles"],
+    faqs: [
+      {
+        question: "What makes a Google Ads headline high-CTR?",
+        answer:
+          "Clear keyword relevance, a specific benefit, and a credibility signal (proof, award, rating). Test multiple angles in RSAs.",
+      },
+      {
+        question: "How many headlines should I include in an RSA?",
+        answer:
+          "Provide enough variety (benefit, proof, keyword, urgency) so Google can learn. Avoid near-duplicates that don’t add signal.",
+      },
+      {
+        question: "Should I include the keyword in every headline?",
+        answer:
+          "Not every one. Include keywords in a few headline slots for relevance, and use other slots for benefits and proof to improve conversion quality.",
+      },
+    ],
+  },
 ];
 
 export function getToolBySlug(slug: string) {

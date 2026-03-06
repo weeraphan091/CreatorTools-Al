@@ -41,7 +41,7 @@ export default function HomePage() {
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href="/tools" className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
-            Explore 10 AI Tools
+            Explore 20 AI Tools
           </Link>
           <Link href="/templates" className="rounded-lg border border-brand-600 bg-white px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50">
             Explore SEO Templates
@@ -107,7 +107,7 @@ export default function HomePage() {
       <FAQSection
         items={[
           {
-            question: "Is CreatorTools AI free to use?",
+            question: "Is ViralHookLab.com free to use?",
             answer:
               "Yes. You can generate content ideas for free. You can later add premium plans if you want higher usage limits or advanced features.",
           },
