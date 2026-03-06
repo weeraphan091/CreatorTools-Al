@@ -90,7 +90,10 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
         </div>
       </section>
 
-      <GeneratorForm toolTitle={tool.title} />
+      <GeneratorForm
+        toolTitle={tool.title}
+        starterPrompts={tool.useCases.map((useCase) => `${tool.title} for ${useCase.toLowerCase()}`)}
+      />
 
       <section className="card p-6">
         <h2 className="text-2xl font-semibold text-slate-900">Best Use Cases</h2>
