@@ -6,15 +6,15 @@ import { blogPosts } from "@/lib/blog";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Creator Marketing Blog",
   description:
-    "Read practical growth guides, marketing hooks, and copywriting ideas for creators.",
+    "Actionable growth guides, hook formulas, and copywriting frameworks for creators and marketers using AI tools.",
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
-    title: "CreatorTools AI Blog",
-    description: "Creator-focused growth and marketing playbooks.",
+    title: "Creator Marketing Blog | CreatorTools AI",
+    description: "Creator-focused growth and marketing playbooks with practical templates and examples.",
     url: "/blog",
   },
 };
@@ -34,6 +34,48 @@ export default function BlogPage() {
       </section>
 
       <AdBanner slot="Blog Index Banner" adSlotId={siteConfig.ads.blogIndex} />
+
+      <section className="grid gap-4 lg:grid-cols-3">
+        <div className="card p-6 lg:col-span-2">
+          <h2 className="text-xl font-semibold text-slate-900">How to use these guides</h2>
+          <p className="mt-2 text-sm text-slate-600">
+            Each post is designed to be used with a generator. Pick a topic, generate variants, and test the best
+            performers in your titles, hooks, captions, or ad creatives.
+          </p>
+          <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-slate-700">
+            <li>Start with one goal (CTR, watch time, leads, sales).</li>
+            <li>Generate 10+ variants, then shortlist 3 for testing.</li>
+            <li>Reuse winners across platforms to compound results.</li>
+          </ul>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link
+              href="/tools"
+              className="inline-flex rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+            >
+              Open the AI Tools
+            </Link>
+            <Link
+              href="/templates"
+              className="inline-flex rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
+            >
+              Browse Templates
+            </Link>
+          </div>
+        </div>
+
+        <aside className="card p-6">
+          <h2 className="text-xl font-semibold text-slate-900">Quality & transparency</h2>
+          <p className="mt-2 text-sm text-slate-600">
+            We aim to publish useful, testable playbooks and keep pages updated as platform behaviors change.
+          </p>
+          <Link
+            href="/editorial-policy"
+            className="mt-4 inline-flex text-sm font-semibold text-brand-700 hover:text-brand-600"
+          >
+            Read our editorial policy →
+          </Link>
+        </aside>
+      </section>
 
       <section className="grid gap-4 md:grid-cols-2">
         {blogPosts.map((post) => (

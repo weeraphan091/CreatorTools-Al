@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import AdSlot from "@/components/AdSlot";
 import ResultList from "@/components/ResultList";
 import { trackEvent } from "@/lib/analytics";
+import { siteConfig } from "@/lib/site";
 
 type GeneratorFormProps = {
   toolTitle: string;
@@ -185,11 +187,19 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
           className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none ring-brand-500 placeholder:text-slate-400 focus:ring"
         />
 
+        <div className="mt-4">
+          <AdSlot
+            variant="inline"
+            label={`${toolTitle} Generate CTA`}
+            slotId={siteConfig.ads.toolGenerateCta}
+          />
+        </div>
+
         <button
           type="button"
           onClick={handleGenerate}
           disabled={isLoading}
-          className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-70"
+          className="mt-3 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isLoading ? (
             <>

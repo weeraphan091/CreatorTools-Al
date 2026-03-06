@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Analytics from "@/components/Analytics";
 import AdsenseScript from "@/components/AdsenseScript";
+import AdSlot from "@/components/AdSlot";
 import WebsiteJsonLd from "@/components/WebsiteJsonLd";
 import { siteConfig } from "@/lib/site";
 
@@ -56,13 +57,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen">
+      <body className="min-h-screen pb-[var(--ct-sticky-ad-offset,0px)]">
         <WebsiteJsonLd />
         <Analytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         <AdsenseScript client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT} />
         <Navbar />
         <main className="container-shell py-8">{children}</main>
         <Footer />
+        <AdSlot
+          variant="sticky"
+          label="Mobile Sticky Footer"
+          slotId={siteConfig.ads.mobileStickyFooter}
+          className="md:hidden"
+          dismissible
+          dismissKey="mobile_sticky_footer"
+        />
       </body>
     </html>
   );

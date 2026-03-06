@@ -1,4 +1,5 @@
 import { absoluteUrl } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
 import type { ToolConfig } from "@/lib/tools";
 
 type ToolJsonLdProps = {
@@ -13,12 +14,19 @@ export default function ToolJsonLd({ tool }: ToolJsonLdProps) {
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     description: tool.seoDescription,
+    isAccessibleForFree: true,
     offers: {
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
     },
     url: absoluteUrl(`/tools/${tool.slug}`),
+    inLanguage: "en",
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
   };
 
   return (

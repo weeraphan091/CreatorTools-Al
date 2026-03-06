@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Contact CreatorTools AI for support, partnerships, and feedback.",
+  title: "Contact CreatorTools AI",
+  description: "Contact CreatorTools AI for support, partnerships, and product feedback.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact CreatorTools AI",
-    description: "Get in touch for product support and collaborations.",
+    title: "Contact CreatorTools AI Support",
+    description: "Get in touch for product support, partnerships, and collaborations.",
     url: "/contact",
   },
 };

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ToolCard from "@/components/ToolCard";
-import AdBanner from "@/components/AdBanner";
+import AdSlot from "@/components/AdSlot";
 import AffiliateBlock from "@/components/AffiliateBlock";
 import NewsletterForm from "@/components/NewsletterForm";
 import FAQSection from "@/components/FAQSection";
@@ -50,9 +50,11 @@ export default function HomePage() {
             Read Blog
           </Link>
         </div>
-      </section>
 
-      <AdBanner slot="Homepage Hero Banner" adSlotId={siteConfig.ads.homepageHero} />
+        <div className="mt-6">
+          <AdSlot variant="hero" label="Homepage Hero Banner" slotId={siteConfig.ads.homepageHero} />
+        </div>
+      </section>
 
       <section>
         <div className="mb-4 flex items-end justify-between">
