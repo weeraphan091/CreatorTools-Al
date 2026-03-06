@@ -10,6 +10,10 @@ export async function getOrCreateStripeCustomerId(userId: string, email?: string
     .eq("user_id", userId)
     .maybeSingle();
 
+  if (existing.error) {
+    throw new Error(`Supabase billing_customers lookup failed: ${existing.error.message || "unknown error"}`);
+  }
+
   if (existing.data?.stripe_customer_id) {
     return existing.data.stripe_customer_id;
   }
@@ -33,7 +37,7 @@ export async function getOrCreateStripeCustomerId(userId: string, email?: string
     );
 
   if (upsert.error) {
-    throw new Error(`Supabase billing_customers upsert failed: ${upsert.error.message}`);
+    throw new Error(`Supabase billing_customers upsert failed: ${upsert.error.message || "unknown error"}`);
   }
 
   return created.id;

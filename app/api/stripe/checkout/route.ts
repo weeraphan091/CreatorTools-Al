@@ -4,6 +4,7 @@ import { siteConfig } from "@/lib/site";
 import { getStripePriceMapping } from "@/lib/billing/plans";
 import { getOrCreateStripeCustomerId } from "@/lib/billing/customer";
 import { stripe } from "@/lib/stripe";
+import { supabaseAdminRpc } from "@/lib/supabase/rpc";
 
 type CheckoutBody = {
   plan?: "starter" | "agency" | "topup100";
@@ -51,6 +52,19 @@ export async function POST(request: Request) {
   try {
     const user = await currentUser();
     const email = user?.emailAddresses?.[0]?.emailAddress || null;
+
+    // Ensure the user's profile exists in Supabase before creating the billing
+    // customer. billing_customers has a FK on profiles.user_id, so if no profile
+    // row exists (e.g. the Clerk webhook didn't fire on signup) the upsert would
+    // fail with a foreign-key violation and the checkout would silently error.
+    await supabaseAdminRpc("ensure_profile", {
+      p_user_id: userId,
+      p_email: email,
+    }).catch(() => {
+      // Non-fatal: proceed even if ensure_profile fails (e.g. Supabase not yet
+      // configured). The billing_customers upsert will surface the real error.
+    });
+
     const customerId = await getOrCreateStripeCustomerId(userId, email);
 
     const session = await stripe().checkout.sessions.create({
@@ -76,7 +90,10 @@ export async function POST(request: Request) {
     }
     return NextResponse.json({ url }, { status: 200 });
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Checkout failed. Please try again.";
+    const message =
+      err instanceof Error && err.message
+        ? err.message
+        : "Checkout failed. Please try again or contact support@viralhooklab.com.";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
