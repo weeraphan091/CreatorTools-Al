@@ -21,11 +21,15 @@
   },
   "homepage": "https://github.com/weeraphan091/CreatorTools-Al#readme",
   "dependencies": {
+    "@clerk/nextjs": "^6.39.0",
     "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.98.0",
     "next": "^14.2.35",
     "openai": "^6.25.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "stripe": "^20.4.0",
+    "svix": "^1.86.0"
   },
   "devDependencies": {
     "@types/node": "^25.3.3",

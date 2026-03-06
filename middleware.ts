@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { clerkMiddleware } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 import { getAllowedOriginForRequest } from "@/lib/security/cors";
 import { checkRateLimit } from "@/lib/security/rateLimit";
 import {
@@ -17,7 +18,7 @@ function forbidden(message = "Forbidden") {
   return NextResponse.json({ error: message }, { status: 403 });
 }
 
-export function middleware(request: NextRequest) {
+export default clerkMiddleware((_, request) => {
   const pathname = request.nextUrl.pathname;
   const search = request.nextUrl.search;
   const userAgent = request.headers.get("user-agent") || "";
@@ -67,6 +68,11 @@ export function middleware(request: NextRequest) {
   }
 
   if (method === "POST") {
+    const isWebhook = pathname.startsWith("/api/webhooks/");
+    if (isWebhook) {
+      return NextResponse.next();
+    }
+
     const origin = request.headers.get("origin");
     const allowedOrigin = getAllowedOriginForRequest(origin);
 
@@ -80,7 +86,7 @@ export function middleware(request: NextRequest) {
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
   matcher: [

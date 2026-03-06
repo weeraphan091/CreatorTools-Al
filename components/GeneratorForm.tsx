@@ -123,6 +123,9 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
       if (!response.ok) {
         const errorData = (await response.json()) as { error?: string; detail?: string };
         setDetail(errorData.detail || null);
+        if (response.status === 403 && typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("viralhooklab:out_of_credits"));
+        }
         throw new Error(errorData.error || "Generation failed.");
       }
 
@@ -133,6 +136,12 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
       const generatedResults = Array.isArray(data.results) ? data.results.slice(0, 5) : [];
       setResults(generatedResults);
       setSource(data.source || null);
+
+      const remainingHeader = response.headers.get("x-credits-remaining");
+      const remaining = remainingHeader ? Number(remainingHeader) : NaN;
+      if (Number.isFinite(remaining) && typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("viralhooklab:credits_updated", { detail: { remaining } }));
+      }
       trackEvent("generate_click", {
         tool_name: toolTitle,
       });

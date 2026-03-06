@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
     "/editorial-policy",
     "/tools",
+    "/pricing",
     "/tiktok",
     "/youtube",
     "/instagram",

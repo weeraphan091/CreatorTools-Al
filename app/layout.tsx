@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Analytics from "@/components/Analytics";
 import AdsenseScript from "@/components/AdsenseScript";
 import AdSlot from "@/components/AdSlot";
 import WebsiteJsonLd from "@/components/WebsiteJsonLd";
+import LaunchBanner from "@/components/LaunchBanner";
+import CreditModal from "@/components/CreditModal";
 import { siteConfig } from "@/lib/site";
+import { CLERK_ENABLED } from "@/lib/clerk";
 
 export const metadata: Metadata = {
   title: {
@@ -56,15 +60,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+  const content = (
     <html lang="en">
       <body className="min-h-screen pb-[var(--ct-sticky-ad-offset,0px)]">
         <WebsiteJsonLd />
         <Analytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         <AdsenseScript client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT} />
+        <LaunchBanner />
         <Navbar />
         <main className="container-shell py-8">{children}</main>
         <Footer />
+        <CreditModal />
         <AdSlot
           variant="sticky"
           label="Mobile Sticky Footer"
@@ -75,5 +81,20 @@ export default function RootLayout({
         />
       </body>
     </html>
+  );
+
+  if (!CLERK_ENABLED) {
+    return content;
+  }
+
+  return (
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      afterSignOutUrl="/"
+    >
+      {content}
+    </ClerkProvider>
   );
 }

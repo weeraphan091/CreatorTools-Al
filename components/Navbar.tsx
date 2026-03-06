@@ -3,11 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { categories } from "@/lib/categories";
+import CreditsNav from "@/components/CreditsNav";
+import { CLERK_ENABLED } from "@/lib/clerk";
 
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/tools", label: "All Tools" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/viral-hooks", label: "Viral Hooks" },
   { href: "/templates", label: "Templates" },
   { href: "/use-cases", label: "Use Cases" },
@@ -70,6 +74,30 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
+
+            {CLERK_ENABLED ? (
+              <>
+                <SignedOut>
+                  <Link
+                    href="/sign-in"
+                    className="rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white hover:bg-slate-800"
+                  >
+                    Sign in
+                  </Link>
+                </SignedOut>
+                <SignedIn>
+                  <CreditsNav />
+                  <UserButton afterSignOutUrl="/" />
+                </SignedIn>
+              </>
+            ) : (
+              <Link
+                href="/sign-in"
+                className="rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white hover:bg-slate-800"
+              >
+                Sign in
+              </Link>
+            )}
           </nav>
         </div>
 
@@ -99,6 +127,34 @@ export default function Navbar() {
                   {item.label}
                 </Link>
               ))}
+
+              <div className="mt-2 rounded-lg bg-slate-50 px-2 py-2">
+                {CLERK_ENABLED ? (
+                  <>
+                    <SignedOut>
+                      <Link
+                        href="/sign-in"
+                        className="block rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800"
+                      >
+                        Sign in
+                      </Link>
+                    </SignedOut>
+                    <SignedIn>
+                      <div className="flex items-center justify-between">
+                        <CreditsNav />
+                        <UserButton afterSignOutUrl="/" />
+                      </div>
+                    </SignedIn>
+                  </>
+                ) : (
+                  <Link
+                    href="/sign-in"
+                    className="block rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800"
+                  >
+                    Sign in
+                  </Link>
+                )}
+              </div>
             </div>
           </nav>
         ) : null}

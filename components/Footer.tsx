@@ -26,11 +26,8 @@ export default function Footer() {
     <footer className="mt-14 border-t border-slate-200 bg-white">
       <div className="container-shell space-y-4 py-8 text-sm text-slate-600">
         <div className="space-y-1">
-          <p>© 2026 ViralHookLab. All rights reserved.</p>
-          <p>Operated by Seventy Eight Co., Ltd.</p>
-          <p>Tax ID: 0205565023848</p>
           <p>
-            Contact:{" "}
+            © 2026 ViralHookLab. Operated by Seventy Eight Co., Ltd. (Tax ID: 0205565023848). Contact:{" "}
             <a className="font-medium text-brand-700 hover:text-brand-600" href="mailto:support@viralhooklab.com">
               support@viralhooklab.com
             </a>

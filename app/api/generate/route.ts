@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
+import { auth } from "@clerk/nextjs/server";
 import { buildCorsHeaders, getAllowedOriginForRequest } from "@/lib/security/cors";
 import {
   containsSuspiciousInput,
@@ -9,6 +10,7 @@ import {
 } from "@/lib/security/input";
 import { checkRateLimit } from "@/lib/security/rateLimit";
 import { getClientIp, hasValidJsonContentType, isBlockedBot } from "@/lib/security/request";
+import { deductOneCredit } from "@/lib/credits";
 
 type GenerateRequestBody = {
   topic?: string;
@@ -292,6 +294,23 @@ export async function POST(request: Request) {
       );
     }
 
+    const { userId } = await auth();
+    if (!userId) {
+      return jsonWithCors({ error: "Unauthorized. Please sign in." }, 401, origin);
+    }
+
+    const creditDeduction = await deductOneCredit(userId);
+    if (!creditDeduction.ok) {
+      return jsonWithCors(
+        { error: "Out of credits." },
+        403,
+        origin,
+        { "X-Credits-Remaining": String(creditDeduction.total_credits ?? 0) },
+      );
+    }
+
+    const creditsHeader = { "X-Credits-Remaining": String(creditDeduction.total_credits ?? 0) };
+
     const openAiKey = process.env.OPENAI_API_KEY;
     const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
     const cacheKey = `${tool.toLowerCase()}::${topic.toLowerCase()}`;
@@ -302,9 +321,15 @@ export async function POST(request: Request) {
         aiResultCache.delete(cacheKey);
       } else {
         return jsonWithCors(
-          { results: cached.results, source: cached.source, cacheHit: true },
+          {
+            results: cached.results,
+            source: cached.source,
+            cacheHit: true,
+            creditsRemaining: creditDeduction.total_credits ?? 0,
+          },
           200,
           origin,
+          creditsHeader,
         );
       }
     }
@@ -319,7 +344,12 @@ export async function POST(request: Request) {
         source: "fallback",
         expiresAt: Date.now() + CACHE_TTL_MS,
       });
-      return jsonWithCors({ results, source, cacheHit: false }, 200, origin);
+      return jsonWithCors(
+        { results, source, cacheHit: false, creditsRemaining: creditDeduction.total_credits ?? 0 },
+        200,
+        origin,
+        creditsHeader,
+      );
     }
 
     const prompt = `You are an expert social media marketer. Generate 5 high converting results based on this topic: ${topic}`;
@@ -373,9 +403,11 @@ export async function POST(request: Request) {
         results: [results[0], results[1], results[2], results[3], results[4]],
         source,
         cacheHit: false,
+        creditsRemaining: creditDeduction.total_credits ?? 0,
       },
       200,
       origin,
+      creditsHeader,
     );
   } catch (error) {
     const detail =
