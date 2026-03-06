@@ -36,6 +36,9 @@ export default clerkMiddleware((_, request) => {
   }
 
   const method = request.method.toUpperCase();
+  if (pathname === "/api/health" && method === "GET") {
+    return NextResponse.next();
+  }
   if (!["POST", "OPTIONS"].includes(method)) {
     return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
   }

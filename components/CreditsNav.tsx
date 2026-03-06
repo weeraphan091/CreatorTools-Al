@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type Snapshot = {
   tier: string;
@@ -11,7 +11,7 @@ type Snapshot = {
 export default function CreditsNav() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
 
-  const fetchCredits = async (retryAfterEnsure = false) => {
+  const fetchCredits = useCallback(async (retryAfterEnsure = false) => {
     if (!retryAfterEnsure) {
       await fetch("/api/profile/ensure", { method: "POST" }).catch(() => {});
     }
@@ -31,7 +31,7 @@ export default function CreditsNav() {
     } else {
       setSnapshot({ tier: "free", total_credits: 0 });
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchCredits();
@@ -56,7 +56,7 @@ export default function CreditsNav() {
 
     window.addEventListener("viralhooklab:credits_updated", update);
     return () => window.removeEventListener("viralhooklab:credits_updated", update);
-  }, []);
+  }, [fetchCredits]);
 
   const creditsText = snapshot ? `Credits: ${snapshot.total_credits}` : "Credits: —";
   const isPaid = snapshot ? snapshot.tier !== "free" : false;
