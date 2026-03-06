@@ -11,6 +11,7 @@ import {
 import { checkRateLimit } from "@/lib/security/rateLimit";
 import { getClientIp, hasValidJsonContentType, isBlockedBot } from "@/lib/security/request";
 import { deductOneCredit } from "@/lib/credits";
+import { supabaseAdminRpc } from "@/lib/supabase/rpc";
 
 type GenerateRequestBody = {
   topic?: string;
@@ -299,7 +300,22 @@ export async function POST(request: Request) {
       return jsonWithCors({ error: "Unauthorized. Please sign in." }, 401, origin);
     }
 
-    const creditDeduction = await deductOneCredit(userId);
+    // Ensure the profile exists before deducting credits. The deduct_credits
+    // RPC creates a profile if missing, but explicitly running ensure_profile
+    // first makes the FK relationship for billing_customers reliable too.
+    await supabaseAdminRpc("ensure_profile", { p_user_id: userId, p_email: null }).catch(() => {});
+
+    let creditDeduction;
+    try {
+      creditDeduction = await deductOneCredit(userId);
+    } catch {
+      return jsonWithCors(
+        { error: "Could not verify your credits. Please refresh and try again." },
+        503,
+        origin,
+      );
+    }
+
     if (!creditDeduction.ok) {
       return jsonWithCors(
         { error: "Out of credits." },
