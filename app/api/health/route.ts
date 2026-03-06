@@ -1,11 +1,6 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 
-/**
- * GET /api/health
- * เช็คสภาพระบบ: env ที่ต้องมี, ไม่ return ค่า secret ออกไป
- * ใช้ดูว่า service ไหนยังไม่ตั้งหรือพัง (เฉพาะตอน debug)
- */
 export async function GET() {
   const isProd = process.env.NODE_ENV === "production";
   const token = process.env.HEALTHCHECK_TOKEN?.trim();
@@ -39,6 +34,26 @@ export async function GET() {
     message: process.env.CLERK_SECRET_KEY?.trim() ? "Set" : "Missing CLERK_SECRET_KEY",
   };
 
+  const publishable = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.trim() || "";
+  const secret = process.env.CLERK_SECRET_KEY?.trim() || "";
+  const publishableMode = publishable.startsWith("pk_live_")
+    ? "live"
+    : publishable.startsWith("pk_test_")
+      ? "test"
+      : "unknown";
+  const secretMode = secret.startsWith("sk_live_")
+    ? "live"
+    : secret.startsWith("sk_test_")
+      ? "test"
+      : "unknown";
+  const modeMatched = publishableMode !== "unknown" && secretMode !== "unknown" && publishableMode === secretMode;
+  checks["clerk_key_mode_match"] = {
+    ok: modeMatched,
+    message: modeMatched
+      ? `Matched (${publishableMode})`
+      : `Mismatch: publishable=${publishableMode}, secret=${secretMode}. Use same mode.`,
+  };
+
   checks["clerk_webhook_secret"] = {
     ok: Boolean(process.env.CLERK_WEBHOOK_SECRET?.trim()),
     message: process.env.CLERK_WEBHOOK_SECRET?.trim() ? "Set" : "Missing CLERK_WEBHOOK_SECRET",
@@ -53,6 +68,38 @@ export async function GET() {
     ok: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()),
     message: process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() ? "Set" : "Missing SUPABASE_SERVICE_ROLE_KEY",
   };
+
+  const supabaseUrl = process.env.SUPABASE_URL?.trim() || "";
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() || "";
+  if (supabaseUrl && supabaseKey) {
+    try {
+      const res = await fetch(`${supabaseUrl}/rest/v1/rpc/get_credits`, {
+        method: "POST",
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ p_user_id: "__health_check__" }),
+      });
+      if (res.ok) {
+        checks["supabase_connection"] = { ok: true, message: "Connected and RPC get_credits exists" };
+      } else {
+        const text = await res.text().catch(() => "");
+        checks["supabase_connection"] = {
+          ok: false,
+          message: `Supabase RPC failed (${res.status}): ${text.slice(0, 200)}`,
+        };
+      }
+    } catch (err) {
+      checks["supabase_connection"] = {
+        ok: false,
+        message: `Supabase unreachable: ${err instanceof Error ? err.message : "unknown"}`,
+      };
+    }
+  } else {
+    checks["supabase_connection"] = { ok: false, message: "Skipped (missing URL or key)" };
+  }
 
   checks["stripe_secret"] = {
     ok: Boolean(process.env.STRIPE_SECRET_KEY?.trim()),

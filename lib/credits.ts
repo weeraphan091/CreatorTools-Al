@@ -68,7 +68,12 @@ export async function deductOneCreditIdempotent(
     p_reason: "generate",
   });
   if (error) {
-    throw new Error(`Supabase deduct_credits_idempotent failed: ${error.message}`);
+    // Backward-compatible fallback for environments that haven't run latest SQL yet.
+    const fallback = await deductOneCredit(userId);
+    return {
+      ...fallback,
+      charged: fallback.ok,
+    };
   }
 
   const row = Array.isArray(data) ? data[0] : null;

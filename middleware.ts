@@ -70,11 +70,6 @@ export default clerkMiddleware(async (_, request) => {
     return NextResponse.json({ error: "Payload too large." }, { status: 413 });
   }
 
-  const secFetchSite = request.headers.get("sec-fetch-site");
-  if (secFetchSite && !["same-origin", "same-site", "none"].includes(secFetchSite)) {
-    return forbidden("Cross-site API request blocked.");
-  }
-
   if (method === "POST") {
     const isCheckout = pathname === "/api/stripe/checkout";
 

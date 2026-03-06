@@ -51,6 +51,9 @@ export async function POST(request: Request) {
 
   try {
     const user = await currentUser();
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized. Please sign in again." }, { status: 401 });
+    }
     const email = user?.emailAddresses?.[0]?.emailAddress || null;
     await supabaseAdminRpc("ensure_profile", {
       p_user_id: userId,
