@@ -4,7 +4,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Analytics from "@/components/Analytics";
-import AdsenseScript from "@/components/AdsenseScript";
 import AdSlot from "@/components/AdSlot";
 import WebsiteJsonLd from "@/components/WebsiteJsonLd";
 import LaunchBanner from "@/components/LaunchBanner";
@@ -68,10 +67,16 @@ export default function RootLayout({
 }>) {
   const content = (
     <html lang="en">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5559114140108157"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-screen pb-[var(--ct-sticky-ad-offset,0px)]">
         <WebsiteJsonLd />
         <Analytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        <AdsenseScript client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT} />
         <LaunchBanner />
         <Navbar />
         <main className="container-shell py-8">{children}</main>
