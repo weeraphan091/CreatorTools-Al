@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import type Stripe from "stripe";
 import { supabaseAdmin } from "@/lib/supabase/admin";
+import { supabaseAdminRpc } from "@/lib/supabase/rpc";
 import { grantLifetimeCredits } from "@/lib/credits";
 import { logError } from "@/lib/observability/logger";
 import { stripe } from "@/lib/stripe";
@@ -104,13 +105,25 @@ export async function POST(request: Request) {
 
     if (event.type === "checkout.session.completed") {
       const session = event.data.object as Stripe.Checkout.Session;
-      const full = await stripe().checkout.sessions.retrieve(session.id, {
-        expand: ["line_items.data.price", "customer", "subscription"],
-      });
+      let full: Stripe.Checkout.Session;
+      try {
+        full = await stripe().checkout.sessions.retrieve(session.id, {
+          expand: ["line_items.data.price", "customer", "subscription"],
+        });
+      } catch (e) {
+        logError("stripe.webhook.checkout_retrieve_failed", { error: String(e), sessionId: session.id });
+        return NextResponse.json({ ok: true });
+      }
 
       const userId = String(full.client_reference_id || full.metadata?.clerk_user_id || "");
       if (!userId) {
         return NextResponse.json({ ok: true });
+      }
+
+      try {
+        await supabaseAdminRpc("ensure_profile", { p_user_id: userId, p_email: null });
+      } catch (e) {
+        logError("stripe.webhook.ensure_profile_failed", { userId, error: String(e) });
       }
 
       const customerId = typeof full.customer === "string" ? full.customer : full.customer?.id || null;
@@ -122,27 +135,39 @@ export async function POST(request: Request) {
       const firstLine = full.line_items?.data?.[0];
       const priceId = String(firstLine?.price?.id || "");
 
-      await upsertBillingCustomer({
-        userId,
-        stripeCustomerId: customerId,
-        stripeSubscriptionId: subscriptionId,
-        priceId: priceId || null,
-      });
+      try {
+        await upsertBillingCustomer({
+          userId,
+          stripeCustomerId: customerId,
+          stripeSubscriptionId: subscriptionId,
+          priceId: priceId || null,
+        });
+      } catch (e) {
+        logError("stripe.webhook.upsert_billing_failed", { userId, error: String(e) });
+      }
 
       if (full.mode === "payment" && mapping.topup100All.includes(priceId)) {
-        await grantLifetimeCredits({
-          userId,
-          amount: 100,
-          reason: "stripe_topup_100",
-          externalId: full.payment_intent ? String(full.payment_intent) : session.id,
-          requestId: `stripe-checkout-${session.id}`,
-        });
+        try {
+          await grantLifetimeCredits({
+            userId,
+            amount: 100,
+            reason: "stripe_topup_100",
+            externalId: full.payment_intent ? String(full.payment_intent) : session.id,
+            requestId: `stripe-checkout-${session.id}`,
+          });
+        } catch (e) {
+          logError("stripe.webhook.grant_credits_failed", { userId, error: String(e) });
+        }
       }
 
       if (full.mode === "subscription") {
         const tier = priceId ? tierFromPriceId(priceId) : null;
         if (tier === "starter" || tier === "agency") {
-          await setTierAndMonthlyCredits(userId, tier);
+          try {
+            await setTierAndMonthlyCredits(userId, tier);
+          } catch (e) {
+            logError("stripe.webhook.set_tier_failed", { userId, tier, error: String(e) });
+          }
         }
       }
     }
