@@ -284,6 +284,12 @@ export const tools: ToolConfig[] = [
           "Use line breaks for structure, lead with your unique value, and end with one clear CTA. Avoid clichés and focus on what makes you different.",
       },
     ],
+    platformRules:
+      "Instagram bio: max 150 characters. Lead with identity and value; one clear CTA (link, DM, follow). Line breaks improve scan; emojis optional.",
+    formatSpec: "Return exactly 5 bio options. Each 1–3 lines, under 150 characters total. No numbering.",
+    principles: ["Clear identity and value", "Single CTA", "Scannable with line breaks", "Audience and outcome stated"],
+    expertRole:
+      "You are an expert Instagram growth and personal branding strategist. Bios must be concise, memorable, and drive one clear action.",
   },
   {
     slug: "ad-headline-generator",
@@ -344,6 +350,12 @@ export const tools: ToolConfig[] = [
           "Yes. Questions that address a pain point or desired outcome can increase engagement, especially for awareness campaigns targeting cold audiences.",
       },
     ],
+    platformRules:
+      "Ad headlines: Meta/Google character limits apply (e.g. ~40 chars primary). Lead with benefit or outcome; test urgency vs curiosity.",
+    formatSpec: "Return exactly 5 headline lines. Each under 40 characters where relevant. No numbering.",
+    principles: ["Benefit or outcome first", "Concrete over vague", "Testable angle", "Match landing message"],
+    expertRole:
+      "You are an expert paid media and conversion copywriter. Headlines must drive CTR and align with the landing page promise.",
   },
   {
     slug: "blog-title-generator",
@@ -404,6 +416,12 @@ export const tools: ToolConfig[] = [
           "Use question-based titles that match exact search queries. Structure the article so the answer appears clearly in the first paragraph or a dedicated section.",
       },
     ],
+    platformRules:
+      "Blog titles: SEO-first; match search intent. 50–60 characters ideal for full display. Numbers and how-to formats perform well.",
+    formatSpec: "Return exactly 5 title lines. Each under 70 characters. No numbering in the output.",
+    principles: ["Search intent match", "Number or how-to when relevant", "Clear outcome", "Keyword front-loaded"],
+    expertRole:
+      "You are an expert SEO content strategist. Titles must rank and earn clicks by balancing keyword intent with curiosity.",
   },
   {
     slug: "product-description-generator",
@@ -462,6 +480,12 @@ export const tools: ToolConfig[] = [
           "Address common concerns (sizing, durability, shipping) directly in the description. A short FAQ section near the buy button can reduce hesitation.",
       },
     ],
+    platformRules:
+      "Product copy: feature-to-benefit; handle objections. 100–300 words typical. Format varies by channel (Amazon bullets vs site storytelling).",
+    formatSpec: "Return exactly 5 product description options. Each 100–300 words; benefits first, then specs. No numbering.",
+    principles: ["Features linked to benefits", "Objection handling", "Clear CTA", "Channel-appropriate length"],
+    expertRole:
+      "You are an expert ecommerce and conversion copywriter. Descriptions must sell by benefits and reduce purchase friction.",
   },
   {
     slug: "brand-name-generator",
@@ -520,6 +544,12 @@ export const tools: ToolConfig[] = [
           "You can, but rebranding is costly and risks losing recognition. Invest time upfront to choose a name that can grow with your business.",
       },
     ],
+    platformRules:
+      "Brand names: short, memorable, easy to spell and pronounce. Check domain and trademark availability before use.",
+    formatSpec: "Return exactly 5 name ideas. Mix styles (invented, two-word, category twist). No numbering.",
+    principles: ["Memorable and pronounceable", "Distinct from competitors", "Scalable for brand growth", "Availability-friendly"],
+    expertRole:
+      "You are an expert brand strategist and naming consultant. Names must be distinctive, memorable, and legally available.",
   },
   {
     slug: "slogan-generator",
@@ -578,6 +608,12 @@ export const tools: ToolConfig[] = [
           "Test translations carefully. Some slogans lose meaning or impact when translated, so consider creating region-specific versions for global campaigns.",
       },
     ],
+    platformRules:
+      "Slogans: short, repeatable, tied to brand promise. Campaign slogans can be temporary; taglines are long-term.",
+    formatSpec: "Return exactly 5 slogan lines. Each under 10 words when possible. No numbering.",
+    principles: ["Short and memorable", "Clear promise", "Distinct tone", "Easy to repeat"],
+    expertRole:
+      "You are an expert brand and campaign copywriter. Slogans must be memorable and aligned with the brand's core message.",
   },
   {
     slug: "call-to-action-generator",
@@ -638,6 +674,12 @@ export const tools: ToolConfig[] = [
           "High-contrast colors that stand out from the page background work best. Test button color alongside copy changes to isolate what drives clicks.",
       },
     ],
+    platformRules:
+      "CTAs: action verb + specific outcome. One primary CTA per page; match the promise. First-person often outperforms generic.",
+    formatSpec: "Return exactly 5 CTA lines. Short (2–5 words). No numbering.",
+    principles: ["Action verb + outcome", "Match page promise", "Specific over generic", "One primary CTA"],
+    expertRole:
+      "You are an expert conversion copywriter. CTAs must be specific, benefit-led, and aligned with the user's intent.",
   },
   {
     slug: "linkedin-viral-post-generator",
@@ -694,6 +736,12 @@ export const tools: ToolConfig[] = [
           "Both can work. Text-only posts often get strong reach in the feed. Use images or carousels when visuals add value; avoid stock photos that feel generic.",
       },
     ],
+    platformRules:
+      "LinkedIn: strong first line; scannable (short lines, whitespace). End with a discussion question. Algorithm favors comments and saves.",
+    formatSpec: "Return exactly 5 post openings or full short posts. Hook in first line; include a closing question. No numbering.",
+    principles: ["Hook in first line", "Story or framework", "Discussion prompt", "Scannable format"],
+    expertRole:
+      "You are an expert LinkedIn content strategist. Posts must hook quickly and invite comments and saves.",
   },
   {
     slug: "x-thread-hook-writer",
@@ -746,6 +794,12 @@ export const tools: ToolConfig[] = [
           "One to two quality threads per week is a strong pace. Consistency matters more than volume; supplement with shorter single-tweet posts between threads.",
       },
     ],
+    platformRules:
+      "X/Twitter threads: hook = claim + proof + payoff. Each tweet must earn the next. Short paragraphs; end with clear CTA (follow, bookmark, reply).",
+    formatSpec: "Return exactly 5 thread hook lines. Each 1–2 sentences; curiosity + credibility. No numbering.",
+    principles: ["Claim + proof + payoff", "Curiosity with credibility", "Clear payoff per tweet", "CTA at end"],
+    expertRole:
+      "You are an expert X (Twitter) thread writer for tech and crypto. Hooks must stop the scroll and promise a clear payoff.",
   },
   {
     slug: "amazon-product-description-ai",
@@ -795,6 +849,12 @@ export const tools: ToolConfig[] = [
           "Avoid naming competitors directly. Instead, highlight your unique advantages (materials, warranty, features) so buyers can draw their own conclusions.",
       },
     ],
+    platformRules:
+      "Amazon: benefit-first bullets; keyword-rich but readable. Use full allowed space; 200–300 words. No competitor names.",
+    formatSpec: "Return exactly 5 description options. Bullets 1–2 lines each; benefits before features. No numbering.",
+    principles: ["Benefit-first bullets", "Objection handling", "Scannable format", "Trust and specs"],
+    expertRole:
+      "You are an expert Amazon listing and A+ content copywriter. Copy must convert with clear benefits and scannable bullets.",
   },
   {
     slug: "faceless-youtube-channel-idea-generator",
@@ -842,6 +902,12 @@ export const tools: ToolConfig[] = [
           "Expect 3–6 months of consistent uploads before seeing meaningful traction. Focus on a repeatable format and study analytics to improve CTR and retention.",
       },
     ],
+    platformRules:
+      "Faceless YouTube: repeatable format (lists, explainers, comparisons). Niche + format + hook; validate demand before scaling.",
+    formatSpec: "Return exactly 5 channel ideas. Each: niche | format | sample hook. No numbering.",
+    principles: ["Repeatable format", "Clear niche", "Searchable demand", "Scalable production"],
+    expertRole:
+      "You are an expert YouTube automation and faceless channel strategist. Ideas must be repeatable and validated for demand.",
   },
   {
     slug: "pinterest-pin-title-desc-optimizer",
@@ -889,6 +955,12 @@ export const tools: ToolConfig[] = [
           "Vary descriptions even for similar content. Unique descriptions help each Pin rank for different keywords and avoid appearing repetitive to Pinterest's algorithm.",
       },
     ],
+    platformRules:
+      "Pinterest: keyword in title; benefit in description. Save-worthy language; 5–15 Pins/week. Unique descriptions per Pin.",
+    formatSpec: "Return exactly 5 Pin title + description pairs. Title under 100 chars; description 1–2 sentences. No numbering.",
+    principles: ["Keyword in title", "Benefit and outcome", "Save-worthy", "Unique per Pin"],
+    expertRole:
+      "You are an expert Pinterest SEO and Pin strategist. Titles and descriptions must drive clicks and saves.",
   },
   {
     slug: "facebook-ad-copywriter",
@@ -936,6 +1008,12 @@ export const tools: ToolConfig[] = [
           "Emojis can increase visual contrast and readability when used sparingly. Test ads with and without emojis to see what your audience prefers.",
       },
     ],
+    platformRules:
+      "Meta/Facebook ads: hook first; benefit + proof + CTA. Short, scannable. Test 5–10 variants per offer; one variable at a time.",
+    formatSpec: "Return exactly 5 ad copy options (hook + primary text + CTA). Short paragraphs. No numbering.",
+    principles: ["Hook first", "Benefit and proof", "Clear CTA", "Mobile-scannable"],
+    expertRole:
+      "You are an expert Meta/Facebook performance copywriter. Ad copy must test cleanly and convert cold and warm traffic.",
   },
   {
     slug: "instagram-reel-script-generator",
@@ -983,6 +1061,12 @@ export const tools: ToolConfig[] = [
           "Use a repeatable format (hook, 3 tips, CTA) and swap topics. Write 5–10 scripts in one sitting, then film and edit in batches for efficiency.",
       },
     ],
+    platformRules:
+      "Reels: hook in 0–2s; value early. 20–45s typical. Structure: hook, 2–3 points, CTA. Text overlays for sound-off viewing.",
+    formatSpec: "Return exactly 5 script options. Each with hook, beats, CTA. No numbering.",
+    principles: ["Hook in first 2 seconds", "Value before context", "Clear CTA (save/follow)", "Batch-friendly format"],
+    expertRole:
+      "You are an expert Instagram Reels and short-form script writer. Scripts must hook fast and drive saves and comments.",
   },
   {
     slug: "email-subject-line-ab-tester",
@@ -1029,6 +1113,12 @@ export const tools: ToolConfig[] = [
           "It depends on your audience. Some segments respond well to a single relevant emoji; others prefer plain text. Always A/B test before committing.",
       },
     ],
+    platformRules:
+      "Email subject lines: test one variable (angle, length, personalization). Under 50 chars often wins on mobile. Clarity first.",
+    formatSpec: "Return exactly 5 A/B pairs (A and B variants). Different angles per pair. No numbering.",
+    principles: ["One variable per test", "Curiosity vs benefit vs urgency", "Short and clear", "Testable angles"],
+    expertRole:
+      "You are an expert email marketing and subject-line strategist. Variants must be A/B-testable and open-rate focused.",
   },
   {
     slug: "tiktok-script-hook-generator-us-uk",
@@ -1079,6 +1169,12 @@ export const tools: ToolConfig[] = [
           "Post 3–5 variations of the same concept with different hooks. Keep visuals and content the same so you can isolate which opening line performs best.",
       },
     ],
+    platformRules:
+      "TikTok US/UK: hook in 0–2s; natural tone. Trend phrasing works; pair with trending audio. Test 5–10 hooks per concept.",
+    formatSpec: "Return exactly 5 hook lines. Each 1–2 sentences; US/UK friendly. No numbering.",
+    principles: ["Hook in first 2 seconds", "Natural trend phrasing", "Clear payoff", "Testable with same visuals"],
+    expertRole:
+      "You are an expert TikTok script and hook writer for US/UK audiences. Hooks must fit trends and drive watch time.",
   },
   {
     slug: "google-ads-headline-optimizer",
@@ -1127,6 +1223,12 @@ export const tools: ToolConfig[] = [
           "Each headline can be up to 30 characters. Write concise, benefit-led copy and use every character wisely. Test short vs. full-length headlines.",
       },
     ],
+    platformRules:
+      "Google Ads headlines: max 30 characters each. RSA needs variety (keyword, benefit, proof). Message match with landing page.",
+    formatSpec: "Return exactly 5 headline options. Each under 30 characters. No numbering.",
+    principles: ["Keyword relevance", "Benefit and proof", "Message match", "RSA variety"],
+    expertRole:
+      "You are an expert SEM and Google Ads copywriter. Headlines must drive CTR and align with landing page and match types.",
   },
   // ---- 20 new unique tools (no overlap with existing) ----
   {
@@ -1174,6 +1276,12 @@ export const tools: ToolConfig[] = [
           "Use a consistent format (e.g., hook → 3 tips → CTA) so viewers know what to expect. Vary the angle and examples, not the structure.",
       },
     ],
+    platformRules:
+      "Faceless scripts: hook in 3–5s; retention beat every 20–40s. 8–12 min (1,200–1,800 words). Short sentences for voiceover.",
+    formatSpec: "Return exactly 5 script options. Hook, structure, retention beats, CTA. No numbering.",
+    principles: ["Hook in first 5 seconds", "Retention beats", "Clear structure", "Voiceover-friendly"],
+    expertRole:
+      "You are an expert faceless YouTube and automation script writer. Scripts must retain and convert.",
   },
   {
     slug: "pinterest-idea-pin-planner",
@@ -1219,6 +1327,12 @@ export const tools: ToolConfig[] = [
           "Yes. Use a template (e.g., “X tips for Y”) and swap the topic and details. Consistency helps your audience recognize your style and improves performance over time.",
       },
     ],
+    platformRules:
+      "Idea Pins: 5–10 pages; one idea per page. First page = hook + title; last page = CTA. Save-worthy, scannable copy.",
+    formatSpec: "Return exactly 5 Idea Pin plans. Title + page copy + CTA. No numbering.",
+    principles: ["Strong first page", "One idea per page", "Save-worthy", "CTA on last page"],
+    expertRole:
+      "You are an expert Pinterest Idea Pin and multi-page content strategist. Plans must drive saves and follows.",
   },
   {
     slug: "x-viral-thread-starter",
@@ -1264,6 +1378,12 @@ export const tools: ToolConfig[] = [
           "Yes. Use a repeatable format (e.g., “X lessons from Y”) so your audience knows what to expect. Swap the topic and examples for each new thread.",
       },
     ],
+    platformRules:
+      "X threads: 5–12 tweets; first tweet = hook + payoff. Each tweet earns the next; tease before transitions. Proof when possible.",
+    formatSpec: "Return exactly 5 thread openers + structure. No numbering.",
+    principles: ["Hook with clear payoff", "One idea per tweet", "Tease next tweet", "Proof or examples"],
+    expertRole:
+      "You are an expert X (Twitter) thread writer for thought leaders. Openers must promise value and keep readers to the end.",
   },
   {
     slug: "linkedin-thought-leadership-post-ai",
@@ -1309,6 +1429,12 @@ export const tools: ToolConfig[] = [
           "Consistency matters more than volume. Aim for 2–4 posts per week. Mix thought leadership with lighter updates and engagement on others’ posts.",
       },
     ],
+    platformRules:
+      "LinkedIn thought leadership: 150–300 words; short paragraphs. Clear POV + story or framework. End with discussion question.",
+    formatSpec: "Return exactly 5 post options. Hook, insight, support, question. No numbering.",
+    principles: ["Clear point of view", "Evidence or story", "Discussion prompt", "Scannable format"],
+    expertRole:
+      "You are an expert LinkedIn thought leadership and B2B content strategist. Posts must build authority and spark discussion.",
   },
   {
     slug: "podcast-episode-show-notes-generator",
@@ -1355,6 +1481,12 @@ export const tools: ToolConfig[] = [
           "After recording you have exact timestamps and quotes. Draft a structure before if it helps; finalize with accurate timestamps and takeaways after.",
       },
     ],
+    platformRules:
+      "Show notes: summary, 3–5 takeaways, timestamps for sections. 150–400 words. Keywords for SEO and preview snippets.",
+    formatSpec: "Return exactly 5 show-note options. Summary, takeaways, timestamps. No numbering.",
+    principles: ["Summary and takeaways", "Timestamps", "SEO keywords", "Resource links"],
+    expertRole:
+      "You are an expert podcast and audio content strategist. Show notes must help discovery and listener navigation.",
   },
   {
     slug: "email-newsletter-subject-line-ab-tester",
@@ -1400,6 +1532,12 @@ export const tools: ToolConfig[] = [
           "Avoid all caps, excessive punctuation, and spam triggers (“FREE,” “Act now”). Keep copy clear and value-focused. Maintain a healthy sender reputation.",
       },
     ],
+    platformRules:
+      "Newsletter subject lines: test one variable; 40–50 chars often best on mobile. Avoid spam triggers; clarity and value first.",
+    formatSpec: "Return exactly 5 A/B subject line pairs. Different angles per pair. No numbering.",
+    principles: ["One variable per test", "Curiosity vs benefit", "Mobile length", "Spam-safe"],
+    expertRole:
+      "You are an expert email and newsletter strategist. Subject lines must be A/B-testable and open-rate focused.",
   },
   {
     slug: "amazon-aplus-content-headline-optimizer",
@@ -1490,6 +1628,12 @@ export const tools: ToolConfig[] = [
           "Yes. Use the same principles: product type, format (e.g., printable, SVG), use case, and audience. Include “instant download” or “digital” if relevant.",
       },
     ],
+    platformRules:
+      "Etsy titles: max 140 characters. Front-load important keywords; readable first. Product type, material, style, occasion.",
+    formatSpec: "Return exactly 5 title options. Under 140 chars each. No numbering.",
+    principles: ["Keyword-rich and readable", "Front-load key terms", "Natural flow", "Tag alignment"],
+    expertRole:
+      "You are an expert Etsy SEO and handmade/vintage listing strategist. Titles must rank and convert.",
   },
   {
     slug: "google-business-profile-description-ai",
@@ -1534,6 +1678,12 @@ export const tools: ToolConfig[] = [
           "Update when offerings, hours, or messaging change. There’s no need to change it constantly; keep it accurate and relevant.",
       },
     ],
+    platformRules:
+      "GBP description: max 750 characters. What you do, where, key services, differentiator, CTA. Natural keywords.",
+    formatSpec: "Return exactly 5 description options. Under 750 chars each. No numbering.",
+    principles: ["Location and service keywords", "Clear CTA", "Differentiator", "No stuffing"],
+    expertRole:
+      "You are an expert local SEO and Google Business Profile strategist. Descriptions must support discovery and conversion.",
   },
   {
     slug: "press-release-draft-generator",
@@ -1579,6 +1729,12 @@ export const tools: ToolConfig[] = [
           "Use wire services (e.g., PR Newswire, Business Wire) for reach, and also send directly to relevant journalists. Post on your newsroom and social channels.",
       },
     ],
+    platformRules:
+      "Press release: 400–600 words. Lead with who/what/when/where/why; quote from spokesperson; boilerplate; contact.",
+    formatSpec: "Return exactly 5 draft options. Headline, lead, quote, boilerplate. No numbering.",
+    principles: ["Lead with news", "Named quote", "Active voice", "Scannable"],
+    expertRole:
+      "You are an expert PR and press release writer. Drafts must be newsworthy and journalist-ready.",
   },
   {
     slug: "webinar-registration-page-copy-ai",
@@ -1624,6 +1780,12 @@ export const tools: ToolConfig[] = [
           "Use a template and swap headline, date, and bullets. Keep the structure and CTA consistent so you can optimize over time.",
       },
     ],
+    platformRules:
+      "Webinar page: headline (topic + outcome), 3–5 benefit bullets, date/time, speaker credibility, strong CTA. Low friction.",
+    formatSpec: "Return exactly 5 copy options. Headline, bullets, CTA. No numbering.",
+    principles: ["Clear value and outcome", "Credibility", "Strong CTA", "Scannable"],
+    expertRole:
+      "You are an expert webinar and registration page copywriter. Copy must convert visitors to registrants.",
   },
   {
     slug: "app-store-aso-description-optimizer",
@@ -1669,6 +1831,12 @@ export const tools: ToolConfig[] = [
           "Yes. Test icons, screenshots, and first lines where possible. Small changes can improve conversion; measure installs and conversion rate.",
       },
     ],
+    platformRules:
+      "ASO: subtitle 30 chars (Apple); first lines keyword-rich and benefit-led. Prioritize visible-before-more copy.",
+    formatSpec: "Return exactly 5 description options. First line + body. No numbering.",
+    principles: ["Benefit in first line", "Keyword-aware", "Store limits", "Conversion-focused"],
+    expertRole:
+      "You are an expert ASO and app store copywriter. Descriptions must rank and convert in store listings.",
   },
   {
     slug: "real-estate-property-listing-storyteller",
@@ -1713,6 +1881,12 @@ export const tools: ToolConfig[] = [
           "Yes. Shorten the main description for social or open house blurbs. Keep the hook and one or two key selling points plus CTA.",
       },
     ],
+    platformRules:
+      "Listing copy: lead with lifestyle or key feature; vivid, accurate. 100–200 words; key specs and CTA.",
+    formatSpec: "Return exactly 5 listing options. Headline + description. No numbering.",
+    principles: ["Lifestyle and feature", "Vivid and accurate", "Clear CTA", "Key specs"],
+    expertRole:
+      "You are an expert real estate listing and property copywriter. Copy must sell the lifestyle and drive inquiries.",
   },
   {
     slug: "quora-answer-assistant-lead-gen",
@@ -1757,6 +1931,12 @@ export const tools: ToolConfig[] = [
           "Yes, when you consistently provide useful answers in your niche. Over time, profile views and link clicks can turn into signups or demos. Track which topics convert.",
       },
     ],
+    platformRules:
+      "Quora: direct answer first; genuine value. Subtle CTA when relevant. Structure (bullets, paragraphs); cite when possible.",
+    formatSpec: "Return exactly 5 answer openings or full short answers. No numbering.",
+    principles: ["Value first", "Direct answer", "Subtle CTA", "Structured"],
+    expertRole:
+      "You are an expert Quora and lead-gen content strategist. Answers must provide value and support authority.",
   },
   {
     slug: "medium-article-subtitle-hook-creator",
@@ -1801,6 +1981,12 @@ export const tools: ToolConfig[] = [
           "Yes. Use a consistent structure (e.g., question hook, then subtitle that promises the answer). Vary the topic and angle for each piece.",
       },
     ],
+    platformRules:
+      "Medium: subtitle 10–20 words; expands title, promises takeaway. Hook: question, stat, or bold claim in first line.",
+    formatSpec: "Return exactly 5 subtitle + hook pairs. No numbering.",
+    principles: ["Subtitle expands title", "Hook in first line", "Clear promise", "Scannable"],
+    expertRole:
+      "You are an expert Medium and long-form content strategist. Subtitles and hooks must capture and retain readers.",
   },
   {
     slug: "user-persona-generator-marketing",
@@ -1845,6 +2031,12 @@ export const tools: ToolConfig[] = [
           "Yes. Use interviews, surveys, and analytics. Avoid making up details. Update personas when you learn more about your customers.",
       },
     ],
+    platformRules:
+      "Personas: demographics, goals, pains, channels, messaging. One primary persona per output; use for targeting and copy.",
+    formatSpec: "Return exactly 5 persona summaries. Name, goals, pains, messaging. No numbering.",
+    principles: ["Actionable", "Goals and pains", "Channel and message", "Specific"],
+    expertRole:
+      "You are an expert marketing and buyer persona strategist. Personas must drive targeting and messaging.",
   },
   {
     slug: "tiktok-spark-ads-caption-writer",
@@ -1889,6 +2081,12 @@ export const tools: ToolConfig[] = [
           "Test different creatives and captions. Hold one variable constant (e.g., same video, different caption). Track CTR, conversion, and cost per result.",
       },
     ],
+    platformRules:
+      "TikTok Spark Ads: native-style captions; hook in first line. Fit feed; CTA clear. Character limits per placement.",
+    formatSpec: "Return exactly 5 caption options. No numbering.",
+    principles: ["Native tone", "Hook first", "Clear CTA", "Feed-appropriate"],
+    expertRole:
+      "You are an expert TikTok Spark and paid social copywriter. Captions must feel native and convert.",
   },
   {
     slug: "meta-description-bulk-optimizer",
@@ -1933,6 +2131,12 @@ export const tools: ToolConfig[] = [
           "Use a consistent template (e.g., [Topic]: [Benefit]. [CTA].). Pull page title or focus keyword per URL. Generate, then review for uniqueness and length.",
       },
     ],
+    platformRules:
+      "Meta descriptions: 150–160 characters. Include primary keyword and CTA. Unique per page; no duplicate copy.",
+    formatSpec: "Return exactly 5 meta description options. Under 160 chars each. No numbering.",
+    principles: ["Keyword and CTA", "Unique per page", "Click-worthy", "Accurate summary"],
+    expertRole:
+      "You are an expert SEO and meta description copywriter. Descriptions must improve CTR and reflect content.",
   },
   {
     slug: "lead-magnet-idea-generator",
@@ -1977,6 +2181,12 @@ export const tools: ToolConfig[] = [
           "Use landing pages, paid ads, content (blogs, videos), and social. Mention it in relevant content and in your bio or footer. Track signup and conversion by source.",
       },
     ],
+    platformRules:
+      "Lead magnets: clear outcome; low friction. Checklist, template, guide, trial. Match to audience and funnel stage.",
+    formatSpec: "Return exactly 5 lead magnet ideas. Title + one-line value. No numbering.",
+    principles: ["Clear outcome", "Low friction", "Audience match", "Funnel stage"],
+    expertRole:
+      "You are an expert lead gen and funnel strategist. Ideas must convert and align with audience needs.",
   },
   {
     slug: "cold-outreach-linkedin-dm-script",
@@ -2021,6 +2231,12 @@ export const tools: ToolConfig[] = [
           "Write like a human: short, specific, and relevant. No hype or excessive punctuation. Reference something real about them or their company.",
       },
     ],
+    platformRules:
+      "Cold LinkedIn DM: short, personalized, one clear ask. No spam; value or reason for reaching out first.",
+    formatSpec: "Return exactly 5 DM script options. Opening + ask. No numbering.",
+    principles: ["Personalized", "One clear ask", "Short", "Value or reason first"],
+    expertRole:
+      "You are an expert B2B cold outreach and LinkedIn DM strategist. Scripts must get replies without sounding spammy.",
   },
   // ---- 10 traffic-focused tools ----
   {
@@ -2047,6 +2263,12 @@ export const tools: ToolConfig[] = [
       { question: "Should I use hashtags in Shorts descriptions?", answer: "You can use 2–3 relevant hashtags. Don't overdo it. Focus on one strong hook in the title first." },
       { question: "Can I use the same title for Shorts and TikTok/Reels?", answer: "You can test the same hook across platforms. Adjust length per platform (e.g., shorter for TikTok) and localize if needed." },
     ],
+    platformRules:
+      "YouTube Shorts: title under 100 chars; description with keywords and CTA. Hook in first line of description.",
+    formatSpec: "Return exactly 5 title + description pairs. No numbering.",
+    principles: ["Hook and keyword", "Under 100 chars title", "CTA in description", "Discoverable"],
+    expertRole:
+      "You are an expert YouTube Shorts and short-form video strategist. Titles and descriptions must drive views and engagement.",
   },
   {
     slug: "instagram-carousel-caption-writer",
@@ -2067,6 +2289,12 @@ export const tools: ToolConfig[] = [
       { question: "How do I get more saves on carousels?", answer: "Use Save this or Bookmark this in the hook or CTA. Make the content clearly useful (checklists, steps, templates)." },
       { question: "Can I use the same format for every carousel?", answer: "Yes. A consistent format (e.g., hook + Swipe for X tips + CTA) helps your audience know what to expect and can improve engagement over time." },
     ],
+    platformRules:
+      "Carousel captions: one idea per slide; CTA on last. Save-worthy; hook in first slide caption.",
+    formatSpec: "Return exactly 5 caption sets (per slide or full). No numbering.",
+    principles: ["One idea per slide", "Hook first", "CTA last", "Save-worthy"],
+    expertRole:
+      "You are an expert Instagram carousel and multi-slide content strategist. Captions must drive saves and follows.",
   },
   {
     slug: "reddit-post-title-hook-generator",
@@ -2087,6 +2315,12 @@ export const tools: ToolConfig[] = [
       { question: "How do I avoid getting downvoted for self-promotion?", answer: "Lead with value: share a story, tip, or insight first. If you mention your product or link, make it helpful and relevant. Follow each sub's self-promo rules." },
       { question: "Can I reuse the same title format across subs?", answer: "You can use a similar structure, but customize for each sub's culture and rules. Copy-pasting the same title everywhere often gets removed or downvoted." },
     ],
+    platformRules:
+      "Reddit: title = hook; match subreddit tone. No clickbait; genuine value. Rules and culture vary by sub.",
+    formatSpec: "Return exactly 5 title/hook options. No numbering.",
+    principles: ["Sub-appropriate", "Genuine value", "Hook in title", "No spam"],
+    expertRole:
+      "You are an expert Reddit and community content strategist. Titles must fit subreddit culture and drive engagement.",
   },
   {
     slug: "landing-page-headline-subheadline-generator",
@@ -2107,6 +2341,12 @@ export const tools: ToolConfig[] = [
       { question: "How do I test landing page headlines?", answer: "A/B test one variable at a time (headline vs headline, or subheadline vs subheadline). Use the same traffic source and audience for valid comparison." },
       { question: "Should I include the product name in the headline?", answer: "Only if the brand is well known or the name itself conveys benefit. Otherwise lead with outcome or benefit; mention the product in the subheadline or body." },
     ],
+    platformRules:
+      "Landing page: headline = main promise; subheadline = proof or detail. Above the fold; message match with ad.",
+    formatSpec: "Return exactly 5 headline + subheadline pairs. No numbering.",
+    principles: ["One main promise", "Proof or detail", "Message match", "Above fold"],
+    expertRole:
+      "You are an expert landing page and conversion copywriter. Headlines must align with traffic and convert.",
   },
   {
     slug: "substack-newsletter-title-teaser-generator",
@@ -2127,6 +2367,12 @@ export const tools: ToolConfig[] = [
       { question: "Should I use the same title format every week?", answer: "A consistent format (e.g., Issue #X: [Topic]) can build recognition. Vary the topic and angle so each title feels fresh." },
       { question: "How do I get more opens with the teaser?", answer: "Create curiosity or state a benefit. Don't repeat the title word-for-word. Tease a key insight or question that's answered in the post." },
     ],
+    platformRules:
+      "Substack: title = open driver; teaser = curiosity or key takeaway. Short; inbox-friendly.",
+    formatSpec: "Return exactly 5 title + teaser pairs. No numbering.",
+    principles: ["Open-driving title", "Teaser with takeaway", "Short", "Inbox-friendly"],
+    expertRole:
+      "You are an expert newsletter and Substack strategist. Titles and teasers must drive opens.",
   },
   {
     slug: "threads-meta-post-hook-generator",
@@ -2167,6 +2413,12 @@ export const tools: ToolConfig[] = [
       { question: "How do I get more saves on LinkedIn carousels?", answer: "Make it clearly useful (framework, checklist, steps). Use Save this or Bookmark in the first or last slide. Deliver what the hook promises." },
       { question: "Can I use the same format for different topics?", answer: "Yes. A repeatable format (e.g., X lessons from Y) builds recognition. Swap the topic and examples for each new carousel." },
     ],
+    platformRules:
+      "LinkedIn carousel: one insight per slide; hook on first. Text overlay + post copy; CTA at end.",
+    formatSpec: "Return exactly 5 carousel text sets. No numbering.",
+    principles: ["One insight per slide", "Hook first", "CTA last", "Scannable"],
+    expertRole:
+      "You are an expert LinkedIn carousel and B2B visual content strategist. Copy must drive saves and shares.",
   },
   {
     slug: "blog-outline-section-headings-generator",
@@ -2187,6 +2439,12 @@ export const tools: ToolConfig[] = [
       { question: "What's a good outline for a how-to article?", answer: "Intro (problem + promise) → Prerequisites (if needed) → Step 1, 2, 3… → Tips or common mistakes → Conclusion / next steps." },
       { question: "Can I use the same outline for similar topics?", answer: "Yes. Use a template (e.g., What is X, Why it matters, How to do it, Examples, FAQ) and customize headings per topic." },
     ],
+    platformRules:
+      "Blog outline: H2/H3 hierarchy; scannable. Each heading = clear section promise; SEO and reader-friendly.",
+    formatSpec: "Return exactly 5 outline options (headings only). No numbering.",
+    principles: ["Clear section promise", "Logical flow", "SEO-friendly", "Scannable"],
+    expertRole:
+      "You are an expert blog and content structure strategist. Outlines must support SEO and readability.",
   },
   {
     slug: "testimonial-review-request-email-generator",
@@ -2207,6 +2465,12 @@ export const tools: ToolConfig[] = [
       { question: "Should I offer an incentive for reviews?", answer: "Only if it's allowed by the platform (e.g., Google's policy). For testimonials, a thank-you or small gesture is fine; avoid pay-for-review." },
       { question: "Can I use the same email for B2B and e-commerce?", answer: "Use a template and customize: B2B might ask for a case study or quote; e-commerce often asks for a star rating and short review. Tone and ask should match the relationship." },
     ],
+    platformRules:
+      "Testimonial/review request: short, personal, one clear ask. Low friction; optional incentive if allowed.",
+    formatSpec: "Return exactly 5 email options. No numbering.",
+    principles: ["Short and personal", "One clear ask", "Low friction", "Timing-aware"],
+    expertRole:
+      "You are an expert reputation and review request copywriter. Emails must get responses without feeling pushy.",
   },
   {
     slug: "instagram-tiktok-hashtag-set-generator",
@@ -2227,6 +2491,12 @@ export const tools: ToolConfig[] = [
       { question: "Do hashtags still work in 2025?", answer: "Yes, but impact varies by platform. Instagram uses them for explore and search; TikTok uses them for trends and topics. Focus on relevant, active tags." },
       { question: "How do I find good niche hashtags?", answer: "Search your topic in the app, check what similar creators use, and look at related or suggested tags. Prefer tags with steady posts, not only millions or only a handful." },
     ],
+    platformRules:
+      "Instagram up to 30; TikTok 3–5. Mix niche + broad + branded. Avoid banned tags; relevance over volume.",
+    formatSpec: "Return exactly 5 hashtag sets. Each set: 5–15 tags for IG, 3–5 for TikTok. No numbering.",
+    principles: ["Niche + broad + branded", "Relevance", "Platform-appropriate count", "No banned tags"],
+    expertRole:
+      "You are an expert Instagram and TikTok hashtag strategist. Sets must support discoverability and trends.",
   },
 ];
 
