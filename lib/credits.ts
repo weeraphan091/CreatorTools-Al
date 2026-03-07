@@ -1,3 +1,4 @@
+import { supabaseAdmin } from "@/lib/supabase/admin";
 import { supabaseAdminRpc } from "@/lib/supabase/rpc";
 
 export type CreditsSnapshot = {
@@ -92,6 +93,24 @@ export async function deductOneCreditIdempotent(
   return row as DeductCreditsIdempotentResult;
 }
 
+/** Direct DB update for lifetime_credits (used when RPC grant_credits fails or is unavailable). */
+async function grantLifetimeCreditsDirect(userId: string, amount: number): Promise<void> {
+  const supabase = supabaseAdmin();
+  const { data: profile, error: fetchErr } = await supabase
+    .from("profiles")
+    .select("lifetime_credits")
+    .eq("user_id", userId)
+    .maybeSingle();
+  if (fetchErr) throw new Error(`Profile fetch failed: ${fetchErr.message}`);
+  if (!profile) throw new Error(`Profile not found for ${userId}`);
+  const newLifetime = (profile.lifetime_credits ?? 0) + amount;
+  const { error: updateErr } = await supabase
+    .from("profiles")
+    .update({ lifetime_credits: newLifetime })
+    .eq("user_id", userId);
+  if (updateErr) throw new Error(`Profile update failed: ${updateErr.message}`);
+}
+
 export async function grantLifetimeCredits(params: {
   userId: string;
   amount: number;
@@ -106,20 +125,18 @@ export async function grantLifetimeCredits(params: {
     p_external_id: params.externalId || null,
     p_request_id: params.requestId || null,
   });
+
   if (error) {
-    throw new Error(`Supabase grant_credits failed: ${error.message}`);
+    await grantLifetimeCreditsDirect(params.userId, params.amount);
+    const snapshot = await getCreditsSnapshot(params.userId);
+    return { ...snapshot, ok: true };
   }
 
   const row = Array.isArray(data) ? data[0] : null;
   if (!row) {
-    return {
-      ok: false,
-      tier: "free",
-      total_credits: 0,
-      daily_free_credits: 0,
-      monthly_credits: 0,
-      lifetime_credits: 0,
-    };
+    await grantLifetimeCreditsDirect(params.userId, params.amount);
+    const snapshot = await getCreditsSnapshot(params.userId);
+    return { ...snapshot, ok: true };
   }
 
   return row as CreditsSnapshot & { ok: boolean };
