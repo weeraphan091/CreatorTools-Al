@@ -8,11 +8,14 @@ import Analytics from "@/components/Analytics";
 import AdSlot from "@/components/AdSlot";
 import WebsiteJsonLd from "@/components/WebsiteJsonLd";
 import LaunchBanner from "@/components/LaunchBanner";
+import AdsenseScript from "@/components/AdsenseScript";
 import { CLERK_CLIENT_ENABLED } from "@/lib/clerk";
 import { siteConfig } from "@/lib/site";
 
 const CookieConsent = dynamic(() => import("@/components/CookieConsent"), { ssr: false });
 const CreditModal = dynamic(() => import("@/components/CreditModal"), { ssr: false });
+
+const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-5559114140108157";
 
 export const metadata: Metadata = {
   title: {
@@ -69,14 +72,9 @@ export default function RootLayout({
 }>) {
   const content = (
     <html lang="en">
-      <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5559114140108157"
-          crossOrigin="anonymous"
-        />
-      </head>
+      <head />
       <body className="min-h-screen pb-[var(--ct-sticky-ad-offset,0px)]">
+        <AdsenseScript client={adsenseClient} />
         <WebsiteJsonLd />
         <Analytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         <LaunchBanner />
