@@ -42,6 +42,10 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
   },
+  {
+    key: "Cross-Origin-Opener-Policy",
+    value: "same-origin-allow-popups",
+  },
 ];
 
 /** @type {import('next').NextConfig} */
@@ -57,6 +61,15 @@ const nextConfig = {
     }
 
     return [
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
       {
         source: "/:path*",
         headers: securityHeaders,

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
@@ -7,10 +8,11 @@ import Analytics from "@/components/Analytics";
 import AdSlot from "@/components/AdSlot";
 import WebsiteJsonLd from "@/components/WebsiteJsonLd";
 import LaunchBanner from "@/components/LaunchBanner";
-import CookieConsent from "@/components/CookieConsent";
-import CreditModal from "@/components/CreditModal";
 import { CLERK_CLIENT_ENABLED } from "@/lib/clerk";
 import { siteConfig } from "@/lib/site";
+
+const CookieConsent = dynamic(() => import("@/components/CookieConsent"), { ssr: false });
+const CreditModal = dynamic(() => import("@/components/CreditModal"), { ssr: false });
 
 export const metadata: Metadata = {
   title: {

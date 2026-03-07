@@ -33,13 +33,26 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
       <div className="container-shell">
         <div className="flex h-16 items-center justify-between gap-3">
-          <Link href="/" className="text-base font-bold text-slate-900 sm:text-lg">
+          <Link href="/" className="shrink-0 text-base font-bold text-slate-900 sm:text-lg">
             ViralHookLab<span className="text-brand-600">.com</span>
           </Link>
 
+          {CLERK_ENABLED ? (
+            <div className="flex min-w-0 shrink items-center gap-2 md:hidden">
+              <SignedIn>
+                <div className="min-w-0 overflow-hidden">
+                  <CreditsNav />
+                </div>
+                <div className="shrink-0">
+                  <UserButton afterSignOutUrl="/" />
+                </div>
+              </SignedIn>
+            </div>
+          ) : null}
+
           <button
             type="button"
-            className="inline-flex items-center rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 md:hidden"
+            className="inline-flex shrink-0 items-center rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 md:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((value) => !value)}
