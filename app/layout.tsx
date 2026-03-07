@@ -55,6 +55,9 @@ export const metadata: Metadata = {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     },
   }),
+  other: {
+    "impact-site-verification": "5f6e7efe-14ed-4a8a-9e83-67446fef27ab",
+  },
   metadataBase: new URL(siteConfig.url),
 };
 
