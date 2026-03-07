@@ -100,16 +100,6 @@ export async function POST(request: Request) {
   }
 
   try {
-    const dedupe = await markWebhookProcessed({
-      eventId: event.id,
-      provider: "stripe",
-      eventType: event.type,
-    });
-    if (!dedupe.inserted) {
-      logInfo("stripe.webhook.duplicate", { eventId: event.id, eventType: event.type });
-      return NextResponse.json({ ok: true, duplicate: true });
-    }
-
     const mapping = getStripePriceMapping();
 
     if (event.type === "checkout.session.completed") {
@@ -231,6 +221,12 @@ export async function POST(request: Request) {
         await setTierAndMonthlyCredits(userId, "free");
       }
     }
+
+    await markWebhookProcessed({
+      eventId: event.id,
+      provider: "stripe",
+      eventType: event.type,
+    }).catch(() => {});
 
     return NextResponse.json({ ok: true });
   } catch (err) {
