@@ -40,7 +40,7 @@ export default clerkMiddleware(async (_, request) => {
   if (pathname === "/api/health" && method === "GET") {
     return NextResponse.next();
   }
-  if (isWebhook) {
+  if (isWebhook || pathname.startsWith("/api/admin/")) {
     return NextResponse.next();
   }
 
