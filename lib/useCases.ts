@@ -1,4 +1,4 @@
-import { truncateMetaTitle } from "@/lib/site";
+import { META_TITLE_PART_MAX, truncateMetaTitle } from "@/lib/site";
 import { tools } from "@/lib/tools";
 
 type Audience = {
@@ -263,6 +263,12 @@ const intentAngles: IntentAngle[] = [
   },
 ];
 
+const intentLabelToShortTitle: Record<string, string> = {
+  "Lead Generation": "Leads",
+  "Conversion Optimization": "Conv",
+  "Awareness Growth": "Awareness",
+};
+
 function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
@@ -292,7 +298,11 @@ function buildUseCasePage(
   const searchTerm = `${formattedTool} for ${audience.searchQualifier} ${intent.keywordModifier}`;
   const slug = `${toolSlug}-${audience.slug}-${intent.slug}`;
   const title = `${toolTitle} for ${audience.name} (${intent.label})`;
-  const shortTitle = truncateMetaTitle(`${toolTitle} for ${audience.name}`);
+  const shortIntentLabel = intentLabelToShortTitle[intent.label] ?? intent.label;
+  const suffix = ` (${shortIntentLabel})`;
+  const base = `${toolTitle} for ${audience.name}`;
+  const maxBase = META_TITLE_PART_MAX - suffix.length;
+  const shortTitle = truncateMetaTitle(base, maxBase) + suffix;
   const description = `Use our ${formattedTool} for ${audience.name.toLowerCase()} for ${intent.label.toLowerCase()}: solve ${audience.painPoint} and ${audience.primaryGoal}.`;
   const intro = `${audience.name} often struggle with ${audience.painPoint}. This use-case page is designed to ${intent.objective} while helping teams ${audience.primaryGoal} across ${audience.channel}.`;
   const tips = [

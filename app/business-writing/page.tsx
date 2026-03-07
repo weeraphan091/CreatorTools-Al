@@ -70,6 +70,10 @@ export default function BusinessWritingCategoryPage() {
       <section className="card p-8">
         <h2 className="text-2xl font-semibold text-slate-900">Why Business Writing Matters</h2>
         <p className="mt-3 text-slate-600">{category.expandedIntro}</p>
+        <p className="mt-4 text-slate-600">
+          Use the tools below to generate LinkedIn posts, thread hooks, email subjects, and ad headlines in seconds.
+          Batch multiple variants and test what gets the best clicks and engagement for your audience.
+        </p>
       </section>
 
       <section>

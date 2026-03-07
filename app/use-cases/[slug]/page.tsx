@@ -97,7 +97,8 @@ export default function UseCaseDetailPage({ params }: UseCaseDetailPageProps) {
         <h2 className="text-2xl font-semibold text-slate-900">Optimization Playbook</h2>
         <p className="mt-2 text-sm text-slate-600">
           Follow these steps to get the best results from the {page.toolTitle} for {page.audienceName}. Each tip is
-          designed to improve clarity, relevance, and performance for your specific audience.
+          designed to improve clarity, relevance, and performance for your specific audience. Apply them before you
+          run the generator so your inputs and outputs stay aligned with your goal.
         </p>
         <ul className="mt-4 space-y-2">
           {page.tips.map((tip) => (

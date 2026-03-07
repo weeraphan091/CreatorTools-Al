@@ -70,6 +70,10 @@ export default function YouTubeCategoryPage() {
       <section className="card p-8">
         <h2 className="text-2xl font-semibold text-slate-900">Why YouTube Matters for Growth</h2>
         <p className="mt-3 text-slate-600">{category.expandedIntro}</p>
+        <p className="mt-4 text-slate-600">
+          Use the tools below to generate title angles, hook lines, and channel ideas in seconds. Pick the best options
+          for your niche and test them in YouTube Studio to see what improves CTR and watch time.
+        </p>
       </section>
 
       <section>

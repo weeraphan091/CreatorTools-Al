@@ -81,6 +81,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         {post.content.map((paragraph, index) => (
           <p key={index}>{paragraph}</p>
         ))}
+        <p className="text-slate-600">
+          For more angles and ready-made prompts, try our free AI tools and use-case pages. Each tool generates five
+          variations so you can test what works best for your audience.
+        </p>
       </section>
 
       <div className="grid gap-4 lg:grid-cols-2">

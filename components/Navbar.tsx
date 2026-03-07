@@ -37,6 +37,23 @@ export default function Navbar() {
             ViralHookLab<span className="text-brand-600">.com</span>
           </Link>
 
+          {CLERK_ENABLED ? (
+            <div className="flex shrink-0 items-center gap-2 md:hidden">
+              <SignedIn>
+                <CreditsNav />
+                <UserButton afterSignOutUrl="/" />
+              </SignedIn>
+              <SignedOut>
+                <Link href="/sign-in" className="rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700">
+                  Sign in
+                </Link>
+                <Link href="/sign-up" className="rounded-full bg-slate-900 px-2 py-1.5 text-xs font-semibold text-white">
+                  Sign up
+                </Link>
+              </SignedOut>
+            </div>
+          ) : null}
+
           <button
             type="button"
             className="inline-flex shrink-0 items-center rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 md:hidden"

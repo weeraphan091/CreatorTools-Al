@@ -95,6 +95,11 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
           Enter your topic or audience, pick your goal, and get five ready-to-use ideas you can tweak and test. Use it
           for social posts, ads, landing pages, or any content where a strong hook or headline matters.
         </p>
+        <p className="mt-3 text-slate-600">
+          Each generation gives you several angles to choose from. Pick the best fit for your audience, refine the
+          wording if needed, and test in real campaigns to see what performs. The tips and FAQs below help you get
+          better results every time.
+        </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {tool.keywords.map((keyword) => (
             <span key={keyword} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600">

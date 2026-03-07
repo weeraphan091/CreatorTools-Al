@@ -31,6 +31,10 @@ export default function BlogPage() {
       <section className="card p-8">
         <h1 className="text-3xl font-bold text-slate-900">ViralHookLab.com Blog</h1>
         <p className="mt-3 text-slate-600">Actionable guides to help you grow faster with better content.</p>
+        <p className="mt-3 text-slate-600">
+          Every guide pairs with our free AI tools. Read the playbook, then use the linked generator to create
+          multiple variants and test what works for your audience.
+        </p>
       </section>
 
       <AdBanner slot="Blog Index Banner" adSlotId={siteConfig.ads.blogIndex} />

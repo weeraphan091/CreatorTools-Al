@@ -70,6 +70,10 @@ export default function InstagramCategoryPage() {
       <section className="card p-8">
         <h2 className="text-2xl font-semibold text-slate-900">Why Instagram Matters for Growth</h2>
         <p className="mt-3 text-slate-600">{category.expandedIntro}</p>
+        <p className="mt-4 text-slate-600">
+          Use the tools below to generate Reel scripts and bios in seconds. Test different hooks and CTAs to see what
+          drives the most saves, shares, and follows from your audience.
+        </p>
       </section>
 
       <section>

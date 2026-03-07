@@ -70,6 +70,10 @@ export default function SeoMarketingCategoryPage() {
       <section className="card p-8">
         <h2 className="text-2xl font-semibold text-slate-900">Why SEO & Marketing Copy Matters</h2>
         <p className="mt-3 text-slate-600">{category.expandedIntro}</p>
+        <p className="mt-4 text-slate-600">
+          Use the tools below to generate meta descriptions, local SEO copy, and lead magnet ideas in seconds. Align
+          your copy with search intent and improve CTR from search results and landing pages.
+        </p>
       </section>
 
       <section>

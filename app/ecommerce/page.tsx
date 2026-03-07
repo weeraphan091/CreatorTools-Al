@@ -70,6 +70,10 @@ export default function EcommerceCategoryPage() {
       <section className="card p-8">
         <h2 className="text-2xl font-semibold text-slate-900">Why E-commerce Copy Matters</h2>
         <p className="mt-3 text-slate-600">{category.expandedIntro}</p>
+        <p className="mt-4 text-slate-600">
+          Use the tools below to generate product descriptions, Amazon copy, and brand assets in seconds. Refine the
+          best options for your products and run A/B tests to improve conversion rates.
+        </p>
       </section>
 
       <section>

@@ -44,6 +44,10 @@ export default function ViralHooksHubPage() {
           Hooks are the first line that makes people stop scrolling. Use this hub to generate hook variations, test the
           best performers, and build a swipe file you can reuse across platforms.
         </p>
+        <p className="mt-3 max-w-3xl text-slate-600">
+          Each tool below produces multiple options per run. Enter your topic or audience once, get several angles, and
+          pick the one that fits your content and goal. Save winning hooks for future videos and ads.
+        </p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link
             href="/tools/ai-hook-generator"

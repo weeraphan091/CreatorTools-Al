@@ -80,6 +80,10 @@ export default function TemplateDetailPage({ params }: TemplatePageProps) {
           scratch. It suits creators, marketers, and small teams who want to ship quality copy fast. The checklist
           below helps you optimize each element before you publish or run ads.
         </p>
+        <p className="mt-3 max-w-3xl text-slate-600">
+          Open the linked tool to generate five variations at once. Compare the options, mix the best parts if needed,
+          and reuse the template for future projects so you stay consistent and fast.
+        </p>
         {tool ? (
           <Link
             href={`/tools/${tool.slug}`}

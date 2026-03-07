@@ -41,6 +41,10 @@ export default function ToolsPage() {
         <p className="mt-3 max-w-2xl text-slate-600">
           Pick a generator, enter your topic, and instantly get 5 high-converting ideas.
         </p>
+        <p className="mt-3 max-w-2xl text-slate-600">
+          Every tool is free to use with daily credits. Use the category pages below to browse by platform or goal, or
+          jump straight into a generator and start testing angles for your next campaign.
+        </p>
       </section>
 
       <AdBanner slot="Tools Listing Banner" adSlotId={siteConfig.ads.toolsListing} />
