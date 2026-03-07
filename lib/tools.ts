@@ -16,6 +16,14 @@ export type ToolConfig = {
     question: string;
     answer: string;
   }>;
+  /** Optional: platform rules (length, algorithm focus) for professional prompts */
+  platformRules?: string;
+  /** Optional: output format (line count, length per item) for professional prompts */
+  formatSpec?: string;
+  /** Optional: principles (curiosity gap, specificity, etc.) for professional prompts */
+  principles?: string[];
+  /** Optional: expert role text for professional prompts */
+  expertRole?: string;
 };
 
 export const tools: ToolConfig[] = [
@@ -78,6 +86,12 @@ export const tools: ToolConfig[] = [
           "Keep titles under 60 characters so they display fully on mobile. Front-load the most compelling words before the cutoff point.",
       },
     ],
+    platformRules:
+      "YouTube titles: max 60 characters for full mobile display. Algorithm favors CTR and watch time; front-load the hook and use numbers when relevant.",
+    formatSpec: "Return exactly 5 title lines, each under 60 characters. No numbering or bullets in the output.",
+    principles: ["Curiosity gap", "Specificity over vague", "Number in title when relevant", "Clear outcome or promise"],
+    expertRole:
+      "You are an expert YouTube growth strategist. You know YouTube's algorithm favors CTR and watch time. Titles must be under 60 characters and front-load the most compelling words.",
   },
   {
     slug: "tiktok-caption-generator",
@@ -138,6 +152,12 @@ export const tools: ToolConfig[] = [
           "You can reuse structures and CTA styles, but personalize each caption to the specific video content for better relevance and engagement.",
       },
     ],
+    platformRules:
+      "TikTok captions: lead with a strong first line (under ~10 words); algorithm rewards retention and engagement. End with a clear CTA (comment, save, follow). Use 3–5 hashtags after the message.",
+    formatSpec: "Return exactly 5 caption lines. Each caption can be 1–2 short sentences. First line must hook; include a CTA or engagement prompt.",
+    principles: ["Hook in first line", "Clear CTA at end", "Concise and scannable", "Comment/save-driving prompt"],
+    expertRole:
+      "You are an expert TikTok copywriter. You know the first line must stop the scroll in under 2 seconds. Use curiosity or tension; end with a clear CTA (comment, save, follow).",
   },
   {
     slug: "ai-hook-generator",
@@ -198,6 +218,12 @@ export const tools: ToolConfig[] = [
           "Track watch time (video) or open rate (email) for the first few seconds or lines. A strong hook keeps at least 70% of viewers past the opening.",
       },
     ],
+    platformRules:
+      "Hooks work in the first 1–3 seconds (video) or first line (copy). Create tension or curiosity immediately; avoid context before the hook. Proof or specificity increases credibility.",
+    formatSpec: "Return exactly 5 hook lines. Each hook is 1–2 sentences max. No numbering or bullets in the output.",
+    principles: ["Tension or curiosity first", "Proof or specificity", "Pattern interrupt", "No context before hook"],
+    expertRole:
+      "You are an expert at writing attention-grabbing hooks for ads and short-form video. You know strong hooks create tension or curiosity in the first second and avoid leading with context.",
   },
   {
     slug: "instagram-bio-generator",

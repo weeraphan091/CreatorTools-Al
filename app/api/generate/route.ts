@@ -13,10 +13,13 @@ import { getClientIp, hasValidJsonContentType, isBlockedBot } from "@/lib/securi
 import { deductOneCreditIdempotent, getCreditsSnapshot } from "@/lib/credits";
 import { logError, logInfo, logWarn } from "@/lib/observability/logger";
 import { supabaseAdminRpc } from "@/lib/supabase/rpc";
+import { getToolBySlug } from "@/lib/tools";
+import type { ToolConfig } from "@/lib/tools";
 
 type GenerateRequestBody = {
   topic?: string;
   tool?: string;
+  toolSlug?: string;
   website?: string;
   clientTs?: number;
   requestId?: string;
@@ -93,6 +96,30 @@ function parseToFiveResults(rawText: string, topic: string) {
     return unique.slice(0, 5);
   }
   return [...unique, ...fallbackResults(topic)].slice(0, 5);
+}
+
+function buildProfessionalPrompt(toolConfig: ToolConfig, topic: string): string {
+  const parts: string[] = [];
+  parts.push(
+    toolConfig.expertRole || "You are an expert social media marketer. Generate 5 high converting results.",
+  );
+  if (toolConfig.platformRules) {
+    parts.push("Platform rules: " + toolConfig.platformRules);
+  }
+  if (toolConfig.formatSpec) {
+    parts.push("Output format: " + toolConfig.formatSpec);
+  }
+  if (toolConfig.principles?.length) {
+    parts.push("Principles to apply: " + toolConfig.principles.join(", "));
+  }
+  const examples = toolConfig.examples.slice(0, 4);
+  if (examples.length) {
+    parts.push("Examples of strong output:\n" + examples.map((e) => "- " + e).join("\n"));
+  }
+  parts.push("Use cases: " + toolConfig.useCases.join(", "));
+  parts.push("Topic: " + topic);
+  parts.push("Generate 5 concise lines in the same style. Return only the 5 lines, no numbering or extra text.");
+  return parts.join("\n\n");
 }
 
 function isValidClientTimestamp(value: unknown) {
@@ -301,6 +328,9 @@ export async function POST(request: Request) {
       return jsonWithCors({ error: "Suspicious input blocked." }, 400, origin);
     }
 
+    const rawToolSlug = typeof body.toolSlug === "string" ? body.toolSlug.trim().slice(0, 80) : "";
+    const toolConfig = rawToolSlug ? getToolBySlug(rawToolSlug) ?? null : null;
+
     const clientIp = getClientIp(request);
     const rate = await checkRateLimit({
       key: `api:generate:${clientIp}`,
@@ -389,8 +419,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const prompt = `You are an expert social media marketer. Generate 5 high converting results based on this topic: ${topic}`;
-    const input = `${prompt}\nTool context: ${tool}\nReturn exactly 5 concise lines.`;
+    const input = toolConfig
+      ? buildProfessionalPrompt(toolConfig, topic)
+      : `You are an expert social media marketer. Generate 5 high converting results based on this topic: ${topic}\nTool context: ${tool}\nReturn exactly 5 concise lines.`;
     let output = "";
 
     if (geminiKey) {

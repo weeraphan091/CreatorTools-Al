@@ -12,9 +12,10 @@ import { siteConfig } from "@/lib/site";
 type GeneratorFormProps = {
   toolTitle: string;
   starterPrompts?: string[];
+  toolSlug?: string;
 };
 
-export default function GeneratorForm({ toolTitle, starterPrompts = [] }: GeneratorFormProps) {
+export default function GeneratorForm({ toolTitle, starterPrompts = [], toolSlug }: GeneratorFormProps) {
   const showDebugPanel = process.env.NEXT_PUBLIC_ENABLE_DEBUG_PANEL === "true";
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -123,6 +124,7 @@ export default function GeneratorForm({ toolTitle, starterPrompts = [] }: Genera
         body: JSON.stringify({
           topic: normalizedTopic,
           tool: toolTitle,
+          toolSlug: toolSlug ?? undefined,
           website: "",
           clientTs: Date.now(),
           requestId,

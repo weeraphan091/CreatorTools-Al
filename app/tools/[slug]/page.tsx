@@ -100,6 +100,7 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
 
       <GeneratorForm
         toolTitle={tool.title}
+        toolSlug={tool.slug}
         starterPrompts={tool.useCases.map((useCase) => `${tool.title} for ${useCase.toLowerCase()}`)}
       />
 
