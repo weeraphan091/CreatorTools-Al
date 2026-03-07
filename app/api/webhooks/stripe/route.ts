@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import type Stripe from "stripe";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { grantLifetimeCredits } from "@/lib/credits";
-import { logError, logInfo } from "@/lib/observability/logger";
+import { logError } from "@/lib/observability/logger";
 import { stripe } from "@/lib/stripe";
 import { getStripePriceMapping, MONTHLY_CREDITS_BY_TIER, tierFromPriceId } from "@/lib/billing/plans";
 
