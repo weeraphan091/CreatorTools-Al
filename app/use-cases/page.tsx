@@ -6,29 +6,66 @@ import { siteConfig } from "@/lib/site";
 import { getIndexableUseCasePages, getUseCaseStats } from "@/lib/useCases";
 import { tools } from "@/lib/tools";
 
-const allUseCasePages = getIndexableUseCasePages();
-const useCaseStats = getUseCaseStats();
+const PER_PAGE = 50;
 
-export const metadata: Metadata = {
-  title: "AI Tool Use Cases",
-  description:
-    "Explore long-tail AI generator use cases by niche and industry. Find pages for creators, ecommerce, SaaS, agencies, and more.",
-  alternates: {
-    canonical: "/use-cases",
-  },
-  openGraph: {
-    title: "AI Tool Use Cases | ViralHookLab.com",
-    description:
-      "Find use-case pages for YouTube titles, TikTok captions, hooks, bios, ad copy, and conversion-focused CTAs.",
-    url: "/use-cases",
-  },
+type UseCasesPageProps = {
+  searchParams?: { page?: string };
 };
 
-export default function UseCasesPage() {
-  const countsByTool = allUseCasePages.reduce<Record<string, number>>((acc, page) => {
+export async function generateMetadata({ searchParams }: UseCasesPageProps): Promise<Metadata> {
+  const indexable = getIndexableUseCasePages();
+  const totalPages = Math.max(1, Math.ceil(indexable.length / PER_PAGE));
+  const pageNum = Math.max(1, parseInt(String(searchParams?.page), 10) || 1);
+  const currentPage = Math.min(pageNum, totalPages);
+
+  const title =
+    currentPage === 1 ? "AI Tool Use Cases" : `AI Tool Use Cases | Page ${currentPage}`;
+  const canonical =
+    currentPage === 1 ? "/use-cases" : `/use-cases?page=${currentPage}`;
+  const prev =
+    currentPage > 1 ? `/use-cases${currentPage === 2 ? "" : `?page=${currentPage - 1}`}` : undefined;
+  const next =
+    currentPage < totalPages ? `/use-cases?page=${currentPage + 1}` : undefined;
+
+  return {
+    title,
+    description:
+      "Explore long-tail AI generator use cases by niche and industry. Find pages for creators, ecommerce, SaaS, agencies, and more.",
+    alternates: {
+      canonical,
+      ...(prev && { prev }),
+      ...(next && { next }),
+    },
+    openGraph: {
+      title: currentPage === 1 ? "AI Tool Use Cases | ViralHookLab.com" : `AI Tool Use Cases | Page ${currentPage} | ViralHookLab.com`,
+      description:
+        "Find use-case pages for YouTube titles, TikTok captions, hooks, bios, ad copy, and conversion-focused CTAs.",
+      url: canonical,
+    },
+  };
+}
+
+export default function UseCasesPage({ searchParams }: UseCasesPageProps) {
+  const indexable = getIndexableUseCasePages();
+  const useCaseStats = getUseCaseStats();
+  const totalPages = Math.max(1, Math.ceil(indexable.length / PER_PAGE));
+  const pageNum = Math.max(1, parseInt(String(searchParams?.page), 10) || 1);
+  const currentPage = Math.min(pageNum, totalPages);
+  const start = (currentPage - 1) * PER_PAGE;
+  const paginatedPages = indexable.slice(start, start + PER_PAGE);
+  const previewPages = paginatedPages.slice(0, 12);
+
+  const countsByTool = indexable.reduce<Record<string, number>>((acc, page) => {
     acc[page.toolSlug] = (acc[page.toolSlug] ?? 0) + 1;
     return acc;
   }, {});
+
+  const paginationStart = Math.max(1, currentPage - 2);
+  const paginationEnd = Math.min(totalPages, currentPage + 2);
+  const pageNumbers: number[] = [];
+  for (let i = paginationStart; i <= paginationEnd; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className="space-y-6">
@@ -111,9 +148,12 @@ export default function UseCasesPage() {
         <h2 className="text-xl font-semibold text-slate-900">All indexable use-case pages</h2>
         <p className="mt-2 text-sm text-slate-600">
           This list is intentionally crawl-friendly to help search engines discover long-tail landing pages quickly.
+          {totalPages > 1 && (
+            <> Showing page {currentPage} of {totalPages}.</>
+          )}
         </p>
         <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-          {allUseCasePages.map((page) => (
+          {paginatedPages.map((page) => (
             <Link
               key={page.slug}
               href={`/use-cases/${page.slug}`}
@@ -124,10 +164,85 @@ export default function UseCasesPage() {
             </Link>
           ))}
         </div>
+
+        {totalPages > 1 && (
+          <nav
+            className="mt-6 flex flex-wrap items-center justify-center gap-2 border-t border-slate-200 pt-6"
+            aria-label="Pagination"
+          >
+            {currentPage > 1 ? (
+              <Link
+                href={currentPage === 2 ? "/use-cases" : `/use-cases?page=${currentPage - 1}`}
+                className="inline-flex rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                Previous
+              </Link>
+            ) : (
+              <span className="inline-flex rounded-lg border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-400">
+                Previous
+              </span>
+            )}
+            <div className="flex items-center gap-1">
+              {paginationStart > 1 && (
+                <>
+                  <Link
+                    href="/use-cases"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                  >
+                    1
+                  </Link>
+                  {paginationStart > 2 && <span className="px-1 text-slate-400">…</span>}
+                </>
+              )}
+              {pageNumbers.map((n) =>
+                n === currentPage ? (
+                  <span
+                    key={n}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-lg border-2 border-brand-600 bg-brand-50 text-sm font-semibold text-brand-700"
+                    aria-current="page"
+                  >
+                    {n}
+                  </span>
+                ) : (
+                  <Link
+                    key={n}
+                    href={n === 1 ? "/use-cases" : `/use-cases?page=${n}`}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                  >
+                    {n}
+                  </Link>
+                )
+              )}
+              {paginationEnd < totalPages && (
+                <>
+                  {paginationEnd < totalPages - 1 && <span className="px-1 text-slate-400">…</span>}
+                  <Link
+                    href={`/use-cases?page=${totalPages}`}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                  >
+                    {totalPages}
+                  </Link>
+                </>
+              )}
+            </div>
+            {currentPage < totalPages ? (
+              <Link
+                href={`/use-cases?page=${currentPage + 1}`}
+                className="inline-flex rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                Next
+              </Link>
+            ) : (
+              <span className="inline-flex rounded-lg border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-400">
+                Next
+              </span>
+            )}
+          </nav>
+        )}
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">
-        {allUseCasePages.slice(0, 24).map((page) => (
+        {previewPages.map((page) => (
           <article key={`${page.slug}-preview`} className="card p-6">
             <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">{page.searchTerm}</p>
             <h2 className="mt-2 text-lg font-semibold text-slate-900">{page.title}</h2>
