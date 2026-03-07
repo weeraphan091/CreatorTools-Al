@@ -11,8 +11,8 @@ export default function ToolJsonLd({ tool }: ToolJsonLdProps) {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: tool.title,
-    applicationCategory: "WebApplication",
-    operatingSystem: "Any",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web Browser",
     description: tool.seoDescription,
     isAccessibleForFree: true,
     offers: {
