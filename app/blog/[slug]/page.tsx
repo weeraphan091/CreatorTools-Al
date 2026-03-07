@@ -95,7 +95,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   });
 
   const toolsFromSlugs =
-    post.toolSlugs?.length > 0
+    post.toolSlugs && post.toolSlugs.length > 0
       ? post.toolSlugs
           .map((s) => tools.find((t) => t.slug === s))
           .filter((t): t is (typeof tools)[number] => t != null)
