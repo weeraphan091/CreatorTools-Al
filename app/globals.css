@@ -21,3 +21,7 @@ a {
 .card {
   @apply overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card;
 }
+
+.footer-link {
+  @apply hover:text-brand-600;
+}

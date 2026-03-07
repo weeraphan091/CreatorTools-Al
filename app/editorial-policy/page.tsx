@@ -20,8 +20,10 @@ export default function EditorialPolicyPage() {
       <header>
         <h1 className="text-3xl font-bold text-slate-900">Editorial Policy</h1>
         <p className="mt-3 text-base text-slate-600">
-          Transparency about how we create, review, and maintain the content on ViralHookLab.com.
-          This policy applies to all pages, tools, blog posts, templates, and guides published on our platform.
+          Transparency about how we create, review, and maintain the content on ViralHookLab.com. We publish this
+          policy so you can trust that our recommendations and guides are designed for your benefit, not for
+          undisclosed commercial gain. This policy applies to all pages, tools, blog posts, templates, and guides
+          published on our platform.
         </p>
       </header>
 

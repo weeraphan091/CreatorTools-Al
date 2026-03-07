@@ -4,23 +4,24 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
 import ToolCard from "@/components/ToolCard";
 import { categories } from "@/lib/categories";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, truncateMetaTitle } from "@/lib/site";
 import { tools } from "@/lib/tools";
 
 const category = categories.find((item) => item.id === "instagram")!;
 
+const metaTitle = truncateMetaTitle(category.seoTitle);
 export const metadata: Metadata = {
-  title: category.seoTitle,
+  title: metaTitle,
   description: category.seoDescription,
   alternates: { canonical: category.href },
   openGraph: {
-    title: `${category.seoTitle} | ViralHookLab.com`,
+    title: `${metaTitle} | ViralHookLab.com`,
     description: category.seoDescription,
     url: category.href,
   },
   twitter: {
     card: "summary_large_image",
-    title: category.seoTitle,
+    title: metaTitle,
     description: category.seoDescription,
   },
 };

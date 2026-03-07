@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: UseCaseDetailPageProps): Prom
   }
 
   return {
-    title: page.title,
+    title: page.shortTitle,
     description: page.description,
     keywords: [page.searchTerm, `${page.toolTitle} for ${page.audienceName}`],
     robots: {
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: UseCaseDetailPageProps): Prom
       canonical: `/use-cases/${page.slug}`,
     },
     openGraph: {
-      title: page.title,
+      title: page.shortTitle,
       description: page.description,
       url: `/use-cases/${page.slug}`,
     },
@@ -80,6 +80,11 @@ export default function UseCaseDetailPage({ params }: UseCaseDetailPageProps) {
         <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">{page.searchTerm}</p>
         <h1 className="mt-2 text-3xl font-bold text-slate-900">{page.title}</h1>
         <p className="mt-3 max-w-3xl text-slate-600">{page.intro}</p>
+        <p className="mt-3 max-w-3xl text-slate-600">
+          This page gives you a focused playbook for {page.audienceName} using the {page.toolTitle}: what to do, what
+          to avoid, and a ready-made prompt template. Apply the tips below, then open the tool to generate variations
+          tailored to your niche.
+        </p>
         <Link
           href={`/tools/${page.toolSlug}`}
           className="mt-5 inline-flex rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
@@ -90,6 +95,10 @@ export default function UseCaseDetailPage({ params }: UseCaseDetailPageProps) {
 
       <section className="card p-6">
         <h2 className="text-2xl font-semibold text-slate-900">Optimization Playbook</h2>
+        <p className="mt-2 text-sm text-slate-600">
+          Follow these steps to get the best results from the {page.toolTitle} for {page.audienceName}. Each tip is
+          designed to improve clarity, relevance, and performance for your specific audience.
+        </p>
         <ul className="mt-4 space-y-2">
           {page.tips.map((tip) => (
             <li key={tip} className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">

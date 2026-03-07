@@ -28,14 +28,14 @@ export default function Footer() {
         <div className="space-y-1">
           <p>
             © 2026 ViralHookLab. Operated by Seventy Eight Co., Ltd. (Tax ID: 0205565023848). Contact:{" "}
-            <a className="font-medium text-brand-700 hover:text-brand-600" href="mailto:support@viralhooklab.com">
+            <a className="footer-link font-medium text-brand-700" href="mailto:support@viralhooklab.com">
               support@viralhooklab.com
             </a>
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
           {primaryLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-brand-600">
+            <Link key={link.href} href={link.href} className="footer-link">
               {link.label}
             </Link>
           ))}

@@ -8,7 +8,7 @@ import BlogJsonLd from "@/components/BlogJsonLd";
 import IntentLinkSection from "@/components/IntentLinkSection";
 import { blogPosts, getBlogPostBySlug } from "@/lib/blog";
 import { getIntentMatchedLinks } from "@/lib/intentLinks";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, truncateMetaTitle } from "@/lib/site";
 import { tools } from "@/lib/tools";
 import { getFeaturedUseCases } from "@/lib/useCases";
 
@@ -32,14 +32,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
+  const title = truncateMetaTitle(post.title);
   return {
-    title: post.title,
+    title,
     description: post.description,
     alternates: {
       canonical: `/blog/${post.slug}`,
     },
     openGraph: {
-      title: post.title,
+      title,
       description: post.description,
       type: "article",
       url: `/blog/${post.slug}`,

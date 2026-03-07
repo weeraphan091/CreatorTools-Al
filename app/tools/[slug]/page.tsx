@@ -10,7 +10,7 @@ import IntentLinkSection from "@/components/IntentLinkSection";
 import ToolJsonLd from "@/components/ToolJsonLd";
 import { getCategoryById } from "@/lib/categories";
 import { getIntentMatchedLinks } from "@/lib/intentLinks";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, truncateMetaTitle } from "@/lib/site";
 import { getRelatedTools, getToolBySlug, tools } from "@/lib/tools";
 import { getUseCasesByTool } from "@/lib/useCases";
 
@@ -41,21 +41,22 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
     };
   }
 
+  const title = truncateMetaTitle(tool.seoTitle);
   return {
-    title: tool.seoTitle,
+    title,
     description: tool.seoDescription,
     keywords: tool.keywords,
     alternates: {
       canonical: `/tools/${tool.slug}`,
     },
     openGraph: {
-      title: tool.seoTitle,
+      title,
       description: tool.seoDescription,
       url: `/tools/${tool.slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title: tool.seoTitle,
+      title,
       description: tool.seoDescription,
     },
   };
@@ -89,6 +90,11 @@ export default function ToolDetailPage({ params }: ToolPageProps) {
       <section className="card p-8">
         <h1 className="text-3xl font-bold text-slate-900">{tool.title}</h1>
         <p className="mt-3 text-slate-600">{tool.description}</p>
+        <p className="mt-3 text-slate-600">
+          The {tool.title} helps you create multiple on-brand options in seconds instead of staring at a blank page.
+          Enter your topic or audience, pick your goal, and get five ready-to-use ideas you can tweak and test. Use it
+          for social posts, ads, landing pages, or any content where a strong hook or headline matters.
+        </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {tool.keywords.map((keyword) => (
             <span key={keyword} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600">

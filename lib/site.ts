@@ -1,3 +1,18 @@
+/** Max length for the title part before " | ViralHookLab.com" (46 + 24 = 70 total). */
+export const META_TITLE_PART_MAX = 46;
+
+/**
+ * Truncates a meta title to fit within the layout template (≤70 chars total).
+ * Prefers cutting at the last space before max to avoid mid-word truncation.
+ */
+export function truncateMetaTitle(title: string, max = META_TITLE_PART_MAX): string {
+  if (title.length <= max) return title;
+  const cut = max - 3;
+  const at = title.slice(0, cut + 1).lastIndexOf(" ");
+  const end = at > cut * 0.5 ? at : cut;
+  return title.slice(0, end).trim() + "...";
+}
+
 export const siteConfig = {
   name: "ViralHookLab",
   description:

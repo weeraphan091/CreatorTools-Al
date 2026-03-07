@@ -7,7 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
 import IntentLinkSection from "@/components/IntentLinkSection";
 import { getIntentMatchedLinks } from "@/lib/intentLinks";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, truncateMetaTitle } from "@/lib/site";
 import { getTemplateBySlug, templatePages } from "@/lib/templates";
 import { getToolBySlug } from "@/lib/tools";
 import { getUseCasesByTool } from "@/lib/useCases";
@@ -31,15 +31,16 @@ export async function generateMetadata({ params }: TemplatePageProps): Promise<M
     };
   }
 
+  const title = truncateMetaTitle(page.seoTitle);
   return {
-    title: page.seoTitle,
+    title,
     description: page.seoDescription,
     keywords: [page.keyword],
     alternates: {
       canonical: `/templates/${page.slug}`,
     },
     openGraph: {
-      title: page.seoTitle,
+      title,
       description: page.seoDescription,
       url: `${siteConfig.url}/templates/${page.slug}`,
     },
@@ -74,6 +75,11 @@ export default function TemplateDetailPage({ params }: TemplatePageProps) {
         <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">{page.keyword}</p>
         <h1 className="mt-2 text-3xl font-bold text-slate-900">{page.title}</h1>
         <p className="mt-3 max-w-3xl text-slate-600">{page.description}</p>
+        <p className="mt-3 max-w-3xl text-slate-600">
+          Use this template when you need a proven structure for {page.title.toLowerCase()} without starting from
+          scratch. It suits creators, marketers, and small teams who want to ship quality copy fast. The checklist
+          below helps you optimize each element before you publish or run ads.
+        </p>
         {tool ? (
           <Link
             href={`/tools/${tool.slug}`}

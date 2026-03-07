@@ -21,7 +21,8 @@ export default function PrivacyPolicyPage() {
       <h1 className="text-3xl font-bold text-slate-900">Privacy Policy</h1>
       <p>
         This Privacy Policy describes how ViralHookLab.com (“ViralHookLab”, “we”, “us”) collects, uses, and shares
-        information when you use our website and tools. ViralHookLab.com is operated by{" "}
+        information when you use our website and tools. We are committed to transparency about data practices so you can
+        use our AI generators with confidence. ViralHookLab.com is operated by{" "}
         <span className="font-medium text-slate-900">Seventy Eight Co., Ltd.</span>.
       </p>
 
@@ -39,7 +40,10 @@ export default function PrivacyPolicyPage() {
       </div>
 
       <h2 className="text-xl font-semibold text-slate-900">Information We Collect</h2>
-      <p>We may collect the following categories of information:</p>
+      <p>
+        We collect only what is necessary to run the service, prevent abuse, and improve our tools. We may collect the
+        following categories of information:
+      </p>
       <ul className="list-disc space-y-1 pl-5">
         <li>
           <span className="font-medium text-slate-900">Usage data</span> (for example: pages viewed, feature
@@ -122,7 +126,8 @@ export default function PrivacyPolicyPage() {
       <h2 className="text-xl font-semibold text-slate-900">Data Retention</h2>
       <p>
         We retain information only as long as necessary to operate the service, comply with legal obligations, resolve
-        disputes, and enforce agreements. Aggregated analytics may be retained longer for reporting and planning.
+        disputes, and enforce agreements. We do not keep personal data longer than needed for these purposes.
+        Aggregated analytics may be retained longer for reporting and planning, in a form that does not identify you.
       </p>
 
       <h2 className="text-xl font-semibold text-slate-900">Your Choices and Controls</h2>

@@ -76,7 +76,9 @@ export default function PricingPage() {
           Upgrade to keep generating
         </h1>
         <p className="mt-3 max-w-2xl text-slate-600">
-          Credits are deducted per generation. Free users get 3 daily credits. Upgrade for monthly credits or add one-time credits.
+          Credits are deducted per generation. Free users get 3 daily credits that reset every day. Subscriptions
+          give you a monthly credit pool so you can batch more titles, hooks, and copy in one sitting. If you only
+          need a boost now and then, one-time top-up credits never expire and are a good fit.
         </p>
         {CLERK_ENABLED && (
           <p className="mt-2 text-sm text-slate-500">Sign in first, then choose a plan to subscribe or buy credits.</p>
@@ -84,6 +86,10 @@ export default function PricingPage() {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-3">
+        <p className="max-w-2xl text-sm text-slate-600 lg:col-span-3">
+          Choose Free to try all tools with daily limits. Starter is best for creators and marketers who ship
+          content weekly. Agency is for teams and multi-brand use with a larger monthly credit pool.
+        </p>
         <TierCard
           name="Free"
           price="$0"
@@ -169,7 +175,9 @@ export default function PricingPage() {
           <div>
             <h2 className="text-2xl font-semibold text-slate-900">Pay-as-you-go top-up</h2>
             <p className="mt-2 text-sm text-slate-600">
-              Need a quick boost? Buy one-time credits that never expire.
+              Need a quick boost? Buy one-time credits that never expire. Top-up is ideal when you do not need a
+              monthly subscription but want extra credits for a project or a busy week. Credits are added to your
+              account immediately after purchase.
             </p>
           </div>
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-right">

@@ -1,3 +1,4 @@
+import { truncateMetaTitle } from "@/lib/site";
 import { tools } from "@/lib/tools";
 
 type Audience = {
@@ -29,6 +30,8 @@ export type UseCasePage = {
   intentLabel: string;
   searchTerm: string;
   title: string;
+  /** Short title for meta (≤46 chars) to avoid truncated SERP display. */
+  shortTitle: string;
   description: string;
   intro: string;
   tips: string[];
@@ -289,6 +292,7 @@ function buildUseCasePage(
   const searchTerm = `${formattedTool} for ${audience.searchQualifier} ${intent.keywordModifier}`;
   const slug = `${toolSlug}-${audience.slug}-${intent.slug}`;
   const title = `${toolTitle} for ${audience.name} (${intent.label})`;
+  const shortTitle = truncateMetaTitle(`${toolTitle} for ${audience.name}`);
   const description = `Use our ${formattedTool} for ${audience.name.toLowerCase()} for ${intent.label.toLowerCase()}: solve ${audience.painPoint} and ${audience.primaryGoal}.`;
   const intro = `${audience.name} often struggle with ${audience.painPoint}. This use-case page is designed to ${intent.objective} while helping teams ${audience.primaryGoal} across ${audience.channel}.`;
   const tips = [
@@ -337,6 +341,7 @@ function buildUseCasePage(
     intentLabel: intent.label,
     searchTerm,
     title,
+    shortTitle,
     description,
     intro,
     tips,
