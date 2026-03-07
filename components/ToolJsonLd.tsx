@@ -27,6 +27,21 @@ export default function ToolJsonLd({ tool }: ToolJsonLdProps) {
       name: siteConfig.name,
       url: siteConfig.url,
     },
+    review: {
+      "@type": "Review",
+      author: {
+        "@type": "Organization",
+        name: siteConfig.name,
+        url: siteConfig.url,
+      },
+      reviewBody: tool.seoDescription,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+        worstRating: "1",
+      },
+    },
   };
 
   return (
