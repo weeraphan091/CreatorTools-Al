@@ -2507,7 +2507,7 @@ export function getToolBySlug(slug: string) {
 export function getRelatedTools(slug: string) {
   const base = getToolBySlug(slug);
   if (!base) {
-    return tools.filter((tool) => tool.slug !== slug).slice(0, 3);
+  return tools.filter((tool) => tool.slug !== slug).slice(0, 3);
   }
 
   const sameCategory = tools.filter((tool) => tool.slug !== slug && tool.categoryId === base.categoryId);
